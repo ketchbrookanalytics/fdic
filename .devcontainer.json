@@ -1,0 +1,32 @@
+{
+    "name": "fdic R package",
+    "image": "rocker/r-ver:4",
+
+    "features": {
+        // https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages
+        "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
+            "packages": "qpdf"
+    },
+
+        // https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages
+        "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
+            "packages": "cli, devtools, dplyr, httpgd, httr2, jsonlite, languageserver, purrr, rlang, stringr, tibble, usethis, xml2",
+            "installSystemRequirements": true
+        }
+
+    },
+
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "REditorSupport.r",
+                "RDebugger.r-debugger"
+            ],
+            "settings": {
+                "editor.rulers": [80],
+                "r.bracketedPaste": true,
+                "r.plot.useHttpgd": true
+            }
+        }
+    }
+}
