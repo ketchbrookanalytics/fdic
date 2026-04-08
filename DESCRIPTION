@@ -1,0 +1,22 @@
+Package: fdic
+Title: R Interface to 'FDIC BankFind Suite API'
+Version: 0.0.0.9000
+Authors@R:
+    person("Dylan", "Hughes", , "dhughes@ketchbrookanalytics.com",
+           role = c("aut", "cre")),
+    person("Ketchbrook Analytics", role = c("cph", "fnd"))
+Description: Provides a convenient interface to the BankFind Suite API made
+    available by the Federal Deposit Insurance Corporation ('FDIC'). Contains
+    functions to retrieve data related to financial institution locations,
+    structural change events, financial reports (both historic and current),
+    summary of deposit reporting, and demographic information.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.3
+Suggests:
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 3.5)
+LazyData: true
