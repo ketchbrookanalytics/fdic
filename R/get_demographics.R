@@ -18,7 +18,7 @@
 #' @param descending (Logical) Should results be sorted in descending order?
 #'   Only applies when `sort_by` is specified. Defaults to `FALSE`.
 #'
-#' @return A [tibble::tibble()] containing demographic data for FDIC-insured
+#' @return A tibble containing demographic data for FDIC-insured
 #'   institutions, with one row per institution.
 #'
 #' @export

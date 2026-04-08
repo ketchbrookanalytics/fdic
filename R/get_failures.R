@@ -6,7 +6,7 @@
 #'
 #' @inheritParams get_demographics
 #'
-#' @return A [tibble::tibble()] containing bank failure data for FDIC-insured
+#' @return A tibble containing bank failure data for FDIC-insured
 #'   institutions, with one row per institution.
 #'
 #' @export

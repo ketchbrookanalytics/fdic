@@ -6,7 +6,7 @@
 #'
 #' @inheritParams get_demographics
 #'
-#' @return A [tibble::tibble()] containing financial data for FDIC-insured
+#' @return A tibble containing financial data for FDIC-insured
 #'   institutions, with one row per institution.
 #'
 #' @export

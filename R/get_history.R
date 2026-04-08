@@ -7,7 +7,7 @@
 #'
 #' @inheritParams get_demographics
 #'
-#' @return A [tibble::tibble()] containing structural change events
+#' @return A tibble containing structural change events
 #'   for FDIC-insured institutions, with one row per institution.
 #'
 #' @export

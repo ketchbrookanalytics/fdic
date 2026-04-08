@@ -6,7 +6,7 @@
 #'
 #' @inheritParams get_demographics
 #'
-#' @return A [tibble::tibble()] containing historic aggregate financial
+#' @return A tibble containing historic aggregate financial
 #'   and structure data regarding financial institutions, with one row per year.
 #'
 #' @export

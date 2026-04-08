@@ -6,7 +6,7 @@
 #'
 #' @inheritParams get_demographics
 #'
-#' @return A [tibble::tibble()] containing location data
+#' @return A tibble containing location data
 #'   for FDIC-insured institutions, with one row per location.
 #'
 #' @export
