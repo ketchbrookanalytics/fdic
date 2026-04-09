@@ -10,14 +10,26 @@
 #'   with one row per institution.
 #'
 #' @export
+#'
+#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' # Return active institutions in North Dakota
+#' get_institutions(filters = "STALP:ND AND ACTIVE:1")
+#'
+#' # Return the 10 largest institutions by total assets
+#' get_institutions(
+#'   fields = c("CERT", "NAME", "STALP", "ASSET"),
+#'   sort_by = "ASSET",
+#'   descending = TRUE,
+#'   limit = 10
+#' )
 get_institutions <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,
   fields = NULL,
   sort_by = NULL,
-  descending = FALSE
+  descending = FALSE,
+  limit = 10000
 ) {
-
   endpoint <- "institutions"
 
   df <- get_fdic(
@@ -26,9 +38,9 @@ get_institutions <- function(
     filters = filters,
     fields = fields,
     sort_by = sort_by,
-    descending = descending
+    descending = descending,
+    limit = limit
   )
 
   return(df)
-
 }

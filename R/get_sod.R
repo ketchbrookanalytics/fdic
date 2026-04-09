@@ -7,17 +7,29 @@
 #' @inheritParams get_demographics
 #'
 #' @return A tibble containing summary of deposits data
-#'   for FDIC-insured institutions, with one row per institution.
+#'   for FDIC-insured institutions, with one row per institution location.
 #'
 #' @export
+#'
+#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' # Return Summary of Deposit data for institutions in North Dakota
+#' get_sod(filters = "STALP:ND")
+#'
+#' # Return specific fields, sorted by total assets descending
+#' get_sod(
+#'   filters = "STALP:ND",
+#'   fields = c("CERT", "CITY", "ASSET", "YEAR"),
+#'   sort_by = "ASSET",
+#'   descending = TRUE
+#' )
 get_sod <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,
   fields = NULL,
   sort_by = NULL,
-  descending = FALSE
+  descending = FALSE,
+  limit = 10000
 ) {
-
   endpoint <- "sod"
 
   df <- get_fdic(
@@ -26,9 +38,9 @@ get_sod <- function(
     filters = filters,
     fields = fields,
     sort_by = sort_by,
-    descending = descending
+    descending = descending,
+    limit = limit
   )
 
   return(df)
-
 }

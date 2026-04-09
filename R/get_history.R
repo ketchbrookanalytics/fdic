@@ -8,17 +8,28 @@
 #' @inheritParams get_demographics
 #'
 #' @return A tibble containing structural change events
-#'   for FDIC-insured institutions, with one row per institution.
+#'   for FDIC-insured institutions, with one row per structural change event.
 #'
 #' @export
+#'
+#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' # Return the 5 most recent structural change events
+#' get_history(
+#'   sort_by = "PROCDATE",
+#'   descending = TRUE,
+#'   limit = 5
+#' )
+#'
+#' # Return specific fields only
+#' get_history(fields = c("CERT", "CHANGECODE", "CHANGECODE_DESC", "PROCDATE"))
 get_history <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,
   fields = NULL,
   sort_by = NULL,
-  descending = FALSE
+  descending = FALSE,
+  limit = 10000
 ) {
-
   endpoint <- "history"
 
   df <- get_fdic(
@@ -27,9 +38,9 @@ get_history <- function(
     filters = filters,
     fields = fields,
     sort_by = sort_by,
-    descending = descending
+    descending = descending,
+    limit = limit
   )
 
   return(df)
-
 }

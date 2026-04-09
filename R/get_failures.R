@@ -7,17 +7,34 @@
 #' @inheritParams get_demographics
 #'
 #' @return A tibble containing bank failure data for FDIC-insured
-#'   institutions, with one row per institution.
+#'   institutions, with one row per failure event.
 #'
 #' @export
+#'
+#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' # Return the 5 most recent bank failures
+#' get_failures(
+#'   sort_by = "FAILDATE",
+#'   descending = TRUE,
+#'   limit = 5
+#' )
+#'
+#' # Filter to failures in a single state
+#' get_failures(filters = "PSTALP:ND")
+#'
+#' # Return specific fields only
+#' get_failures(
+#'   fields = c("NAME", "CERT", "FAILDATE", "PSTALP"),
+#'   limit = 100
+#' )
 get_failures <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,
   fields = NULL,
   sort_by = NULL,
-  descending = FALSE
+  descending = FALSE,
+  limit = 10000
 ) {
-
   endpoint <- "failures"
 
   df <- get_fdic(
@@ -26,9 +43,9 @@ get_failures <- function(
     filters = filters,
     fields = fields,
     sort_by = sort_by,
-    descending = descending
+    descending = descending,
+    limit = limit
   )
 
   return(df)
-
 }
