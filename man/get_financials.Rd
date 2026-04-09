@@ -9,7 +9,8 @@ get_financials(
   filters = NULL,
   fields = NULL,
   sort_by = NULL,
-  descending = FALSE
+  descending = FALSE,
+  limit = 10000
 )
 }
 \arguments{
@@ -20,24 +21,51 @@ get_financials(
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase. See the examples
 below and refer to \url{https://api.fdic.gov/banks/docs/} for full syntax
-details. Run \code{demographics$field} to see available field names.}
+details. Run \code{fdic_demographics$field} to see available field names.}
 
 \item{fields}{(String or Character vector) Fields to include in the response.
-Defaults to all available fields if not specified. Run \code{demographics$field}
+Defaults to all available fields if not specified. Run \code{fdic_financials$field}
 for valid values.}
 
 \item{sort_by}{(String) Field name to sort results by. Defaults to the API
-default sort order for this endpoint. Run \code{demographics$field} to see
-valid values.}
+default sort order for this endpoint. Run \code{fdic_demographics$field} for
+reference.}
 
 \item{descending}{(Logical) Should results be sorted in descending order?
 Only applies when \code{sort_by} is specified. Defaults to \code{FALSE}.}
+
+\item{limit}{(Integer) Number of records to return. Must be between 1 and
+10,000. Defaults to 10,000. \strong{Note:} when more than 250 fields are
+requested, the maximum is 500.}
 }
 \value{
-A tibble containing financial data for FDIC-insured
-institutions, with one row per institution.
+A tibble containing financial data for FDIC-insured institutions,
+with one row per institution per reporting period.
 }
 \description{
 Queries the \verb{/financials} endpoint of the FDIC BankFind Suite API,
 returning financial data for FDIC-insured financial institutions.
+}
+\details{
+The \verb{/financials} endpoint returns one row per institution per reporting
+period (quarter). Requesting more than 250 fields reduces the maximum
+allowed \code{limit} to 500 records; exceeding this will raise an error.
+}
+\examples{
+\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+# Return key financial fields for institutions in North Dakota
+get_financials(
+  filters = "STALP:ND",
+  fields = c("CERT", "REPDTE", "ASSET", "NETINC"),
+  limit = 100
+)
+
+# Sort by total assets descending
+get_financials(
+  fields = c("CERT", "ASSET"),
+  sort_by = "ASSET",
+  descending = TRUE,
+  limit = 100
+)
+\dontshow{\}) # examplesIf}
 }

@@ -9,7 +9,8 @@ get_sod(
   filters = NULL,
   fields = NULL,
   sort_by = NULL,
-  descending = FALSE
+  descending = FALSE,
+  limit = 10000
 )
 }
 \arguments{
@@ -20,24 +21,42 @@ get_sod(
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase. See the examples
 below and refer to \url{https://api.fdic.gov/banks/docs/} for full syntax
-details. Run \code{demographics$field} to see available field names.}
+details. Run \code{fdic_demographics$field} to see available field names.}
 
 \item{fields}{(String or Character vector) Fields to include in the response.
-Defaults to all available fields if not specified. Run \code{demographics$field}
-for valid values.}
+Defaults to all available fields if not specified. Run \code{fdic_demographics$field}
+for reference. An \code{ID} column is always included in the response regardless
+of the fields requested.}
 
 \item{sort_by}{(String) Field name to sort results by. Defaults to the API
-default sort order for this endpoint. Run \code{demographics$field} to see
-valid values.}
+default sort order for this endpoint. Run \code{fdic_demographics$field} for
+reference.}
 
 \item{descending}{(Logical) Should results be sorted in descending order?
 Only applies when \code{sort_by} is specified. Defaults to \code{FALSE}.}
+
+\item{limit}{(Integer) Number of records to return. Must be between 1 and
+10,000. Defaults to 10,000.}
 }
 \value{
 A tibble containing summary of deposits data
-for FDIC-insured institutions, with one row per institution.
+for FDIC-insured institutions, with one row per institution location.
 }
 \description{
 Queries the \verb{/sod} endpoint of the FDIC BankFind Suite API,
 returning summary of deposit data for FDIC-insured financial institutions.
+}
+\examples{
+\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+# Return Summary of Deposit data for institutions in North Dakota
+get_sod(filters = "STALP:ND")
+
+# Return specific fields, sorted by total assets descending
+get_sod(
+  filters = "STALP:ND",
+  fields = c("CERT", "CITY", "ASSET", "YEAR"),
+  sort_by = "ASSET",
+  descending = TRUE
+)
+\dontshow{\}) # examplesIf}
 }

@@ -9,7 +9,8 @@ get_demographics(
   filters = NULL,
   fields = NULL,
   sort_by = NULL,
-  descending = FALSE
+  descending = FALSE,
+  limit = 10000
 )
 }
 \arguments{
@@ -20,18 +21,22 @@ get_demographics(
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase. See the examples
 below and refer to \url{https://api.fdic.gov/banks/docs/} for full syntax
-details. Run \code{demographics$field} to see available field names.}
+details. Run \code{fdic_demographics$field} to see available field names.}
 
 \item{fields}{(String or Character vector) Fields to include in the response.
-Defaults to all available fields if not specified. Run \code{demographics$field}
-for valid values.}
+Defaults to all available fields if not specified. Run \code{fdic_demographics$field}
+for reference. An \code{ID} column is always included in the response regardless
+of the fields requested.}
 
 \item{sort_by}{(String) Field name to sort results by. Defaults to the API
-default sort order for this endpoint. Run \code{demographics$field} to see
-valid values.}
+default sort order for this endpoint. Run \code{fdic_demographics$field} for
+reference.}
 
 \item{descending}{(Logical) Should results be sorted in descending order?
 Only applies when \code{sort_by} is specified. Defaults to \code{FALSE}.}
+
+\item{limit}{(Integer) Number of records to return. Must be between 1 and
+10,000. Defaults to 10,000.}
 }
 \value{
 A tibble containing demographic data for FDIC-insured
@@ -42,22 +47,22 @@ Queries the \verb{/demographics} endpoint of the FDIC BankFind Suite API,
 returning demographic data for FDIC-insured financial institutions.
 }
 \examples{
-if (!no_creds_available()) {
-  # Assumiming you have set the FDIC_API_KEY environment variable
+\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+# Return demographic data for a specific institution
+get_demographics(filters = "CERT:10002")
 
-  # Return all demographic data (subject to 10,000 maximum record limit)
-  get_demographics()
+# Return specific fields only
+get_demographics(
+  fields = c("CERT", "REPDTE", "OFFTOT", "OFFSTATE"),
+  limit = 10
+)
 
-  # Filter to a single state
-  get_demographics(filters = "STALP:ND")
-
-  # Filter to multiple states
-  get_demographics(filters = "STALP:(ND OR SD)")
-
-  # Return specific fields only
-  get_demographics(fields = c("CERT", "STALP", "REPDTE"))
-
-  # Sort by certificate number in descending order
-  get_demographics(sort_by = "CERT", descending = TRUE)
-}
+# Sort by report date in descending order
+get_demographics(
+  fields = c("CERT", "REPDTE", "OFFTOT"),
+  sort_by = "REPDTE",
+  descending = TRUE,
+  limit = 10
+)
+\dontshow{\}) # examplesIf}
 }
