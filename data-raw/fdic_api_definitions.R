@@ -27,9 +27,9 @@ field_definitions <- api_definitions |>
         .f = function(x, idx) {
           tibble::tibble(
             field = idx,
-            title = trimws(x$title),
-            description = trimws(x$description),
-            type = trimws(x$type)
+            title = trimws(purrr::pluck(x, "title", .default = NA_character_)),
+            description = trimws(purrr::pluck(x, "description", .default = NA_character_)),
+            type = trimws(purrr::pluck(x, "type", .default = NA_character_))
           )
         }
       ) |>
@@ -38,23 +38,23 @@ field_definitions <- api_definitions |>
     }
   )
 
-demographics <- field_definitions$demographics
-failures     <- field_definitions$failures
-financials   <- field_definitions$financials
-history      <- field_definitions$history
-institutions <- field_definitions$institutions
-locations    <- field_definitions$locations
-sod          <- field_definitions$sod
-summary      <- field_definitions$summary
+fdic_demographics <- field_definitions$demographics
+fdic_failures     <- field_definitions$failures
+fdic_financials   <- field_definitions$financials
+fdic_history      <- field_definitions$history
+fdic_institutions <- field_definitions$institutions
+fdic_locations    <- field_definitions$locations
+fdic_sod          <- field_definitions$sod
+fdic_summary      <- field_definitions$summary
 
 usethis::use_data(
-  demographics,
-  failures,
-  financials,
-  history,
-  institutions,
-  locations,
-  sod,
-  summary,
+  fdic_demographics,
+  fdic_failures,
+  fdic_financials,
+  fdic_history,
+  fdic_institutions,
+  fdic_locations,
+  fdic_sod,
+  fdic_summary,
   overwrite = TRUE
 )
