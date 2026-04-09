@@ -22,31 +22,15 @@ check_empty_creds <- function(api_key) {
   }
 }
 
-#' Handle missing API Key values without throwing an error for
-#' unit testing purposes
-#'
-#' @param api_key (String) Your FDIC API key. Defaults to the value of the
-#'   `FDIC_API_KEY` environment variable. Register for a key at
-#'   <https://api.data.gov/signup/>.
-#'
-#' @return (Logical) `FALSE` if a valid `api_key` is available; otherwise `TRUE`
-#'
-#' @details Intended for internal use.
-#'
-#' @export
-no_creds_available <- function(api_key = Sys.getenv("FDIC_API_KEY")) {
-
-  if (
-    is.null(api_key) ||
-      trimws(api_key) == ""
-  ) TRUE else FALSE
-
-}
-
-
-
-validate_query_params <- function(filters, fields, sort_by, descending, endpoint) {
-
+#' Validate API query parameters
+#' @noRd
+validate_query_params <- function(
+  filters,
+  fields,
+  sort_by,
+  descending,
+  limit = 10000
+) {
   # The `filters` param is a string that uses Elastic Search query string syntax
   # While the content is challenging to validate, the value can still be checked
   if (!is.null(filters) && (!is.character(filters) || length(filters) != 1)) {
