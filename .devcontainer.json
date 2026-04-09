@@ -10,7 +10,7 @@
 
         // https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
-            "packages": "cli, devtools, dplyr, httpgd, httr2, jsonlite, languageserver, purrr, rlang, stringr, tibble, usethis, xml2",
+            "packages": "cli, devtools, dplyr, httpgd, httr2, jsonlite, languageserver, purrr, rlang, tibble, usethis",
             "installSystemRequirements": true
         }
 
@@ -18,15 +18,21 @@
 
     "customizations": {
         "vscode": {
-            "extensions": [
-                "REditorSupport.r",
-                "RDebugger.r-debugger"
-            ],
             "settings": {
                 "editor.rulers": [80],
                 "r.bracketedPaste": true,
-                "r.plot.useHttpgd": true
-            }
+                "r.plot.useHttpgd": true,
+                "[r]": {
+                    "editor.formatOnSave": true,
+                    "editor.defaultFormatter": "Posit.air-vscode"
+                }
+            },
+            "extensions": [
+                "Anthropic.claude-code",
+                "Posit.air-vscode",
+                "REditorSupport.r",
+                "RDebugger.r-debugger"
+            ]
         }
     }
 }
