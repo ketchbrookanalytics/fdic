@@ -1,0 +1,34 @@
+url: https://ketchbrookanalytics.github.io/fdic/
+template:
+  bootstrap: 5
+  bootswatch: simplex
+  bslib:
+    base_font: {google: "Lora"}
+  theme: breeze-light
+navbar:
+  structure:
+    left:  [intro, reference, news]
+    right: [search, github]
+reference:
+  - title: "Data retrieval"
+    desc: "Retrieve data from specified FDIC BankSuite API endpoints"
+    contents:
+    - get_demographics
+    - get_failures
+    - get_financials
+    - get_history
+    - get_institutions
+    - get_locations
+    - get_sod
+    - get_summary
+  - title: "API defintions"
+    desc: "Internal datasets documenting API endpoint definitions"
+    contents:
+    - fdic_demographics
+    - fdic_failures
+    - fdic_financials
+    - fdic_history
+    - fdic_institutions
+    - fdic_locations
+    - fdic_sod
+    - fdic_summary
