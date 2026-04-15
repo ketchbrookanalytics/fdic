@@ -35,7 +35,7 @@
 #' # Return specific fields only
 #' get_demographics(
 #'   fields = c("CERT", "REPDTE", "OFFTOT", "OFFSTATE"),
-#'   limit = 10
+#'   limit = 5
 #' )
 #'
 #' # Sort by report date in descending order
@@ -43,7 +43,7 @@
 #'   fields = c("CERT", "REPDTE", "OFFTOT"),
 #'   sort_by = "REPDTE",
 #'   descending = TRUE,
-#'   limit = 10
+#'   limit = 5
 #' )
 get_demographics <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),

@@ -54,7 +54,7 @@ get_demographics(filters = "CERT:10002")
 # Return specific fields only
 get_demographics(
   fields = c("CERT", "REPDTE", "OFFTOT", "OFFSTATE"),
-  limit = 10
+  limit = 5
 )
 
 # Sort by report date in descending order
@@ -62,7 +62,7 @@ get_demographics(
   fields = c("CERT", "REPDTE", "OFFTOT"),
   sort_by = "REPDTE",
   descending = TRUE,
-  limit = 10
+  limit = 5
 )
 \dontshow{\}) # examplesIf}
 }
