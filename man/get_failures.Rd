@@ -56,12 +56,15 @@ get_failures(
 )
 
 # Filter to failures in a single state
-get_failures(filters = "PSTALP:ND")
+get_failures(
+  filters = "PSTALP:NY"
+  limit = 5
+)
 
 # Return specific fields only
 get_failures(
   fields = c("NAME", "CERT", "FAILDATE", "PSTALP"),
-  limit = 100
+  limit = 5
 )
 \dontshow{\}) # examplesIf}
 }

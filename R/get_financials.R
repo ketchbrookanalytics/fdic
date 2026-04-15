@@ -23,11 +23,11 @@
 #' @export
 #'
 #' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
-#' # Return key financial fields for institutions in North Dakota
+#' # Return key financial fields for institutions in New York
 #' get_financials(
-#'   filters = "STALP:ND",
+#'   filters = "STALP:NY",
 #'   fields = c("CERT", "REPDTE", "ASSET", "NETINC"),
-#'   limit = 100
+#'   limit = 5
 #' )
 #'
 #' # Sort by total assets descending
@@ -35,7 +35,7 @@
 #'   fields = c("CERT", "ASSET"),
 #'   sort_by = "ASSET",
 #'   descending = TRUE,
-#'   limit = 100
+#'   limit = 5
 #' )
 get_financials <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),

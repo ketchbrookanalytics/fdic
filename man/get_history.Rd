@@ -57,6 +57,9 @@ get_history(
 )
 
 # Return specific fields only
-get_history(fields = c("CERT", "CHANGECODE", "CHANGECODE_DESC", "PROCDATE"))
+get_history(
+  fields = c("CERT", "CHANGECODE", "CHANGECODE_DESC", "PROCDATE"),
+  limit = 5
+)
 \dontshow{\}) # examplesIf}
 }

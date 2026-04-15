@@ -48,15 +48,18 @@ returning FDIC-insured financial institution data.
 }
 \examples{
 \dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
-# Return active institutions in North Dakota
-get_institutions(filters = "STALP:ND AND ACTIVE:1")
+# Return active institutions in New York
+get_institutions(
+  filters = "STALP:NY AND ACTIVE:1",
+  limit = 5
+)
 
-# Return the 10 largest institutions by total assets
+# Return the 5 largest institutions by total assets
 get_institutions(
   fields = c("CERT", "NAME", "STALP", "ASSET"),
   sort_by = "ASSET",
   descending = TRUE,
-  limit = 10
+  limit = 5
 )
 \dontshow{\}) # examplesIf}
 }

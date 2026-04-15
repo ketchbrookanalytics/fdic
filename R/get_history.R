@@ -21,7 +21,10 @@
 #' )
 #'
 #' # Return specific fields only
-#' get_history(fields = c("CERT", "CHANGECODE", "CHANGECODE_DESC", "PROCDATE"))
+#' get_history(
+#'   fields = c("CERT", "CHANGECODE", "CHANGECODE_DESC", "PROCDATE"),
+#'   limit = 5
+#' )
 get_history <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,

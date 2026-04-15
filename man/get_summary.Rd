@@ -51,13 +51,17 @@ for FDIC-insured financial institutions.
 \examples{
 \dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
 # Return summary data for each bank type, state, quarter, and year
-get_summary(fields = c("CALLYM", "BANKS", "BRANCHES", "ASSET", "NETINC"))
+get_summary(
+  fields = c("CALLYM", "BANKS", "BRANCHES", "ASSET", "NETINC"),
+  limit = 5
+)
 
 # Return summary data sorted by reporting period descending
 get_summary(
   fields = c("YEAR", "CALLYM", "BANKS", "ASSET"),
   sort_by = "CALLYM",
-  descending = TRUE
+  descending = TRUE,
+  limit = 5
 )
 \dontshow{\}) # examplesIf}
 }

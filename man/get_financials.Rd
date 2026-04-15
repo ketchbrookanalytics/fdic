@@ -53,11 +53,11 @@ allowed \code{limit} to 500 records; exceeding this will raise an error.
 }
 \examples{
 \dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
-# Return key financial fields for institutions in North Dakota
+# Return key financial fields for institutions in New York
 get_financials(
-  filters = "STALP:ND",
+  filters = "STALP:NY",
   fields = c("CERT", "REPDTE", "ASSET", "NETINC"),
-  limit = 100
+  limit = 5
 )
 
 # Sort by total assets descending
@@ -65,7 +65,7 @@ get_financials(
   fields = c("CERT", "ASSET"),
   sort_by = "ASSET",
   descending = TRUE,
-  limit = 100
+  limit = 5
 )
 \dontshow{\}) # examplesIf}
 }

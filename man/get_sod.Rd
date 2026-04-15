@@ -48,15 +48,19 @@ returning summary of deposit data for FDIC-insured financial institutions.
 }
 \examples{
 \dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
-# Return Summary of Deposit data for institutions in North Dakota
-get_sod(filters = "STALP:ND")
+# Return Summary of Deposit data for institutions in North York
+get_sod(
+  filters = "STALP:NY",
+  limit = 5
+)
 
 # Return specific fields, sorted by total assets descending
 get_sod(
-  filters = "STALP:ND",
+  filters = "STALP:NY",
   fields = c("CERT", "CITY", "ASSET", "YEAR"),
   sort_by = "ASSET",
-  descending = TRUE
+  descending = TRUE,
+  limit = 5
 )
 \dontshow{\}) # examplesIf}
 }

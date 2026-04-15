@@ -12,13 +12,17 @@
 #' @export
 #'
 #' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
-#' # Return all branch locations in North Dakota
-#' get_locations(filters = "STALP:ND")
+#' # Return branch locations in New York
+#' get_locations(
+#'   filters = "STALP:NY",
+#'   limit 5
+#' )
 #'
 #' # Return specific fields only
 #' get_locations(
 #'   filters = "STALP:ND",
-#'   fields = c("CERT", "CITY", "ADDRESS", "STALP")
+#'   fields = c("CERT", "CITY", "ADDRESS", "STALP"),
+#'   limit = 5
 #' )
 get_locations <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
