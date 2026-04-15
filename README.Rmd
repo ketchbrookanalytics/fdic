@@ -63,7 +63,7 @@ If you prefer not to set the API key as an environment variable, you can pass it
 ```{r example-1}
 library(fdic)
 
-# Retrieve all active institutions in New York State, sorted by total assets
+# Retrieve active institutions in New York State, sorted by total assets
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   fields = c("NAME", "CITY", "ASSET"),
@@ -99,7 +99,7 @@ get_demographics(
 ```
 
 ```{r example-3}
-# Filter to all active institutions in New York State
+# Filter to active institutions in New York State
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
@@ -120,16 +120,21 @@ get_sod(
 
 ### Available API Fields
 
-{fdic} contains eight internal datasets documenting the [API endpoint definition files](https://api.fdic.gov/banks/docs/) provided by the FDIC. Each dataset corresponds to one of the functions listed above and is named by prefixing the endpoint with `fdic_` (e.g., `fdic_institutions` for `get_institutions()`). Each dataset can be accessed directly by name, as demonstrated below.
+{fdic} contains eight internal datasets documenting the [current API endpoint definition files](https://api.fdic.gov/banks/docs/) provided by the FDIC. Each dataset corresponds to one of the functions contained in {fdic} and is named by prefixing the endpoint with `fdic_` (e.g., `fdic_institutions` for `get_institutions()`). Each dataset can be accessed directly by name, as demonstrated below.
 
 ```{r example-5}
-fdic_institutions |>
-  head()
+head(fdic_institutions)
 ```
 
 During package development, it was noted that *most* fields returned by the API are documented in these internal datasets. **However, there are several instances where fields are either no longer available or new, undocumented fields have been added.**
 
-{fdic} functions evaluate the values supplied to the `fields` argument and will raise a warning if a field is not returned in the response. However, it can be helpful to call a function with no `fields` argument and `limit = 1` to return the full current endpoint definition.
+{fdic} functions evaluate the values supplied to the `fields` argument and will raise a warning if a field is not returned in the response. However, it can be helpful to call an {fdic} function with no `fields` argument and `limit = 1` to return the current endpoint definition, as demonstrated below:
+
+```{r example-6}
+# Review current endpoint definition
+get_locations(limit = 1) |>
+  names()
+```
 
 ## Need Help?
 

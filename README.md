@@ -59,7 +59,7 @@ in {fdic}.
 ``` r
 library(fdic)
 
-# Retrieve all active institutions in New York State, sorted by total assets
+# Retrieve active institutions in New York State, sorted by total assets
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   fields = c("NAME", "CITY", "ASSET"),
@@ -131,7 +131,7 @@ get_demographics(
 ```
 
 ``` r
-# Filter to all active institutions in New York State
+# Filter to active institutions in New York State
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
@@ -175,16 +175,15 @@ get_sod(
 
 ### Available API Fields
 
-{fdic} contains eight internal datasets documenting the [API endpoint
-definition files](https://api.fdic.gov/banks/docs/) provided by the
-FDIC. Each dataset corresponds to one of the functions listed above and
-is named by prefixing the endpoint with `fdic_` (e.g.,
+{fdic} contains eight internal datasets documenting the [current API
+endpoint definition files](https://api.fdic.gov/banks/docs/) provided by
+the FDIC. Each dataset corresponds to one of the functions contained in
+{fdic} and is named by prefixing the endpoint with `fdic_` (e.g.,
 `fdic_institutions` for `get_institutions()`). Each dataset can be
 accessed directly by name, as demonstrated below.
 
 ``` r
-fdic_institutions |>
-  head()
+head(fdic_institutions)
 #> # A tibble: 6 × 4
 #>   field   title                            description                     type 
 #>   <chr>   <chr>                            <chr>                           <chr>
@@ -203,8 +202,25 @@ undocumented fields have been added.**
 
 {fdic} functions evaluate the values supplied to the `fields` argument
 and will raise a warning if a field is not returned in the response.
-However, it can be helpful to call a function with no `fields` argument
-and `limit = 1` to return the full current endpoint definition.
+However, it can be helpful to call an {fdic} function with no `fields`
+argument and `limit = 1` to return the current endpoint definition, as
+demonstrated below:
+
+``` r
+# Review current endpoint definition
+get_locations(limit = 1) |>
+  names()
+#>  [1] "ACQDATE"         "ADDRESS"         "ADDRESS2"        "BKCLASS"        
+#>  [5] "CBSA"            "CBSA_DIV"        "CBSA_DIV_FLG"    "CBSA_DIV_NO"    
+#>  [9] "CBSA_METRO"      "CBSA_METRO_FLG"  "CBSA_METRO_NAME" "CBSA_MICRO_FLG" 
+#> [13] "CBSA_NO"         "CERT"            "CITY"            "COUNTY"         
+#> [17] "CSA"             "CSA_FLG"         "CSA_NO"          "ESTYMD"         
+#> [21] "FI_UNINUM"       "ID"              "LATITUDE"        "LONGITUDE"      
+#> [25] "MAINOFF"         "MDI_STATUS_CODE" "MDI_STATUS_DESC" "NAME"           
+#> [29] "OFFNAME"         "OFFNUM"          "RUNDATE"         "SERVTYPE"       
+#> [33] "SERVTYPE_DESC"   "STALP"           "STCNTY"          "STNAME"         
+#> [37] "UNINUM"          "ZIP"
+```
 
 ## Need Help?
 
