@@ -1,10 +1,11 @@
 Package: fdic
 Title: R Interface to 'FDIC BankFind Suite API'
 Version: 0.0.0.9000
-Authors@R:
-    person("Dylan", "Hughes", , "dhughes@ketchbrookanalytics.com",
+Authors@R: c(
+    person("Dylan", "Hughes", email = "dhughes@ketchbrookanalytics.com",
            role = c("aut", "cre")),
     person("Ketchbrook Analytics", role = c("cph", "fnd"))
+  )
 Description: Provides a convenient interface to the BankFind Suite API made
     available by the Federal Deposit Insurance Corporation ('FDIC'). Contains
     functions to retrieve data related to financial institution locations,
@@ -18,10 +19,10 @@ Suggests:
     testthat (>= 3.0.0),
     withr
 Config/testthat/edition: 3
-Depends: 
+Depends:
     R (>= 4.1)
 LazyData: true
-Imports: 
+Imports:
     cli,
     httr2,
     tibble
