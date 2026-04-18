@@ -1,9 +1,11 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# fdic
+# fdic <a href="https://ketchbrookanalytics.github.io/fdic/"><img src="man/figures/logo.png" align="right" height="600" alt="fdic website" /></a>
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/ketchbrookanalytics/fdic/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ketchbrookanalytics/fdic/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 R package for retrieving data from the [FDIC BankFind Suite
