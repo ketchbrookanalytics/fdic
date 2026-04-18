@@ -51,7 +51,7 @@ returning location data for FDIC-insured financial institutions.
 # Return branch locations in New York
 get_locations(
   filters = "STALP:NY",
-  limit 5
+  limit = 5
 )
 
 # Return specific fields only
