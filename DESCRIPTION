@@ -26,3 +26,4 @@ Imports:
     cli,
     httr2,
     tibble
+URL: https://ketchbrookanalytics.github.io/fdic/
