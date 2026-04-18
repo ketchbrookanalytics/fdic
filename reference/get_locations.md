@@ -60,3 +60,20 @@ A tibble containing location data for FDIC-insured institutions, with
 one row per institution location.
 
 ## Examples
+
+``` r
+if (FALSE) { # nzchar(Sys.getenv("FDIC_API_KEY"))
+# Return branch locations in New York
+get_locations(
+  filters = "STALP:NY",
+  limit = 5
+)
+
+# Return specific fields only
+get_locations(
+  filters = "STALP:ND",
+  fields = c("CERT", "CITY", "ADDRESS", "STALP"),
+  limit = 5
+)
+}
+```

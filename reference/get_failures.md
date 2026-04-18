@@ -60,3 +60,26 @@ A tibble containing bank failure data for FDIC-insured institutions,
 with one row per failure event.
 
 ## Examples
+
+``` r
+if (FALSE) { # nzchar(Sys.getenv("FDIC_API_KEY"))
+# Return the 5 most recent bank failures
+get_failures(
+  sort_by = "FAILDATE",
+  descending = TRUE,
+  limit = 5
+)
+
+# Filter to failures in a single state
+get_failures(
+  filters = "PSTALP:NY",
+  limit = 5
+)
+
+# Return specific fields only
+get_failures(
+  fields = c("NAME", "CERT", "FAILDATE", "PSTALP"),
+  limit = 5
+)
+}
+```
