@@ -8,3 +8,6 @@
 ^pkgdown$
 ^\.github$
 ^\.devcontainer$
+^\.claude$
+^[.]?air[.]toml$
+^cran-comments\.md$

@@ -18,21 +18,22 @@
 
     "customizations": {
         "vscode": {
+            "extensions": [
+                "Anthropic.claude-code",
+                "Posit.air-vscode",
+                "REditorSupport.r",
+                "RDebugger.r-debugger"
+            ],
             "settings": {
                 "editor.rulers": [80],
+                "files.useExperimentalFileWatcher": true,
                 "r.bracketedPaste": true,
                 "r.plot.useHttpgd": true,
                 "[r]": {
                     "editor.formatOnSave": true,
                     "editor.defaultFormatter": "Posit.air-vscode"
                 }
-            },
-            "extensions": [
-                "Anthropic.claude-code",
-                "Posit.air-vscode",
-                "REditorSupport.r",
-                "RDebugger.r-debugger"
-            ]
+            }
         }
     }
 }
