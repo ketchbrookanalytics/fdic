@@ -8,9 +8,10 @@ Authors@R: c(
   )
 Description: Provides a convenient interface to the BankFind Suite API made
     available by the Federal Deposit Insurance Corporation ('FDIC'). Contains
-    functions to retrieve data related to financial institution locations,
-    structural change events, financial reports (both historic and current),
-    summary of deposit reporting, and demographic information.
+    functions to retrieve data related to qualitative institution information,
+    branch and office locations, Summary of Deposit reporting, financial
+    information, failed financial institutions, structural change events,
+    historic aggregate industry data, and demographics information.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -26,4 +27,5 @@ Imports:
     cli,
     httr2,
     tibble
-URL: https://ketchbrookanalytics.github.io/fdic/
+URL: https://github.com/ketchbrookanalytics/fdic, https://ketchbrookanalytics.github.io/fdic/
+BugReports: https://github.com/ketchbrookanalytics/fdic/issues
