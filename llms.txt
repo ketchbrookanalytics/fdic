@@ -5,14 +5,14 @@ API](https://api.fdic.gov/banks/docs/).
 
 The FDIC BankFind Suite API provides access to:
 
-- Demographic data related to financial institutions
-- Details on failed financial institutions
-- Financial information and risk/performance metrics
-- Details on structural change events
-- Data on FDIC-insured financial institutions
+- Qualitative data on FDIC-insured financial institutions
 - Branch and office location data
 - Summary of Deposits by institution and location
+- Financial information and risk/performance metrics
+- Details on failed financial institutions
+- Details on structural change events
 - Historic aggregate financial and structure data
+- Demographic data related to financial institutions
 
 ## Installation
 
@@ -53,7 +53,8 @@ in {fdic}.
 ``` r
 library(fdic)
 
-# Retrieve active institutions in New York State, sorted by total assets
+# Retrieve qualitative information for active institutions in New York State,
+# sorted by total assets
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   fields = c("NAME", "CITY", "ASSET"),
@@ -103,29 +104,7 @@ documentation provided by the FDIC and Elastic, a few examples are
 provided below for reference:
 
 ``` r
-# Filter to a specific institution
-get_demographics(
-  filters = "CERT:10002",
-  limit = 5
-)
-#> # A tibble: 5 × 37
-#>   ACTEVT BRANCH CALLYM  CALLYMD CBSANAME   CERT CLCODE CNTRYALP CNTRYNUM CNTYNUM
-#>    <int>  <int>  <int>    <int> <chr>     <int>  <int> <chr>       <int>   <int>
-#> 1     NA      1 198403 19840331 WHEELING… 10002      3 US           1007      69
-#> 2    810      1 198406 19840630 WHEELING… 10002      3 US           1007      69
-#> 3    810      1 198409 19840930 WHEELING… 10002      3 US           1007      69
-#> 4    810      1 198412 19841231 WHEELING… 10002      3 US           1007      69
-#> 5    810      1 198503 19850331 WHEELING… 10002      3 US           1007      69
-#> # ℹ 27 more variables: CSA <lgl>, DIVISION <int>, DOCKET <int>, FDICAREA <int>,
-#> #   FDICTERR <chr>, FLDOFDCA <chr>, HCTNONE <lgl>, ID <chr>, INSAGNT2 <lgl>,
-#> #   METRO <int>, MICRO <int>, MNRTYCDE <lgl>, MNRTYDTE <int>, OAKAR <int>,
-#> #   OFFDMULT <int>, OFFNDOM <int>, OFFOTH <int>, OFFSOD <int>, OFFSTATE <int>,
-#> #   OFFTOT <int>, OFFUSOA <int>, QTRNO <int>, REPDTE <int>, RISKTERR <chr>,
-#> #   SASSER <int>, SIMS_LAT <dbl>, SIMS_LONG <dbl>
-```
-
-``` r
-# Filter to active institutions in New York State
+# Retrieve qualitative information for all active institutions in New York State
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
@@ -148,7 +127,30 @@ get_institutions(
 ```
 
 ``` r
-# Filter to all non-community banks in New York State for the year 2025
+# Retrieve office and branch location data for a specific institution
+get_locations(
+  filters = "CERT:33124",
+  limit = 5
+)
+#> # A tibble: 5 × 38
+#>   ACQDATE      ADDRESS  ADDRESS2 BKCLASS CBSA  CBSA_DIV CBSA_DIV_FLG CBSA_DIV_NO
+#>   <chr>        <chr>    <lgl>    <chr>   <chr> <chr>           <int>       <int>
+#> 1 "11/28/2008" 111 S M… NA       SM      Salt… ""                  0          NA
+#> 2 ""           200 Wes… NA       SM      New … "New Yo…            1       35614
+#> 3 ""           125 Hig… NA       SM      Bost… "Boston…            1       14454
+#> 4 ""           30 Huds… NA       SM      New … "New Yo…            1       35614
+#> 5 ""           11850 S… NA       SM      Salt… ""                  0          NA
+#> # ℹ 30 more variables: CBSA_METRO <int>, CBSA_METRO_FLG <int>,
+#> #   CBSA_METRO_NAME <chr>, CBSA_MICRO_FLG <int>, CBSA_NO <int>, CERT <int>,
+#> #   CITY <chr>, COUNTY <chr>, CSA <chr>, CSA_FLG <int>, CSA_NO <int>,
+#> #   ESTYMD <chr>, FI_UNINUM <int>, ID <int>, LATITUDE <dbl>, LONGITUDE <dbl>,
+#> #   MAINOFF <int>, MDI_STATUS_CODE <lgl>, MDI_STATUS_DESC <chr>, NAME <chr>,
+#> #   OFFNAME <chr>, OFFNUM <int>, RUNDATE <chr>, SERVTYPE <int>,
+#> #   SERVTYPE_DESC <chr>, STALP <chr>, STCNTY <int>, STNAME <chr>, …
+```
+
+``` r
+# Retrieve 2025 Summary of Deposit data for New York State non-community banks
 # An `ID` column is always included in the response, despite not being specified
 get_sod(
   filters = "STALP:NY AND !(CB:1) AND YEAR:2025",
@@ -217,6 +219,10 @@ get_locations(limit = 1) |>
 #> [37] "UNINUM"          "ZIP"
 ```
 
+Alternatively, the BankFind Suite offers a [Glossary and Variable
+Definition](https://banks.data.fdic.gov/bankfind-suite/help?helpTopic=glossary-and-variable-definitions)
+table which may provide more up-to-date information on API fields.
+
 ## Need Help?
 
 If you’re in need of assistance working with {fdic}, don’t hesitate to
@@ -224,7 +230,7 @@ reach out to our team at <info@ketchbrookanalytics.com>.
 
 # Package index
 
-## Data retrieval
+## Data Retrieval
 
 Retrieve data from specified FDIC BankSuite API endpoints
 
@@ -247,7 +253,7 @@ Retrieve data from specified FDIC BankSuite API endpoints
   : Retrieve Historical Aggregate Data by Year for FDIC-Insured
   Institutions
 
-## API defintions
+## API Defintions
 
 Internal datasets documenting API endpoint definitions
 
@@ -290,4 +296,12 @@ Internal datasets documenting API endpoint definitions
   :
 
   Field definitions for the FDIC BankFind Suite `/summary` endpoint
+
+## Internal Functions
+
+Internal package utility functions
+
+- [`no_creds_available()`](https://ketchbrookanalytics.github.io/fdic/reference/no_creds_available.md)
+  : Handle missing API key without throwing an error for unit testing
+  purposes
 

@@ -68,7 +68,7 @@ allowed `limit` to 500 records; exceeding this will raise an error.
 ## Examples
 
 ``` r
-if (FALSE) { # nzchar(Sys.getenv("FDIC_API_KEY"))
+if (FALSE) { # !no_creds_available()
 # Return key financial fields for institutions in New York
 get_financials(
   filters = "STALP:NY",

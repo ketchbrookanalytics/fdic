@@ -20,6 +20,7 @@ returning financial data for FDIC-insured financial institutions."><meta propert
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ketchbrookanalytics/fdic/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -28,7 +29,7 @@ returning financial data for FDIC-insured financial institutions."><meta propert
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Retrieve Financial Data for FDIC-Insured Institutions</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/ketchbrookanalytics/fdic/blob/main/R/get_financials.R" class="external-link"><code>R/get_financials.R</code></a></small>
       <div class="d-none name"><code>get_financials.Rd</code></div>
     </div>
 
@@ -103,7 +104,7 @@ allowed <code>limit</code> to 500 records; exceeding this will raise an error.</
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># nzchar(Sys.getenv("FDIC_API_KEY"))</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># !no_creds_available()</span></span></span>
 <span class="r-in"><span><span class="co"># Return key financial fields for institutions in New York</span></span></span>
 <span class="r-in"><span><span class="fu">get_financials</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"STALP:NY"</span>,</span></span>

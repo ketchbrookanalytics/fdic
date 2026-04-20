@@ -62,7 +62,7 @@ one row per institution location.
 ## Examples
 
 ``` r
-if (FALSE) { # nzchar(Sys.getenv("FDIC_API_KEY"))
+if (FALSE) { # !no_creds_available()
 # Return branch locations in New York
 get_locations(
   filters = "STALP:NY",

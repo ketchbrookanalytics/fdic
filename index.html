@@ -17,8 +17,8 @@
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="R Interface to FDIC BankFind Suite API">
-<meta name="description" content="Provides a convenient interface to the BankFind Suite API made available by the Federal Deposit Insurance Corporation (FDIC). Contains functions to retrieve data related to financial institution locations, structural change events, financial reports (both historic and current), summary of deposit reporting, and demographic information.">
-<meta property="og:description" content="Provides a convenient interface to the BankFind Suite API made available by the Federal Deposit Insurance Corporation (FDIC). Contains functions to retrieve data related to financial institution locations, structural change events, financial reports (both historic and current), summary of deposit reporting, and demographic information.">
+<meta name="description" content="Provides a convenient interface to the BankFind Suite API made available by the Federal Deposit Insurance Corporation (FDIC). Contains functions to retrieve data related to qualitative institution information, branch and office locations, Summary of Deposit reporting, financial information, failed financial institutions, structural change events, historic aggregate industry data, and demographics information.">
+<meta property="og:description" content="Provides a convenient interface to the BankFind Suite API made available by the Federal Deposit Insurance Corporation (FDIC). Contains functions to retrieve data related to qualitative institution information, branch and office locations, Summary of Deposit reporting, financial information, failed financial institutions, structural change events, historic aggregate industry data, and demographics information.">
 <meta property="og:image" content="https://ketchbrookanalytics.github.io/fdic/logo.png">
 </head>
 <body>
@@ -44,6 +44,7 @@
 <li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="search.json">
 </form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ketchbrookanalytics/fdic/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul>
 </div>
 
@@ -62,14 +63,14 @@
 <p>R package for retrieving data from the <a href="https://api.fdic.gov/banks/docs/" class="external-link">FDIC BankFind Suite API</a>.</p>
 <p>The FDIC BankFind Suite API provides access to:</p>
 <ul>
-<li>Demographic data related to financial institutions</li>
-<li>Details on failed financial institutions</li>
-<li>Financial information and risk/performance metrics</li>
-<li>Details on structural change events</li>
-<li>Data on FDIC-insured financial institutions</li>
+<li>Qualitative data on FDIC-insured financial institutions</li>
 <li>Branch and office location data</li>
 <li>Summary of Deposits by institution and location</li>
+<li>Financial information and risk/performance metrics</li>
+<li>Details on failed financial institutions</li>
+<li>Details on structural change events</li>
 <li>Historic aggregate financial and structure data</li>
+<li>Demographic data related to financial institutions</li>
 </ul>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -96,9 +97,10 @@
 <h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ketchbrookanalytics.github.io/fdic/">fdic</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ketchbrookanalytics/fdic" class="external-link">fdic</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># Retrieve active institutions in New York State, sorted by total assets</span></span>
+<span><span class="co"># Retrieve qualitative information for active institutions in New York State,</span></span>
+<span><span class="co"># sorted by total assets</span></span>
 <span><span class="fu"><a href="reference/get_institutions.html">get_institutions</a></span><span class="op">(</span></span>
 <span>  filters <span class="op">=</span> <span class="st">"STALP:NY AND ACTIVE:1"</span>,</span>
 <span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"NAME"</span>, <span class="st">"CITY"</span>, <span class="st">"ASSET"</span><span class="op">)</span>,</span>
@@ -137,27 +139,7 @@
 <p>The <a href="https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-query-string-query#query-string-syntax" class="external-link">Elasticsearch Query String Syntax</a> is a mini-language that allows for a customized search of the data, using terms and operators to facilitate the filtering. Pass a valid Elasticsearch Query String to the <code>filters</code> argument of an {fdic} function to filter the data provided by the FDIC BankFind Suite API.</p>
 <p>While it is strongly encouraged to review the Query String Syntax documentation provided by the FDIC and Elastic, a few examples are provided below for reference:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Filter to a specific institution</span></span>
-<span><span class="fu"><a href="reference/get_demographics.html">get_demographics</a></span><span class="op">(</span></span>
-<span>  filters <span class="op">=</span> <span class="st">"CERT:10002"</span>,</span>
-<span>  limit <span class="op">=</span> <span class="fl">5</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 5 × 37</span></span>
-<span><span class="co">#&gt;   ACTEVT BRANCH CALLYM  CALLYMD CBSANAME   CERT CLCODE CNTRYALP CNTRYNUM CNTYNUM</span></span>
-<span><span class="co">#&gt;    &lt;int&gt;  &lt;int&gt;  &lt;int&gt;    &lt;int&gt; &lt;chr&gt;     &lt;int&gt;  &lt;int&gt; &lt;chr&gt;       &lt;int&gt;   &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1     NA      1 198403 19840331 WHEELING… 10002      3 US           1007      69</span></span>
-<span><span class="co">#&gt; 2    810      1 198406 19840630 WHEELING… 10002      3 US           1007      69</span></span>
-<span><span class="co">#&gt; 3    810      1 198409 19840930 WHEELING… 10002      3 US           1007      69</span></span>
-<span><span class="co">#&gt; 4    810      1 198412 19841231 WHEELING… 10002      3 US           1007      69</span></span>
-<span><span class="co">#&gt; 5    810      1 198503 19850331 WHEELING… 10002      3 US           1007      69</span></span>
-<span><span class="co">#&gt; # ℹ 27 more variables: CSA &lt;lgl&gt;, DIVISION &lt;int&gt;, DOCKET &lt;int&gt;, FDICAREA &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   FDICTERR &lt;chr&gt;, FLDOFDCA &lt;chr&gt;, HCTNONE &lt;lgl&gt;, ID &lt;chr&gt;, INSAGNT2 &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   METRO &lt;int&gt;, MICRO &lt;int&gt;, MNRTYCDE &lt;lgl&gt;, MNRTYDTE &lt;int&gt;, OAKAR &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   OFFDMULT &lt;int&gt;, OFFNDOM &lt;int&gt;, OFFOTH &lt;int&gt;, OFFSOD &lt;int&gt;, OFFSTATE &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   OFFTOT &lt;int&gt;, OFFUSOA &lt;int&gt;, QTRNO &lt;int&gt;, REPDTE &lt;int&gt;, RISKTERR &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   SASSER &lt;int&gt;, SIMS_LAT &lt;dbl&gt;, SIMS_LONG &lt;dbl&gt;</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Filter to active institutions in New York State</span></span>
+<code class="sourceCode R"><span><span class="co"># Retrieve qualitative information for all active institutions in New York State</span></span>
 <span><span class="fu"><a href="reference/get_institutions.html">get_institutions</a></span><span class="op">(</span></span>
 <span>  filters <span class="op">=</span> <span class="st">"STALP:NY AND ACTIVE:1"</span>,</span>
 <span>  limit <span class="op">=</span> <span class="fl">5</span></span>
@@ -177,8 +159,29 @@
 <span><span class="co">#&gt; #   CITY &lt;chr&gt;, CITYHCR &lt;chr&gt;, CLCODE &lt;int&gt;, CONSERVE &lt;chr&gt;, COUNTY &lt;chr&gt;,</span></span>
 <span><span class="co">#&gt; #   CSA &lt;chr&gt;, CSA_FLG &lt;int&gt;, CSA_NO &lt;int&gt;, DATEUPDT &lt;chr&gt;, DENOVO &lt;int&gt;,</span></span>
 <span><span class="co">#&gt; #   DEP &lt;int&gt;, DEPDOM &lt;int&gt;, DOCKET &lt;int&gt;, EFFDATE &lt;chr&gt;, ENDEFYMD &lt;chr&gt;, …</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Retrieve office and branch location data for a specific institution</span></span>
+<span><span class="fu"><a href="reference/get_locations.html">get_locations</a></span><span class="op">(</span></span>
+<span>  filters <span class="op">=</span> <span class="st">"CERT:33124"</span>,</span>
+<span>  limit <span class="op">=</span> <span class="fl">5</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; # A tibble: 5 × 38</span></span>
+<span><span class="co">#&gt;   ACQDATE      ADDRESS  ADDRESS2 BKCLASS CBSA  CBSA_DIV CBSA_DIV_FLG CBSA_DIV_NO</span></span>
+<span><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;lgl&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;int&gt;       &lt;int&gt;</span></span>
+<span><span class="co">#&gt; 1 "11/28/2008" 111 S M… NA       SM      Salt… ""                  0          NA</span></span>
+<span><span class="co">#&gt; 2 ""           200 Wes… NA       SM      New … "New Yo…            1       35614</span></span>
+<span><span class="co">#&gt; 3 ""           125 Hig… NA       SM      Bost… "Boston…            1       14454</span></span>
+<span><span class="co">#&gt; 4 ""           30 Huds… NA       SM      New … "New Yo…            1       35614</span></span>
+<span><span class="co">#&gt; 5 ""           11850 S… NA       SM      Salt… ""                  0          NA</span></span>
+<span><span class="co">#&gt; # ℹ 30 more variables: CBSA_METRO &lt;int&gt;, CBSA_METRO_FLG &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   CBSA_METRO_NAME &lt;chr&gt;, CBSA_MICRO_FLG &lt;int&gt;, CBSA_NO &lt;int&gt;, CERT &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   CITY &lt;chr&gt;, COUNTY &lt;chr&gt;, CSA &lt;chr&gt;, CSA_FLG &lt;int&gt;, CSA_NO &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   ESTYMD &lt;chr&gt;, FI_UNINUM &lt;int&gt;, ID &lt;int&gt;, LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;,</span></span>
+<span><span class="co">#&gt; #   MAINOFF &lt;int&gt;, MDI_STATUS_CODE &lt;lgl&gt;, MDI_STATUS_DESC &lt;chr&gt;, NAME &lt;chr&gt;,</span></span>
+<span><span class="co">#&gt; #   OFFNAME &lt;chr&gt;, OFFNUM &lt;int&gt;, RUNDATE &lt;chr&gt;, SERVTYPE &lt;int&gt;,</span></span>
+<span><span class="co">#&gt; #   SERVTYPE_DESC &lt;chr&gt;, STALP &lt;chr&gt;, STCNTY &lt;int&gt;, STNAME &lt;chr&gt;, …</span></span></code></pre></div>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Filter to all non-community banks in New York State for the year 2025</span></span>
+<code class="sourceCode R"><span><span class="co"># Retrieve 2025 Summary of Deposit data for New York State non-community banks</span></span>
 <span><span class="co"># An `ID` column is always included in the response, despite not being specified</span></span>
 <span><span class="fu"><a href="reference/get_sod.html">get_sod</a></span><span class="op">(</span></span>
 <span>  filters <span class="op">=</span> <span class="st">"STALP:NY AND !(CB:1) AND YEAR:2025"</span>,</span>
@@ -227,6 +230,7 @@
 <span><span class="co">#&gt; [29] "OFFNAME"         "OFFNUM"          "RUNDATE"         "SERVTYPE"       </span></span>
 <span><span class="co">#&gt; [33] "SERVTYPE_DESC"   "STALP"           "STCNTY"          "STNAME"         </span></span>
 <span><span class="co">#&gt; [37] "UNINUM"          "ZIP"</span></span></code></pre></div>
+<p>Alternatively, the BankFind Suite offers a <a href="https://banks.data.fdic.gov/bankfind-suite/help?helpTopic=glossary-and-variable-definitions" class="external-link">Glossary and Variable Definition</a> table which may provide more up-to-date information on API fields.</p>
 </div>
 </div>
 <div class="section level2">
@@ -235,7 +239,15 @@
 <p>If you’re in need of assistance working with {fdic}, don’t hesitate to reach out to our team at <a href="mailto:info@ketchbrookanalytics.com" class="email">info@ketchbrookanalytics.com</a>.</p>
 </div>
 </div>
-  </main><aside class="col-md-3"><div class="license">
+  </main><aside class="col-md-3"><div class="links">
+<h2 data-toc-skip>Links</h2>
+<ul class="list-unstyled">
+<li><a href="https://github.com/ketchbrookanalytics/fdic/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/ketchbrookanalytics/fdic/issues" class="external-link">Report a bug</a></li>
+</ul>
+</div>
+
+<div class="license">
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>

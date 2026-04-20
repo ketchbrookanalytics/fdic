@@ -62,7 +62,7 @@ institutions, with one row per institution location.
 ## Examples
 
 ``` r
-if (FALSE) { # nzchar(Sys.getenv("FDIC_API_KEY"))
+if (FALSE) { # !no_creds_available()
 # Return Summary of Deposit data for institutions in North York
 get_sod(
   filters = "STALP:NY",

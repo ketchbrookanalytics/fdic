@@ -1,6 +1,6 @@
 # Package index
 
-## Data retrieval
+## Data Retrieval
 
 Retrieve data from specified FDIC BankSuite API endpoints
 
@@ -23,7 +23,7 @@ Retrieve data from specified FDIC BankSuite API endpoints
   : Retrieve Historical Aggregate Data by Year for FDIC-Insured
   Institutions
 
-## API defintions
+## API Defintions
 
 Internal datasets documenting API endpoint definitions
 
@@ -66,3 +66,11 @@ Internal datasets documenting API endpoint definitions
   :
 
   Field definitions for the FDIC BankFind Suite `/summary` endpoint
+
+## Internal Functions
+
+Internal package utility functions
+
+- [`no_creds_available()`](https://ketchbrookanalytics.github.io/fdic/reference/no_creds_available.md)
+  : Handle missing API key without throwing an error for unit testing
+  purposes

@@ -20,6 +20,7 @@
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ketchbrookanalytics/fdic/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -28,7 +29,7 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Field definitions for the FDIC BankFind Suite <code>/financials</code> endpoint</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/ketchbrookanalytics/fdic/blob/main/R/data.R" class="external-link"><code>R/data.R</code></a></small>
       <div class="d-none name"><code>fdic_financials.Rd</code></div>
     </div>
 
@@ -64,9 +65,9 @@
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>This dataset reflects the API field definitions at the time the
-package was built. The FDIC API may have added, removed, or renamed
-fields since then. To confirm which fields are currently available,
+    <p>This dataset reflects the API field definitions provided by the FDIC at
+the time the package was built. The FDIC API may have added, removed, or
+renamed fields since then. To confirm which fields are currently available,
 call <code><a href="get_financials.html">get_financials()</a></code> with <code>limit = 1</code> and no <code>fields</code> argument.</p>
     </div>
 

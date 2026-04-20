@@ -36,8 +36,9 @@ A data frame with 35 rows and 4 columns:
 
 ## Note
 
-This dataset reflects the API field definitions at the time the package
-was built. The FDIC API may have added, removed, or renamed fields since
-then. To confirm which fields are currently available, call
+This dataset reflects the API field definitions provided by the FDIC at
+the time the package was built. The FDIC API may have added, removed, or
+renamed fields since then. To confirm which fields are currently
+available, call
 [`get_locations()`](https://ketchbrookanalytics.github.io/fdic/reference/get_locations.md)
 with `limit = 1` and no `fields` argument.

@@ -62,7 +62,7 @@ with one row per failure event.
 ## Examples
 
 ``` r
-if (FALSE) { # nzchar(Sys.getenv("FDIC_API_KEY"))
+if (FALSE) { # !no_creds_available()
 # Return the 5 most recent bank failures
 get_failures(
   sort_by = "FAILDATE",

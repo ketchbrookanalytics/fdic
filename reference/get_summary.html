@@ -22,6 +22,7 @@ for FDIC-insured financial institutions."><meta property="og:image" content="htt
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
+<li class="nav-item"><a class="external-link nav-link" href="https://github.com/ketchbrookanalytics/fdic/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
       </ul></div>
 
 
@@ -30,7 +31,7 @@ for FDIC-insured financial institutions."><meta property="og:image" content="htt
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>Retrieve Historical Aggregate Data by Year for FDIC-Insured Institutions</h1>
-
+      <small class="dont-index">Source: <a href="https://github.com/ketchbrookanalytics/fdic/blob/main/R/get_summary.R" class="external-link"><code>R/get_summary.R</code></a></small>
       <div class="d-none name"><code>get_summary.Rd</code></div>
     </div>
 
@@ -101,7 +102,7 @@ quarter and year.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># nzchar(Sys.getenv("FDIC_API_KEY"))</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># !no_creds_available()</span></span></span>
 <span class="r-in"><span><span class="co"># Return summary data for each bank type, state, quarter, and year</span></span></span>
 <span class="r-in"><span><span class="fu">get_summary</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CALLYM"</span>, <span class="st">"BANKS"</span>, <span class="st">"BRANCHES"</span>, <span class="st">"ASSET"</span>, <span class="st">"NETINC"</span><span class="op">)</span>,</span></span>
