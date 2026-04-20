@@ -10,9 +10,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_demographics()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_demographics"
@@ -29,9 +29,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_failures()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_failures"
@@ -48,9 +48,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_financials()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_financials"
@@ -67,9 +67,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_history()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_history"
@@ -86,9 +86,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_institutions()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_institutions"
@@ -105,9 +105,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_locations()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_locations"
@@ -124,9 +124,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_sod()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_sod"
@@ -143,9 +143,9 @@
 #'   \item{description}{Extended description of the field, where available.}
 #'   \item{type}{Data type of the field (`"string"` or `"number"`).}
 #' }
-#' @note This dataset reflects the API field definitions at the time the
-#'   package was built. The FDIC API may have added, removed, or renamed
-#'   fields since then. To confirm which fields are currently available,
+#' @note This dataset reflects the API field definitions provided by the FDIC at
+#'   the time the package was built. The FDIC API may have added, removed, or
+#'   renamed fields since then. To confirm which fields are currently available,
 #'   call [get_summary()] with `limit = 1` and no `fields` argument.
 #' @source <https://api.fdic.gov/banks/docs/>
 "fdic_summary"

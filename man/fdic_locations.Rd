@@ -24,9 +24,9 @@ A data frame describing the fields available when querying the
 \verb{/locations} endpoint via \code{\link[=get_locations]{get_locations()}}.
 }
 \note{
-This dataset reflects the API field definitions at the time the
-package was built. The FDIC API may have added, removed, or renamed
-fields since then. To confirm which fields are currently available,
+This dataset reflects the API field definitions provided by the FDIC at
+the time the package was built. The FDIC API may have added, removed, or
+renamed fields since then. To confirm which fields are currently available,
 call \code{\link[=get_locations]{get_locations()}} with \code{limit = 1} and no \code{fields} argument.
 }
 \keyword{datasets}
