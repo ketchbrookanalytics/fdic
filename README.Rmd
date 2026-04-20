@@ -25,14 +25,14 @@ R package for retrieving data from the [FDIC BankFind Suite API](https://api.fdi
 
 The FDIC BankFind Suite API provides access to:
 
-- Demographic data related to financial institutions
-- Details on failed financial institutions
-- Financial information and risk/performance metrics
-- Details on structural change events
-- Data on FDIC-insured financial institutions
+- Qualitative data on FDIC-insured financial institutions
 - Branch and office location data
 - Summary of Deposits by institution and location
+- Financial information and risk/performance metrics
+- Details on failed financial institutions
+- Details on structural change events
 - Historic aggregate financial and structure data
+- Demographic data related to financial institutions
 
 ## Installation
 
@@ -64,7 +64,8 @@ If you prefer not to set the API key as an environment variable, you can pass it
 ```{r example-1}
 library(fdic)
 
-# Retrieve active institutions in New York State, sorted by total assets
+# Retrieve qualitative information for active institutions in New York State,
+# sorted by total assets
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   fields = c("NAME", "CITY", "ASSET"),
@@ -91,24 +92,24 @@ The [Elasticsearch Query String Syntax](https://www.elastic.co/docs/reference/qu
 
 While it is strongly encouraged to review the Query String Syntax documentation provided by the FDIC and Elastic, a few examples are provided below for reference:
 
-```{r example-2}
-# Filter to a specific institution
-get_demographics(
-  filters = "CERT:10002",
-  limit = 5
-)
-```
-
 ```{r example-3}
-# Filter to active institutions in New York State
+# Retrieve qualitative information for all active institutions in New York State
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
 )
 ```
 
+```{r example-2}
+# Retrieve office and branch location data for a specific institution
+get_locations(
+  filters = "CERT:33124",
+  limit = 5
+)
+```
+
 ```{r example-4}
-# Filter to all non-community banks in New York State for the year 2025
+# Retrieve 2025 Summary of Deposit data for New York State non-community banks
 # An `ID` column is always included in the response, despite not being specified
 get_sod(
   filters = "STALP:NY AND !(CB:1) AND YEAR:2025",
@@ -136,6 +137,8 @@ During package development, it was noted that *most* fields returned by the API 
 get_locations(limit = 1) |>
   names()
 ```
+
+Alternatively, the BankFind Suite offers a [Glossary and Variable Definition](https://banks.data.fdic.gov/bankfind-suite/help?helpTopic=glossary-and-variable-definitions) table which may provide more up-to-date information on API fields.
 
 ## Need Help?
 
