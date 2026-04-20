@@ -48,7 +48,7 @@ returning data for structural change events for FDIC-insured financial
 institutions.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return the 5 most recent structural change events
 get_history(
   sort_by = "PROCDATE",

@@ -49,7 +49,7 @@ returning aggregate data by bank type, state, quarter, and year
 for FDIC-insured financial institutions.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return summary data for each bank type, state, quarter, and year
 get_summary(
   fields = c("CALLYM", "BANKS", "BRANCHES", "ASSET", "NETINC"),

@@ -16,7 +16,7 @@ navbar:
     - search
     - github
 reference:
-- title: Data retrieval
+- title: Data Retrieval
   desc: Retrieve data from specified FDIC BankSuite API endpoints
   contents:
   - get_demographics
@@ -27,7 +27,7 @@ reference:
   - get_locations
   - get_sod
   - get_summary
-- title: API defintions
+- title: API Defintions
   desc: Internal datasets documenting API endpoint definitions
   contents:
   - fdic_demographics
@@ -38,3 +38,7 @@ reference:
   - fdic_locations
   - fdic_sod
   - fdic_summary
+- title: "Internal Functions"
+  desc: "Internal package utility functions"
+  contents:
+  - no_creds_available

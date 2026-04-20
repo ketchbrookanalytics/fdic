@@ -47,7 +47,7 @@ Queries the \verb{/sod} endpoint of the FDIC BankFind Suite API,
 returning summary of deposit data for FDIC-insured financial institutions.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return Summary of Deposit data for institutions in North York
 get_sod(
   filters = "STALP:NY",

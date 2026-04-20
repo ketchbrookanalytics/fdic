@@ -8,6 +8,26 @@ fdic_error_message <- function(resp) {
   httr2::resp_body_json(resp)$Message
 }
 
+#' Handle missing API key without throwing an error for unit testing purposes
+#'
+#' @param api_key (String) The API key for authenticating against the FDIC API
+
+#' @return (Logical) `FALSE` if a non-empty `api_key` has been supplied;
+#'   otherwise `TRUE`.
+#'
+#' @details Intended for internal use.
+#'
+#' @export
+no_creds_available <- function(
+  api_key = Sys.getenv("FDIC_API_KEY")
+) {
+  if (is.null(api_key) || trimws(api_key) == "") {
+    TRUE
+  } else {
+    FALSE
+  }
+}
+
 #' Handle missing API Key value
 #' @noRd
 check_empty_creds <- function(api_key) {

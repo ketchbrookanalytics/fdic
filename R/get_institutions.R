@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' @examplesIf !no_creds_available()
 #' # Return active institutions in New York
 #' get_institutions(
 #'   filters = "STALP:NY AND ACTIVE:1",

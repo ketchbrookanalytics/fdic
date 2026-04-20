@@ -13,7 +13,7 @@
 #'
 #' @export
 #'
-#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' @examplesIf !no_creds_available()
 #' # Return summary data for each bank type, state, quarter, and year
 #' get_summary(
 #'   fields = c("CALLYM", "BANKS", "BRANCHES", "ASSET", "NETINC"),

@@ -52,7 +52,7 @@ period (quarter). Requesting more than 250 fields reduces the maximum
 allowed \code{limit} to 500 records; exceeding this will raise an error.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return key financial fields for institutions in New York
 get_financials(
   filters = "STALP:NY",

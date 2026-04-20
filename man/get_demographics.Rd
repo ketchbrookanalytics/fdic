@@ -47,7 +47,7 @@ Queries the \verb{/demographics} endpoint of the FDIC BankFind Suite API,
 returning demographic data for FDIC-insured financial institutions.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return demographic data for a specific institution
 get_demographics(filters = "CERT:10002")
 

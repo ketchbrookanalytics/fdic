@@ -47,7 +47,7 @@ Queries the \verb{/institutions} endpoint of the FDIC BankFind Suite API,
 returning FDIC-insured financial institution data.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return active institutions in New York
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",

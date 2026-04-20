@@ -47,7 +47,7 @@ Queries the \verb{/failures} endpoint of the FDIC BankFind Suite API,
 returning data for failed financial institutions from 1934 to present.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return the 5 most recent bank failures
 get_failures(
   sort_by = "FAILDATE",

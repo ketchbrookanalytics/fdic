@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' @examplesIf !no_creds_available()
 #' # Return Summary of Deposit data for institutions in North York
 #' get_sod(
 #'   filters = "STALP:NY",

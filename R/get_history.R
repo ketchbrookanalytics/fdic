@@ -12,7 +12,7 @@
 #'
 #' @export
 #'
-#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' @examplesIf !no_creds_available()
 #' # Return the 5 most recent structural change events
 #' get_history(
 #'   sort_by = "PROCDATE",

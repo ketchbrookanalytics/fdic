@@ -47,7 +47,7 @@ Queries the \verb{/locations} endpoint of the FDIC BankFind Suite API,
 returning location data for FDIC-insured financial institutions.
 }
 \examples{
-\dontshow{if (nzchar(Sys.getenv("FDIC_API_KEY"))) withAutoprint(\{ # examplesIf}
+\dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return branch locations in New York
 get_locations(
   filters = "STALP:NY",

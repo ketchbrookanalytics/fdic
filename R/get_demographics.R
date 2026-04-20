@@ -28,7 +28,7 @@
 #'
 #' @export
 #'
-#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' @examplesIf !no_creds_available()
 #' # Return demographic data for a specific institution
 #' get_demographics(filters = "CERT:10002")
 #'

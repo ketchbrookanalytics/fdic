@@ -11,7 +11,7 @@
 #'
 #' @export
 #'
-#' @examplesIf nzchar(Sys.getenv("FDIC_API_KEY"))
+#' @examplesIf !no_creds_available()
 #' # Return branch locations in New York
 #' get_locations(
 #'   filters = "STALP:NY",
