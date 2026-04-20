@@ -1,3 +1,30 @@
+# check_empty_creds() errors when api_key is NULL or empty
+
+    Code
+      check_empty_creds(NULL)
+    Condition
+      Error in `check_empty_creds()`:
+      ! `api_key` is missing.
+      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
+
+---
+
+    Code
+      check_empty_creds("")
+    Condition
+      Error in `check_empty_creds()`:
+      ! `api_key` is missing.
+      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
+
+---
+
+    Code
+      check_empty_creds("   ")
+    Condition
+      Error in `check_empty_creds()`:
+      ! `api_key` is missing.
+      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
+
 # validate_query_params() errors when filters is not a single string
 
     Code
@@ -57,33 +84,6 @@
       $limit
       [1] 10000
       
-
-# check_empty_creds() errors when api_key is NULL or empty
-
-    Code
-      check_empty_creds(NULL)
-    Condition
-      Error in `check_empty_creds()`:
-      ! `api_key` is missing.
-      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
-
----
-
-    Code
-      check_empty_creds("")
-    Condition
-      Error in `check_empty_creds()`:
-      ! `api_key` is missing.
-      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
-
----
-
-    Code
-      check_empty_creds("   ")
-    Condition
-      Error in `check_empty_creds()`:
-      ! `api_key` is missing.
-      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
 
 # validate_query_params() errors on invalid limit
 

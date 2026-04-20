@@ -1,4 +1,20 @@
-# Non-API unit tests: validate_query_params() and check_empty_creds() --------
+# Non-API unit tests:
+
+test_that("no_creds_available() returns TRUE when api_key is NULL or empty", {
+  expect_true(no_creds_available(NULL))
+  expect_true(no_creds_available(""))
+  expect_true(no_creds_available("   "))
+})
+
+test_that("no_creds_available() returns FALSE when api_key is non-empty", {
+  expect_false(no_creds_available("my_api_key"))
+})
+
+test_that("check_empty_creds() errors when api_key is NULL or empty", {
+  expect_snapshot(error = TRUE, check_empty_creds(NULL))
+  expect_snapshot(error = TRUE, check_empty_creds(""))
+  expect_snapshot(error = TRUE, check_empty_creds("   "))
+})
 
 test_that("validate_query_params() errors when filters is not a single string", {
   expect_snapshot(
@@ -37,7 +53,9 @@ test_that("validate_query_params() errors when descending has length > 1", {
   expect_snapshot(
     error = TRUE,
     validate_query_params(
-      filters = NULL, fields = NULL, sort_by = NULL,
+      filters = NULL,
+      fields = NULL,
+      sort_by = NULL,
       descending = c(TRUE, FALSE)
     )
   )
@@ -85,16 +103,13 @@ test_that("validate_query_params() returns DESC sort_order when descending=TRUE"
   expect_equal(result$sort_order, "DESC")
 })
 
-test_that("check_empty_creds() errors when api_key is NULL or empty", {
-  expect_snapshot(error = TRUE, check_empty_creds(NULL))
-  expect_snapshot(error = TRUE, check_empty_creds(""))
-  expect_snapshot(error = TRUE, check_empty_creds("   "))
-})
-
 test_that("validate_query_params() returns limit as integer", {
   result <- validate_query_params(
-    filters = NULL, fields = NULL, sort_by = NULL,
-    descending = FALSE, limit = 100
+    filters = NULL,
+    fields = NULL,
+    sort_by = NULL,
+    descending = FALSE,
+    limit = 100
   )
   expect_identical(result$limit, 100L)
 })
@@ -152,10 +167,10 @@ test_that("validate_query_params() errors on invalid limit", {
   )
 })
 
-# get_fdic() integration tests ------------------------------------------------
+# get_fdic() integration tests:
 
 test_that("get_fdic() errors when API returns an empty response", {
-  skip_if_not(nzchar(Sys.getenv("FDIC_API_KEY")))
+  skip_if(no_creds_available())
   expect_snapshot(
     error = TRUE,
     get_institutions(filters = "STALP:XX")
@@ -163,7 +178,7 @@ test_that("get_fdic() errors when API returns an empty response", {
 })
 
 test_that("get_fdic() errors when all requested fields are invalid", {
-  skip_if_not(nzchar(Sys.getenv("FDIC_API_KEY")))
+  skip_if(no_creds_available())
   expect_snapshot(
     error = TRUE,
     get_institutions(
@@ -175,7 +190,7 @@ test_that("get_fdic() errors when all requested fields are invalid", {
 })
 
 test_that("get_fdic() warns when some requested fields are invalid", {
-  skip_if_not(nzchar(Sys.getenv("FDIC_API_KEY")))
+  skip_if(no_creds_available())
   expect_snapshot(
     get_institutions(
       filters = "STALP:ND",
