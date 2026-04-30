@@ -9,7 +9,7 @@ returning demographic data for FDIC-insured financial institutions."><meta prope
 
     <a class="navbar-brand me-2" href="../index.html">fdic</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,6 +18,7 @@ returning demographic data for FDIC-insured financial institutions."><meta prope
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/ketchbrookanalytics/fdic/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -104,13 +105,13 @@ institutions, with one row per institution.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return specific fields only</span></span></span>
 <span class="r-in"><span><span class="fu">get_demographics</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CERT"</span>, <span class="st">"REPDTE"</span>, <span class="st">"OFFTOT"</span>, <span class="st">"OFFSTATE"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CERT"</span>, <span class="st">"OFFSTATE"</span>, <span class="st">"OFFTOT"</span>, <span class="st">"REPDTE"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sort by report date in descending order</span></span></span>
 <span class="r-in"><span><span class="fu">get_demographics</span><span class="op">(</span></span></span>
-<span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CERT"</span>, <span class="st">"REPDTE"</span>, <span class="st">"OFFTOT"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CERT"</span>, <span class="st">"OFFTOT"</span>, <span class="st">"REPDTE"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  sort_by <span class="op">=</span> <span class="st">"REPDTE"</span>,</span></span>
 <span class="r-in"><span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
@@ -123,7 +124,7 @@ institutions, with one row per institution.</p>
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Dylan Hughes, Ketchbrook Analytics.</p>
+  <p>Developed by Dylan Hughes, Michael Thomas, Ketchbrook Analytics.</p>
 </div>
 
 <div class="pkgdown-footer-right">

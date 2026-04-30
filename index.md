@@ -3,16 +3,17 @@
 R package for retrieving data from the [FDIC BankFind Suite
 API](https://api.fdic.gov/banks/docs/).
 
-The FDIC BankFind Suite API provides access to:
+The FDIC BankFind Suite API allows you to:
 
-- Qualitative data on FDIC-insured financial institutions
-- Branch and office location data
-- Summary of Deposits by institution and location
-- Financial information and risk/performance metrics
-- Details on failed financial institutions
-- Details on structural change events
-- Historic aggregate financial and structure data
-- Demographic data related to financial institutions
+- Search for specific FDIC-insured financial institutions
+- Collect branch office location data
+- Explore annual branch office deposits by institution and location
+- Review financial reports and other performance metrics for
+  institutions
+- Get details on failed financial institutions and structural change
+  events
+- Retrieve historic aggregate financial and structural data
+- Obtain demographic data related to financial institutions
 
 ## Installation
 
@@ -20,6 +21,7 @@ You can install the development version of {fdic} from GitHub using
 {pak} like so:
 
 ``` r
+
 # install.packages("pak")
 pak::pak("ketchbrookanalytics/fdic")
 ```
@@ -51,13 +53,14 @@ in {fdic}.
 ## Examples
 
 ``` r
+
 library(fdic)
 
 # Retrieve qualitative information for active institutions in New York State,
 # sorted by total assets
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
-  fields = c("NAME", "CITY", "ASSET"),
+  fields = c("ASSET", "CITY", "NAME"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
@@ -83,8 +86,8 @@ Each function in {fdic} accepts the following arguments:
 - `sort_by`: A field name to sort the response by
 - `descending`: A flag to specify the direction to `sort_by` (if
   `sort_by` is specified)
-- `limit`: The number of records to include in response (up to a maximum
-  of 10,000)
+- `limit`: The number of records to include in the response (up to a
+  maximum of 10,000)
 
 While most of the arguments are relatively straightforward, there are
 some idiosyncrasies with both the `filters` and `fields` arguments that
@@ -104,6 +107,7 @@ documentation provided by the FDIC and Elastic, a few examples are
 provided below for reference:
 
 ``` r
+
 # Retrieve qualitative information for all active institutions in New York State
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
@@ -127,6 +131,7 @@ get_institutions(
 ```
 
 ``` r
+
 # Retrieve office and branch location data for a specific institution
 get_locations(
   filters = "CERT:33124",
@@ -150,11 +155,12 @@ get_locations(
 ```
 
 ``` r
+
 # Retrieve 2025 Summary of Deposit data for New York State non-community banks
 # An `ID` column is always included in the response, despite not being specified
 get_sod(
   filters = "STALP:NY AND !(CB:1) AND YEAR:2025",
-  fields = c("NAMEBR", "YEAR", "DEPSUM"),
+  fields = c("DEPSUM", "NAMEBR", "YEAR"),
   sort_by = "DEPSUM",
   descending = TRUE,
   limit = 5
@@ -180,6 +186,7 @@ the FDIC. Each dataset corresponds to one of the functions contained in
 Each dataset can be accessed directly by name, as demonstrated below.
 
 ``` r
+
 head(fdic_institutions)
 #> # A tibble: 6 × 4
 #>   field   title                            description                     type 
@@ -204,6 +211,7 @@ argument and `limit = 1` to return the current endpoint definition, as
 demonstrated below:
 
 ``` r
+
 # Review current endpoint definition
 get_locations(limit = 1) |>
   names()
