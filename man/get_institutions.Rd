@@ -56,7 +56,7 @@ get_institutions(
 
 # Return the 5 largest institutions by total assets
 get_institutions(
-  fields = c("CERT", "NAME", "STALP", "ASSET"),
+  fields = c("ASSET", "CERT", "NAME", "STALP"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5

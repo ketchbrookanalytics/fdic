@@ -57,7 +57,7 @@ get_locations(
 # Return specific fields only
 get_locations(
   filters = "STALP:ND",
-  fields = c("CERT", "CITY", "ADDRESS", "STALP"),
+  fields = c("ADDRESS", "CERT", "CITY", "STALP"),
   limit = 5
 )
 \dontshow{\}) # examplesIf}

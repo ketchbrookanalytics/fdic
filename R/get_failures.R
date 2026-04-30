@@ -27,7 +27,7 @@
 #'
 #' # Return specific fields only
 #' get_failures(
-#'   fields = c("NAME", "CERT", "FAILDATE", "PSTALP"),
+#'   fields = c("CERT", "FAILDATE", "NAME", "PSTALP"),
 #'   limit = 5
 #' )
 get_failures <- function(

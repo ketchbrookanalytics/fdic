@@ -34,13 +34,13 @@
 #'
 #' # Return specific fields only
 #' get_demographics(
-#'   fields = c("CERT", "REPDTE", "OFFTOT", "OFFSTATE"),
+#'   fields = c("CERT", "OFFSTATE", "OFFTOT", "REPDTE"),
 #'   limit = 5
 #' )
 #'
 #' # Sort by report date in descending order
 #' get_demographics(
-#'   fields = c("CERT", "REPDTE", "OFFTOT"),
+#'   fields = c("CERT", "OFFTOT", "REPDTE"),
 #'   sort_by = "REPDTE",
 #'   descending = TRUE,
 #'   limit = 5

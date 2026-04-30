@@ -26,13 +26,13 @@
 #' # Return key financial fields for institutions in New York
 #' get_financials(
 #'   filters = "STALP:NY",
-#'   fields = c("CERT", "REPDTE", "ASSET", "NETINC"),
+#'   fields = c("ASSET", "CERT", "NETINC", "REPDTE"),
 #'   limit = 5
 #' )
 #'
 #' # Sort by total assets descending
 #' get_financials(
-#'   fields = c("CERT", "ASSET"),
+#'   fields = c("ASSET", "CERT"),
 #'   sort_by = "ASSET",
 #'   descending = TRUE,
 #'   limit = 5

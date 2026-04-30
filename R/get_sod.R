@@ -21,7 +21,7 @@
 #' # Return specific fields, sorted by total assets descending
 #' get_sod(
 #'   filters = "STALP:NY",
-#'   fields = c("CERT", "CITY", "ASSET", "YEAR"),
+#'   fields = c("ASSET", "CERT", "CITY", "YEAR"),
 #'   sort_by = "ASSET",
 #'   descending = TRUE,
 #'   limit = 5

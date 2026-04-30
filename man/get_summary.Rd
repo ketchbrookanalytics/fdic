@@ -52,13 +52,13 @@ for FDIC-insured financial institutions.
 \dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return summary data for each bank type, state, quarter, and year
 get_summary(
-  fields = c("CALLYM", "BANKS", "BRANCHES", "ASSET", "NETINC"),
+  fields = c("ASSET", "BANKS", "BRANCHES", "CALLYM", "NETINC"),
   limit = 5
 )
 
 # Return summary data sorted by reporting period descending
 get_summary(
-  fields = c("YEAR", "CALLYM", "BANKS", "ASSET"),
+  fields = c("ASSET", "BANKS", "CALLYM", "YEAR"),
   sort_by = "CALLYM",
   descending = TRUE,
   limit = 5
