@@ -23,16 +23,15 @@ devtools::load_all()
 
 R package for retrieving data from the [FDIC BankFind Suite API](https://api.fdic.gov/banks/docs/).
 
-The FDIC BankFind Suite API provides access to:
+The FDIC BankFind Suite API allows you to:
 
-- Qualitative data on FDIC-insured financial institutions
-- Branch and office location data
-- Summary of Deposits by institution and location
-- Financial information and risk/performance metrics
-- Details on failed financial institutions
-- Details on structural change events
-- Historic aggregate financial and structure data
-- Demographic data related to financial institutions
+- Search for specific FDIC-insured financial institutions
+- Collect branch office location data
+- Explore annual branch office deposits by institution and location
+- Review financial reports and other performance metrics for institutions
+- Get details on failed financial institutions and structural change events
+- Retrieve historic aggregate financial and structural data
+- Obtain demographic data related to financial institutions
 
 ## Installation
 
@@ -68,7 +67,7 @@ library(fdic)
 # sorted by total assets
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
-  fields = c("NAME", "CITY", "ASSET"),
+  fields = c("ASSET", "CITY", "NAME"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
@@ -82,7 +81,7 @@ Each function in {fdic} accepts the following arguments:
 - `fields`: One or more fields to include in the response
 - `sort_by`: A field name to sort the response by
 - `descending`: A flag to specify the direction to `sort_by` (if `sort_by` is specified)
-- `limit`: The number of records to include in response (up to a maximum of 10,000)
+- `limit`: The number of records to include in the response (up to a maximum of 10,000)
 
 While most of the arguments are relatively straightforward, there are some idiosyncrasies with both the `filters` and `fields` arguments that are worth discussing.
 
@@ -113,7 +112,7 @@ get_locations(
 # An `ID` column is always included in the response, despite not being specified
 get_sod(
   filters = "STALP:NY AND !(CB:1) AND YEAR:2025",
-  fields = c("NAMEBR", "YEAR", "DEPSUM"),
+  fields = c("DEPSUM", "NAMEBR", "YEAR"),
   sort_by = "DEPSUM",
   descending = TRUE,
   limit = 5
