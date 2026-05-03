@@ -7,7 +7,7 @@ The FDIC BankFind Suite API allows you to:
 
 - Search for specific FDIC-insured financial institutions
 - Collect branch office location data
-- Explore annual branch office deposits by institution and location
+- Explore annual branch office deposit data by institution and location
 - Review financial reports and other performance metrics for
   institutions
 - Get details on failed financial institutions and structural change
@@ -56,23 +56,25 @@ in {fdic}.
 
 library(fdic)
 
-# Retrieve qualitative information for active institutions in New York State,
-# sorted by total assets
+# Search for the five largest active institutions by asset size in New York
+# Collect the total asset amount, name of each institution, and the report date
+# The `ID` column is included in all responses despite not being in `fields`
+# Sort the results by total assets, descending
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
-  fields = c("ASSET", "CITY", "NAME"),
+  fields = c("ASSET", "NAME", "REPDTE"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
 )
 #> # A tibble: 5 × 4
-#>       ASSET CITY          ID NAME                                             
-#>       <int> <chr>      <int> <chr>                                            
-#> 1 644997000 New York   33124 Goldman Sachs Bank USA                           
-#> 2 380997000 New York     639 The Bank of New York Mellon                      
-#> 3 254706000 Purchase   34221 Morgan Stanley Private Bank, National Association
-#> 4 212887157 Buffalo      588 Manufacturers and Traders Trust Company          
-#> 5  87511954 Hicksville 32541 Flagstar Bank, National Association
+#>       ASSET    ID NAME                                              REPDTE    
+#>       <int> <int> <chr>                                             <chr>     
+#> 1 644997000 33124 Goldman Sachs Bank USA                            12/31/2025
+#> 2 380997000   639 The Bank of New York Mellon                       12/31/2025
+#> 3 254706000 34221 Morgan Stanley Private Bank, National Association 12/31/2025
+#> 4 212887157   588 Manufacturers and Traders Trust Company           12/31/2025
+#> 5  87511954 32541 Flagstar Bank, National Association               12/31/2025
 ```
 
 Each function in {fdic} accepts the following arguments:
@@ -108,7 +110,8 @@ provided below for reference:
 
 ``` r
 
-# Retrieve qualitative information for all active institutions in New York State
+# Search for five active institutions in New York
+# Return all available fields
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
@@ -132,7 +135,8 @@ get_institutions(
 
 ``` r
 
-# Retrieve office and branch location data for a specific institution
+# Collect location data for five branches of a specific institution
+# Return all available fields
 get_locations(
   filters = "CERT:33124",
   limit = 5
@@ -156,23 +160,26 @@ get_locations(
 
 ``` r
 
-# Retrieve 2025 Summary of Deposit data for New York State non-community banks
-# An `ID` column is always included in the response, despite not being specified
+# Explore the 2025 Summary of Deposit data for non-community banks in New York
+# Collect the coordinates for the top five branch locations by total deposits
 get_sod(
   filters = "STALP:NY AND !(CB:1) AND YEAR:2025",
-  fields = c("DEPSUM", "NAMEBR", "YEAR"),
+  fields = c("DEPSUM", "NAMEBR", "SIMS_LATITUDE", "SIMS_LONGITUDE", "YEAR"),
   sort_by = "DEPSUM",
   descending = TRUE,
   limit = 5
 )
-#> # A tibble: 5 × 4
-#>      DEPSUM ID           NAMEBR                                             YEAR
-#>       <int> <chr>        <chr>                                             <int>
-#> 1 390220000 2025_33124_0 Goldman Sachs Bank Usa                             2025
-#> 2 227667000 2025_639_0   The Bank Of New York Mellon                        2025
-#> 3 212449000 2025_34221_0 Morgan Stanley Private Bank, National Association  2025
-#> 4 168383903 2025_588_0   Manufacturers And Traders Trust Company            2025
-#> 5  70246292 2025_32541_0 Flagstar Bank, National Association                2025
+#> # A tibble: 5 × 6
+#>      DEPSUM ID           NAMEBR               SIMS_LATITUDE SIMS_LONGITUDE  YEAR
+#>       <int> <chr>        <chr>                        <dbl>          <dbl> <int>
+#> 1 390220000 2025_33124_0 Goldman Sachs Bank …          40.7          -74.0  2025
+#> 2 227667000 2025_639_0   The Bank Of New Yor…          40.7          -74.0  2025
+#> 3 212449000 2025_34221_0 Morgan Stanley Priv…          41.0          -73.7  2025
+#> 4 168383903 2025_588_0   Manufacturers And T…          42.9          -78.9  2025
+#> 5  70246292 2025_32541_0 Flagstar Bank, Nati…          40.8          -73.5  2025
+
+fdic_sod$description[fdic_sod$field == "DEPSUM"]
+#> [1] "TOTAL DEPOSITS"
 ```
 
 ### Available API Fields

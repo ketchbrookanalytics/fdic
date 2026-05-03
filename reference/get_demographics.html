@@ -57,28 +57,25 @@ returning demographic data for FDIC-insured financial institutions.</p>
 
 <dl><dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
 <dd><p>(String) Your FDIC API key. Defaults to the value of the
-<code>FDIC_API_KEY</code> environment variable. Register for a key at
-<a href="https://api.data.gov/signup/" class="external-link">https://api.data.gov/signup/</a>.</p></dd>
+<code>FDIC_API_KEY</code> environment variable.</p></dd>
 
 
 <dt id="arg-filters">filters<a class="anchor" aria-label="anchor" href="#arg-filters"></a></dt>
 <dd><p>(String) An optional Elasticsearch query string to filter
-results. All field names and values must be uppercase. See the examples
-below and refer to <a href="https://api.fdic.gov/banks/docs/" class="external-link">https://api.fdic.gov/banks/docs/</a> for full syntax
-details. Run <code>fdic_demographics$field</code> to see available field names.</p></dd>
+results. All field names and values must be uppercase.</p></dd>
 
 
 <dt id="arg-fields">fields<a class="anchor" aria-label="anchor" href="#arg-fields"></a></dt>
 <dd><p>(String or Character vector) Fields to include in the response.
-Defaults to all available fields if not specified. Run <code>fdic_demographics$field</code>
-for reference. An <code>ID</code> column is always included in the response regardless
-of the fields requested.</p></dd>
+An <code>ID</code> column is always present, regardless of the fields requested.
+To retrieve the most recently published API definition for an endpoint,
+replace the <code>get_</code> prefix in the function name with <code>fdic_</code>
+(e.g., <code>get_{endpoint}()</code> to <code>fdic_{endpoint}()</code>).</p></dd>
 
 
 <dt id="arg-sort-by">sort_by<a class="anchor" aria-label="anchor" href="#arg-sort-by"></a></dt>
 <dd><p>(String) Field name to sort results by. Defaults to the API
-default sort order for this endpoint. Run <code>fdic_demographics$field</code> for
-reference.</p></dd>
+default sort order for this endpoint.</p></dd>
 
 
 <dt id="arg-descending">descending<a class="anchor" aria-label="anchor" href="#arg-descending"></a></dt>

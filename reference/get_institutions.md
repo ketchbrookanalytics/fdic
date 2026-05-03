@@ -21,28 +21,25 @@ get_institutions(
 - api_key:
 
   (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. Register for a key at
-  <https://api.data.gov/signup/>.
+  `FDIC_API_KEY` environment variable.
 
 - filters:
 
   (String) An optional Elasticsearch query string to filter results. All
-  field names and values must be uppercase. See the examples below and
-  refer to <https://api.fdic.gov/banks/docs/> for full syntax details.
-  Run `fdic_demographics$field` to see available field names.
+  field names and values must be uppercase.
 
 - fields:
 
-  (String or Character vector) Fields to include in the response.
-  Defaults to all available fields if not specified. Run
-  `fdic_demographics$field` for reference. An `ID` column is always
-  included in the response regardless of the fields requested.
+  (String or Character vector) Fields to include in the response. An
+  `ID` column is always present, regardless of the fields requested. To
+  retrieve the most recently published API definition for an endpoint,
+  replace the `get_` prefix in the function name with `fdic_` (e.g.,
+  `get_{endpoint}()` to `fdic_{endpoint}()`).
 
 - sort_by:
 
   (String) Field name to sort results by. Defaults to the API default
-  sort order for this endpoint. Run `fdic_demographics$field` for
-  reference.
+  sort order for this endpoint.
 
 - descending:
 

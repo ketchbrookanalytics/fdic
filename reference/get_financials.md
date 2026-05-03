@@ -21,15 +21,12 @@ get_financials(
 - api_key:
 
   (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. Register for a key at
-  <https://api.data.gov/signup/>.
+  `FDIC_API_KEY` environment variable.
 
 - filters:
 
   (String) An optional Elasticsearch query string to filter results. All
-  field names and values must be uppercase. See the examples below and
-  refer to <https://api.fdic.gov/banks/docs/> for full syntax details.
-  Run `fdic_demographics$field` to see available field names.
+  field names and values must be uppercase.
 
 - fields:
 
@@ -40,8 +37,7 @@ get_financials(
 - sort_by:
 
   (String) Field name to sort results by. Defaults to the API default
-  sort order for this endpoint. Run `fdic_demographics$field` for
-  reference.
+  sort order for this endpoint.
 
 - descending:
 
