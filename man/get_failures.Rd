@@ -15,22 +15,19 @@ get_failures(
 }
 \arguments{
 \item{api_key}{(String) Your FDIC API key. Defaults to the value of the
-\code{FDIC_API_KEY} environment variable. Register for a key at
-\url{https://api.data.gov/signup/}.}
+\code{FDIC_API_KEY} environment variable.}
 
 \item{filters}{(String) An optional Elasticsearch query string to filter
-results. All field names and values must be uppercase. See the examples
-below and refer to \url{https://api.fdic.gov/banks/docs/} for full syntax
-details. Run \code{fdic_demographics$field} to see available field names.}
+results. All field names and values must be uppercase.}
 
 \item{fields}{(String or Character vector) Fields to include in the response.
-Defaults to all available fields if not specified. Run \code{fdic_demographics$field}
-for reference. An \code{ID} column is always included in the response regardless
-of the fields requested.}
+An \code{ID} column is always present, regardless of the fields requested.
+To retrieve the most recently published API definition for an endpoint,
+replace the \code{get_} prefix in the function name with \code{fdic_}
+(e.g., \verb{get_\{endpoint\}()} to \verb{fdic_\{endpoint\}()}).}
 
 \item{sort_by}{(String) Field name to sort results by. Defaults to the API
-default sort order for this endpoint. Run \code{fdic_demographics$field} for
-reference.}
+default sort order for this endpoint.}
 
 \item{descending}{(Logical) Should results be sorted in descending order?
 Only applies when \code{sort_by} is specified. Defaults to \code{FALSE}.}

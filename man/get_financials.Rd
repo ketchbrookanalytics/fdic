@@ -15,21 +15,17 @@ get_financials(
 }
 \arguments{
 \item{api_key}{(String) Your FDIC API key. Defaults to the value of the
-\code{FDIC_API_KEY} environment variable. Register for a key at
-\url{https://api.data.gov/signup/}.}
+\code{FDIC_API_KEY} environment variable.}
 
 \item{filters}{(String) An optional Elasticsearch query string to filter
-results. All field names and values must be uppercase. See the examples
-below and refer to \url{https://api.fdic.gov/banks/docs/} for full syntax
-details. Run \code{fdic_demographics$field} to see available field names.}
+results. All field names and values must be uppercase.}
 
 \item{fields}{(String or Character vector) Fields to include in the response.
 Defaults to all available fields if not specified. Run \code{fdic_financials$field}
 for valid values.}
 
 \item{sort_by}{(String) Field name to sort results by. Defaults to the API
-default sort order for this endpoint. Run \code{fdic_demographics$field} for
-reference.}
+default sort order for this endpoint.}
 
 \item{descending}{(Logical) Should results be sorted in descending order?
 Only applies when \code{sort_by} is specified. Defaults to \code{FALSE}.}
