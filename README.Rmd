@@ -121,8 +121,6 @@ get_sod(
   descending = TRUE,
   limit = 5
 )
-
-fdic_sod$description[fdic_sod$field == "DEPSUM"]
 ```
 
 ### Available API Fields
