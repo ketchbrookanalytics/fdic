@@ -177,9 +177,6 @@ get_sod(
 #> 3 212449000 2025_34221_0 Morgan Stanley Priv…          41.0          -73.7  2025
 #> 4 168383903 2025_588_0   Manufacturers And T…          42.9          -78.9  2025
 #> 5  70246292 2025_32541_0 Flagstar Bank, Nati…          40.8          -73.5  2025
-
-fdic_sod$description[fdic_sod$field == "DEPSUM"]
-#> [1] "TOTAL DEPOSITS"
 ```
 
 ### Available API Fields
