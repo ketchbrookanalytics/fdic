@@ -11,6 +11,10 @@
 R package for retrieving data from the [FDIC BankFind Suite
 API](https://api.fdic.gov/banks/docs/).
 
+<br>
+
+<img src="man/figures/fdic_example_plot.png" align="center" height="400" alt="Example Plot of FDIC Summary of Deposit Data" />
+
 The FDIC BankFind Suite API allows you to:
 
 - Search for specific FDIC-insured financial institutions
