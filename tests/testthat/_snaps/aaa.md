@@ -114,3 +114,23 @@
       Error in `validate_query_params()`:
       ! `limit` must be an integer between 1 and 10,000.
 
+---
+
+    Code
+      validate_query_params(filters = NULL, fields = NULL, sort_by = NULL,
+        descending = FALSE, limit = Inf)
+    Condition
+      Warning in `validate_query_params()`:
+      NAs introduced by coercion to integer range
+      Error in `validate_query_params()`:
+      ! `limit` must be an integer between 1 and 10,000.
+
+---
+
+    Code
+      validate_query_params(filters = NULL, fields = NULL, sort_by = NULL,
+        descending = FALSE, limit = -1)
+    Condition
+      Error in `validate_query_params()`:
+      ! `limit` must be an integer between 1 and 10,000.
+
