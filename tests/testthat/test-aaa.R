@@ -214,9 +214,22 @@ test_that("get_fdic() errors when all requested fields are invalid", {
 })
 
 test_that("get_fdic() warns when some requested fields are invalid", {
-  skip_if(no_creds_available())
+  # Mock the HTTP response so this test runs without credentials and is not
+  # fragile against live data changing. The mocked response contains only CERT
+  # and the always-returned ID column, so the requested NONEXISTENT_FIELD is
+  # absent and triggers the "fields not returned" warning inside get_fdic().
+  httr2::local_mocked_responses(list(
+    httr2::response(
+      status_code = 200,
+      body = charToRaw(paste0(
+        "CERT,ID\n",
+        "10231,10231\n10233,10233\n10236,10236\n10238,10238\n10240,10240\n"
+      ))
+    )
+  ))
   expect_snapshot(
     get_institutions(
+      api_key = "test_key",
       filters = "STALP:ND",
       fields = c("CERT", "NONEXISTENT_FIELD"),
       limit = 5

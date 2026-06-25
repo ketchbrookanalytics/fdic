@@ -156,3 +156,23 @@
       * `NONEXISTENT_FIELD_1` and `NONEXISTENT_FIELD_2`
       i These fields may not exist or may have been renamed. To see currently available fields, call this function with `limit = 1` and no `fields` argument.
 
+# get_fdic() warns when some requested fields are invalid
+
+    Code
+      get_institutions(api_key = "test_key", filters = "STALP:ND", fields = c("CERT",
+        "NONEXISTENT_FIELD"), limit = 5)
+    Condition
+      Warning:
+      The following `fields` were not returned by the API:
+      * `NONEXISTENT_FIELD`
+      i These fields may not exist or may have been renamed. To see currently available fields, call this function with `limit = 1` and no `fields` argument.
+    Output
+      # A tibble: 5 x 2
+         CERT    ID
+        <int> <int>
+      1 10231 10231
+      2 10233 10233
+      3 10236 10236
+      4 10238 10238
+      5 10240 10240
+
