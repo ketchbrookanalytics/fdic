@@ -165,6 +165,26 @@ test_that("validate_query_params() errors on invalid limit", {
       limit = NA_real_
     )
   )
+  expect_snapshot(
+    error = TRUE,
+    validate_query_params(
+      filters = NULL,
+      fields = NULL,
+      sort_by = NULL,
+      descending = FALSE,
+      limit = Inf
+    )
+  )
+  expect_snapshot(
+    error = TRUE,
+    validate_query_params(
+      filters = NULL,
+      fields = NULL,
+      sort_by = NULL,
+      descending = FALSE,
+      limit = -1
+    )
+  )
 })
 
 # get_fdic() integration tests:
