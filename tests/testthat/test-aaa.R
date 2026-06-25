@@ -223,3 +223,11 @@ test_that("get_fdic() warns when some requested fields are invalid", {
     )
   )
 })
+
+test_that("get_fdic() errors with HTTP 403 for an invalid api_key", {
+  skip_if_offline()
+  expect_error(
+    get_institutions(api_key = "blah", limit = 1),
+    class = "httr2_http_403"
+  )
+})
