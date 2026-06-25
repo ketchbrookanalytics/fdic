@@ -6,15 +6,24 @@
         // https://github.com/rocker-org/devcontainer-features/tree/main/src/apt-packages
         "ghcr.io/rocker-org/devcontainer-features/apt-packages:1": {
             "packages": "qpdf"
-    },
+        },
 
         // https://github.com/rocker-org/devcontainer-features/tree/main/src/r-packages
         "ghcr.io/rocker-org/devcontainer-features/r-packages:1": {
             "packages": "cli, devtools, dplyr, httpgd, httr2, jsonlite, languageserver, purrr, rlang, tibble, usethis",
             "installSystemRequirements": true
-        }
+        },
+
+        // Install GitHub CLI
+		"ghcr.io/devcontainers/features/github-cli:1": {}
 
     },
+
+    "mounts": [
+      "source=${localEnv:USERPROFILE}/.gitconfig,target=/root/.gitconfig,type=bind,consistency=cached",
+      "source=${localEnv:USERPROFILE}/.config/gh,target=/root/.config/gh,type=bind,consistency=cached",
+	  "source=${localEnv:USERPROFILE}/.claude,target=/root/.claude,type=bind,consistency=cached"
+    ],
 
     "customizations": {
         "vscode": {
