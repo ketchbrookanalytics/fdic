@@ -134,3 +134,25 @@
       Error in `validate_query_params()`:
       ! `limit` must be an integer between 1 and 10,000.
 
+# get_fdic() errors when API returns an empty response
+
+    Code
+      get_institutions(filters = "STALP:XX")
+    Condition
+      Error in `get_fdic()`:
+      ! The response from the API is empty.
+      Query `filters` of `STALP:XX` passed to API.
+      Please check `filters` for possible issues.
+      Refer to <https://api.fdic.gov/banks/docs/> for additional information.
+
+# get_fdic() errors when all requested fields are invalid
+
+    Code
+      get_institutions(filters = "STALP:ND", fields = c("NONEXISTENT_FIELD_1",
+        "NONEXISTENT_FIELD_2"), limit = 5)
+    Condition
+      Error in `get_fdic()`:
+      ! None of the requested `fields` were returned by the API:
+      * `NONEXISTENT_FIELD_1` and `NONEXISTENT_FIELD_2`
+      i These fields may not exist or may have been renamed. To see currently available fields, call this function with `limit = 1` and no `fields` argument.
+
