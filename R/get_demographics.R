@@ -5,7 +5,9 @@
 #' returning demographic data for FDIC-insured financial institutions.
 #'
 #' @param api_key (String) Your FDIC API key. Defaults to the value of the
-#'   `FDIC_API_KEY` environment variable.
+#'   `FDIC_API_KEY` environment variable. A key is strongly recommended: use
+#'   `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register for a
+#'   free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
 #' @param filters (String) An optional Elasticsearch query string to filter
 #'   results. All field names and values must be uppercase.
 #' @param fields (String or Character vector) Fields to include in the response.

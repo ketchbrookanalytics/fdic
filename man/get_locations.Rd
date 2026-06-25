@@ -15,7 +15,9 @@ get_locations(
 }
 \arguments{
 \item{api_key}{(String) Your FDIC API key. Defaults to the value of the
-\code{FDIC_API_KEY} environment variable.}
+\code{FDIC_API_KEY} environment variable. A key is strongly recommended: use
+\code{"DEMO_KEY"} for exploration (30 req/hr, 50 req/day), or register for a
+free personal key (1,000 req/hr) at \url{https://api.data.gov/signup/}.}
 
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase.}

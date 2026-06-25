@@ -48,7 +48,10 @@ pak::pak("ketchbrookanalytics/fdic")
 
 ## Authentication
 
-In order to use {fdic}, you will first need to [obtain an API key](https://api.data.gov/signup/) from the United States Government's Open Data Portal. **The API key must be provided to each function in this R package.**
+An API key is strongly recommended to use {fdic}. Without one, requests are subject to very low rate limits (50 requests per day). Two options:
+
+- **`DEMO_KEY`** — a built-in key available to anyone, no registration required. Limited to 30 requests per hour and 50 per day; useful for initial exploration.
+- **Personal key** — free to register at the [United States Government's Open Data Portal](https://api.data.gov/signup/). Allows up to 1,000 requests per hour.
 
 ### Using Your API Key
 
