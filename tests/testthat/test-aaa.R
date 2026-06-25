@@ -10,10 +10,14 @@ test_that("no_creds_available() returns FALSE when api_key is non-empty", {
   expect_false(no_creds_available("my_api_key"))
 })
 
-test_that("check_empty_creds() errors when api_key is NULL or empty", {
-  expect_snapshot(error = TRUE, check_empty_creds(NULL))
-  expect_snapshot(error = TRUE, check_empty_creds(""))
-  expect_snapshot(error = TRUE, check_empty_creds("   "))
+test_that("check_empty_creds() warns once per session when api_key is NULL or empty", {
+  .fdic_env$no_key_warned <- FALSE
+  on.exit(.fdic_env$no_key_warned <- FALSE)
+
+  expect_snapshot(check_empty_creds(NULL))
+  # Second call should be silent
+  expect_no_warning(check_empty_creds(""))
+  expect_no_warning(check_empty_creds("   "))
 })
 
 test_that("validate_query_params() errors when filters is not a single string", {

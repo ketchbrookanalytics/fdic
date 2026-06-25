@@ -2,6 +2,10 @@
 #' @noRd
 base_url <- "https://api.fdic.gov/banks/"
 
+# Session-scoped state: tracks whether the no-key warning has been shown
+.fdic_env <- new.env(parent = emptyenv())
+.fdic_env$no_key_warned <- FALSE
+
 #' Create a small error handler to return error messages from API
 #' @noRd
 fdic_error_message <- function(resp) {
@@ -31,13 +35,16 @@ no_creds_available <- function(
 #' Handle missing API Key value
 #' @noRd
 check_empty_creds <- function(api_key) {
-  if (is.null(api_key) || trimws(api_key) == "") {
-    cli::cli_abort(
+  if ((is.null(api_key) || trimws(api_key) == "") && !.fdic_env$no_key_warned) {
+    cli::cli_warn(
       c(
-        "{.arg api_key} is missing.",
-        "If you do not have an FDIC API Key, you can register for one at {.url https://api.data.gov/signup/}."
+        "No {.arg api_key} provided.",
+        "i" = "Use {.code api_key = \"DEMO_KEY\"} for exploration (30 req/hr, 50 req/day).",
+        "i" = "Register for a free personal key (1,000 req/hr) at {.url https://api.data.gov/signup/}.",
+        "{.emph This message is shown once per session.}"
       )
     )
+    .fdic_env$no_key_warned <- TRUE
   }
 }
 
