@@ -92,7 +92,7 @@
         descending = FALSE, limit = "100")
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -101,7 +101,7 @@
         descending = FALSE, limit = 100.5)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -110,7 +110,7 @@
         descending = FALSE, limit = 0)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -119,7 +119,7 @@
         descending = FALSE, limit = 10001)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -128,47 +128,5 @@
         descending = FALSE, limit = NA_real_)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
-
-# get_fdic() errors when API returns an empty response
-
-    Code
-      get_institutions(filters = "STALP:XX")
-    Condition
-      Error in `get_fdic()`:
-      ! The response from the API is empty.
-      Query `filters` of `STALP:XX` passed to API.
-      Please check `filters` for possible issues.
-      Refer to <https://api.fdic.gov/banks/docs/> for additional information.
-
-# get_fdic() errors when all requested fields are invalid
-
-    Code
-      get_institutions(filters = "STALP:ND", fields = c("NONEXISTENT_FIELD_1",
-        "NONEXISTENT_FIELD_2"), limit = 5)
-    Condition
-      Error in `get_fdic()`:
-      ! None of the requested `fields` were returned by the API:
-      * `NONEXISTENT_FIELD_1` and `NONEXISTENT_FIELD_2`
-      i These fields may not exist or may have been renamed. To see currently available fields, call this function with `limit = 1` and no `fields` argument.
-
-# get_fdic() warns when some requested fields are invalid
-
-    Code
-      get_institutions(filters = "STALP:ND", fields = c("CERT", "NONEXISTENT_FIELD"),
-      limit = 5)
-    Condition
-      Warning:
-      The following `fields` were not returned by the API:
-      * `NONEXISTENT_FIELD`
-      i These fields may not exist or may have been renamed. To see currently available fields, call this function with `limit = 1` and no `fields` argument.
-    Output
-      # A tibble: 5 x 2
-         CERT    ID
-        <int> <int>
-      1 10231 10231
-      2 10233 10233
-      3 10236 10236
-      4 10238 10238
-      5 10240 10240
+      ! `limit` must be an integer between 1 and 10,000.
 

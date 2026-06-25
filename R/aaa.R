@@ -80,7 +80,7 @@ validate_query_params <- function(
       limit < 1 ||
       limit > 10000
   ) {
-    cli::cli_abort("{.arg limit} must be a whole number between 1 and 10,000.")
+    cli::cli_abort("{.arg limit} must be an integer between 1 and 10,000.")
   }
 
   # The `descending` param does not affect the return data
