@@ -140,6 +140,11 @@ get_fdic <- function(
       "fdic R package (https://ketchbrookanalytics.github.io/fdic/)"
     )
 
+  if (!is.null(api_key) && trimws(api_key) != "") {
+    req <- req |>
+      httr2::req_url_query(api_key = api_key)
+  }
+
   # Perform request
   resp <- httr2::req_perform(req)
 
