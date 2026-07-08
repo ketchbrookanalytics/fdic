@@ -12,8 +12,8 @@
 <link rel="icon" sizes="any" href="favicon.ico">
 <link rel="manifest" href="site.webmanifest">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/Lora-0.4.10/font.css" rel="stylesheet">
+<link href="deps/bootstrap-5.3.8/bootstrap.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.8/bootstrap.bundle.min.js"></script><link href="deps/Lora-0.4.10/font.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="R Interface to FDIC BankFind Suite API">
@@ -85,7 +85,13 @@
 <div class="section level2">
 <h2 id="authentication">Authentication<a class="anchor" aria-label="anchor" href="#authentication"></a>
 </h2>
-<p>In order to use {fdic}, you will first need to <a href="https://api.data.gov/signup/" class="external-link">obtain an API key</a> from the United States Government’s Open Data Portal. <strong>The API key must be provided to each function in this R package.</strong></p>
+<p>An API key is strongly recommended to use {fdic}. Without one, requests are subject to very low rate limits (50 requests per day). Two options:</p>
+<ul>
+<li>
+<strong><code>DEMO_KEY</code></strong> — a built-in key available to anyone, no registration required. Limited to 30 requests per hour and 50 per day; useful for initial exploration.</li>
+<li>
+<strong>Personal key</strong> — free to register at the <a href="https://api.data.gov/signup/" class="external-link">United States Government’s Open Data Portal</a>. Allows up to 1,000 requests per hour.</li>
+</ul>
 <div class="section level3">
 <h3 id="using-your-api-key">Using Your API Key<a class="anchor" aria-label="anchor" href="#using-your-api-key"></a>
 </h3>

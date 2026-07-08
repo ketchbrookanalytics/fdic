@@ -21,7 +21,10 @@ get_failures(
 - api_key:
 
   (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable.
+  `FDIC_API_KEY` environment variable. A key is strongly recommended:
+  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
+  for a free personal key (1,000 req/hr) at
+  <https://api.data.gov/signup/>.
 
 - filters:
 
