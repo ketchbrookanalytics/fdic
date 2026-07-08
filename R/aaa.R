@@ -2,6 +2,10 @@
 #' @noRd
 base_url <- "https://api.fdic.gov/banks/"
 
+# Session-scoped state: tracks whether the no-key warning has been shown
+.fdic_env <- new.env(parent = emptyenv())
+.fdic_env$no_key_warned <- FALSE
+
 #' Create a small error handler to return error messages from API
 #' @noRd
 fdic_error_message <- function(resp) {
@@ -31,13 +35,16 @@ no_creds_available <- function(
 #' Handle missing API Key value
 #' @noRd
 check_empty_creds <- function(api_key) {
-  if (is.null(api_key) || trimws(api_key) == "") {
-    cli::cli_abort(
+  if ((is.null(api_key) || trimws(api_key) == "") && !.fdic_env$no_key_warned) {
+    cli::cli_warn(
       c(
-        "{.arg api_key} is missing.",
-        "If you do not have an FDIC API Key, you can register for one at {.url https://api.data.gov/signup/}."
+        "No {.arg api_key} provided.",
+        "i" = "Use {.code api_key = \"DEMO_KEY\"} for exploration (30 req/hr, 50 req/day).",
+        "i" = "Register for a free personal key (1,000 req/hr) at {.url https://api.data.gov/signup/}.",
+        "{.emph This message is shown once per session.}"
       )
     )
+    .fdic_env$no_key_warned <- TRUE
   }
 }
 
@@ -80,7 +87,7 @@ validate_query_params <- function(
       limit < 1 ||
       limit > 10000
   ) {
-    cli::cli_abort("{.arg limit} must be a whole number between 1 and 10,000.")
+    cli::cli_abort("{.arg limit} must be an integer between 1 and 10,000.")
   }
 
   # The `descending` param does not affect the return data
@@ -139,6 +146,11 @@ get_fdic <- function(
     httr2::req_user_agent(
       "fdic R package (https://ketchbrookanalytics.github.io/fdic/)"
     )
+
+  if (!is.null(api_key) && trimws(api_key) != "") {
+    req <- req |>
+      httr2::req_url_query(api_key = api_key)
+  }
 
   # Perform request
   resp <- httr2::req_perform(req)

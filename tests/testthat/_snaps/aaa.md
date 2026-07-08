@@ -1,29 +1,13 @@
-# check_empty_creds() errors when api_key is NULL or empty
+# check_empty_creds() warns once per session when api_key is NULL or empty
 
     Code
       check_empty_creds(NULL)
     Condition
-      Error in `check_empty_creds()`:
-      ! `api_key` is missing.
-      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
-
----
-
-    Code
-      check_empty_creds("")
-    Condition
-      Error in `check_empty_creds()`:
-      ! `api_key` is missing.
-      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
-
----
-
-    Code
-      check_empty_creds("   ")
-    Condition
-      Error in `check_empty_creds()`:
-      ! `api_key` is missing.
-      If you do not have an FDIC API Key, you can register for one at <https://api.data.gov/signup/>.
+      Warning:
+      No `api_key` provided.
+      i Use `api_key = "DEMO_KEY"` for exploration (30 req/hr, 50 req/day).
+      i Register for a free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
+      This message is shown once per session.
 
 # validate_query_params() errors when filters is not a single string
 
@@ -92,7 +76,7 @@
         descending = FALSE, limit = "100")
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -101,7 +85,7 @@
         descending = FALSE, limit = 100.5)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -110,7 +94,7 @@
         descending = FALSE, limit = 0)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -119,7 +103,7 @@
         descending = FALSE, limit = 10001)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
 
 ---
 
@@ -128,7 +112,27 @@
         descending = FALSE, limit = NA_real_)
     Condition
       Error in `validate_query_params()`:
-      ! `limit` must be a whole number between 1 and 10,000.
+      ! `limit` must be an integer between 1 and 10,000.
+
+---
+
+    Code
+      validate_query_params(filters = NULL, fields = NULL, sort_by = NULL,
+        descending = FALSE, limit = Inf)
+    Condition
+      Warning in `validate_query_params()`:
+      NAs introduced by coercion to integer range
+      Error in `validate_query_params()`:
+      ! `limit` must be an integer between 1 and 10,000.
+
+---
+
+    Code
+      validate_query_params(filters = NULL, fields = NULL, sort_by = NULL,
+        descending = FALSE, limit = -1)
+    Condition
+      Error in `validate_query_params()`:
+      ! `limit` must be an integer between 1 and 10,000.
 
 # get_fdic() errors when API returns an empty response
 
@@ -155,8 +159,8 @@
 # get_fdic() warns when some requested fields are invalid
 
     Code
-      get_institutions(filters = "STALP:ND", fields = c("CERT", "NONEXISTENT_FIELD"),
-      limit = 5)
+      get_institutions(api_key = "test_key", filters = "STALP:ND", fields = c("CERT",
+        "NONEXISTENT_FIELD"), limit = 5)
     Condition
       Warning:
       The following `fields` were not returned by the API:

@@ -15,22 +15,35 @@ test_that("get_financials() respects the fields argument", {
 test_that("get_financials() errors when limit > 500 and fields > 250", {
   expect_snapshot(
     error = TRUE,
-    get_financials(fields = head(fdic_financials$field, 251), limit = 501)
+    get_financials(
+      fields = head(fdic_financials$field, 251),
+      limit = 501
+    )
   )
 })
 
 test_that("get_financials() allows limit = 500 when fields > 250", {
-  withr::local_envvar(FDIC_API_KEY = "")
-  expect_error(
-    get_financials(fields = head(fdic_financials$field, 251), limit = 500),
-    regexp = "api_key"
+  # Mock `get_fdic()` so we can test the constraint boundary without credentials
+  # or a network call. If the constraint fires, it aborts before `get_fdic()` is
+  # reached, so `expect_no_error()` proves the constraint correctly did not
+  # fire.
+  local_mocked_bindings(get_fdic = function(...) tibble::tibble())
+  expect_no_error(
+    get_financials(
+      fields = head(fdic_financials$field, 251),
+      limit = 500
+    )
   )
 })
 
 test_that("get_financials() allows limit > 500 when fields <= 250", {
-  withr::local_envvar(FDIC_API_KEY = "")
-  expect_error(
-    get_financials(fields = head(fdic_financials$field, 250), limit = 501),
-    regexp = "api_key"
+  # Same mocking approach as above — constraint only applies when BOTH
+  # fields > 250 AND limit > 500, so either condition alone should pass.
+  local_mocked_bindings(get_fdic = function(...) tibble::tibble())
+  expect_no_error(
+    get_financials(
+      fields = head(fdic_financials$field, 250),
+      limit = 501
+    )
   )
 })

@@ -11,3 +11,4 @@
 ^\.claude$
 ^[.]?air[.]toml$
 ^cran-comments\.md$
+^CLAUDE\.md$

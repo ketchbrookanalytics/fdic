@@ -10,10 +10,14 @@ test_that("no_creds_available() returns FALSE when api_key is non-empty", {
   expect_false(no_creds_available("my_api_key"))
 })
 
-test_that("check_empty_creds() errors when api_key is NULL or empty", {
-  expect_snapshot(error = TRUE, check_empty_creds(NULL))
-  expect_snapshot(error = TRUE, check_empty_creds(""))
-  expect_snapshot(error = TRUE, check_empty_creds("   "))
+test_that("check_empty_creds() warns once per session when api_key is NULL or empty", {
+  .fdic_env$no_key_warned <- FALSE
+  on.exit(.fdic_env$no_key_warned <- FALSE)
+
+  expect_snapshot(check_empty_creds(NULL))
+  # Second call should be silent
+  expect_no_warning(check_empty_creds(""))
+  expect_no_warning(check_empty_creds("   "))
 })
 
 test_that("validate_query_params() errors when filters is not a single string", {
@@ -165,6 +169,26 @@ test_that("validate_query_params() errors on invalid limit", {
       limit = NA_real_
     )
   )
+  expect_snapshot(
+    error = TRUE,
+    validate_query_params(
+      filters = NULL,
+      fields = NULL,
+      sort_by = NULL,
+      descending = FALSE,
+      limit = Inf
+    )
+  )
+  expect_snapshot(
+    error = TRUE,
+    validate_query_params(
+      filters = NULL,
+      fields = NULL,
+      sort_by = NULL,
+      descending = FALSE,
+      limit = -1
+    )
+  )
 })
 
 # get_fdic() integration tests:
@@ -190,12 +214,33 @@ test_that("get_fdic() errors when all requested fields are invalid", {
 })
 
 test_that("get_fdic() warns when some requested fields are invalid", {
-  skip_if(no_creds_available())
+  # Mock the HTTP response so this test runs without credentials and is not
+  # fragile against live data changing. The mocked response contains only CERT
+  # and the always-returned ID column, so the requested NONEXISTENT_FIELD is
+  # absent and triggers the "fields not returned" warning inside get_fdic().
+  httr2::local_mocked_responses(list(
+    httr2::response(
+      status_code = 200,
+      body = charToRaw(paste0(
+        "CERT,ID\n",
+        "10231,10231\n10233,10233\n10236,10236\n10238,10238\n10240,10240\n"
+      ))
+    )
+  ))
   expect_snapshot(
     get_institutions(
+      api_key = "test_key",
       filters = "STALP:ND",
       fields = c("CERT", "NONEXISTENT_FIELD"),
       limit = 5
     )
+  )
+})
+
+test_that("get_fdic() errors with HTTP 403 for an invalid api_key", {
+  skip_if_offline()
+  expect_error(
+    get_institutions(api_key = "blah", limit = 1),
+    class = "httr2_http_403"
   )
 })
