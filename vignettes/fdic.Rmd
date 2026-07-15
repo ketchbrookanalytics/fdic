@@ -36,7 +36,7 @@ While most of the arguments are relatively straightforward, there are some idios
 ```{r example-1}
 # Dropping `description` for example due to length of field
 head(fdic_locations) |>
-  dplyr::select(!description)
+  subset(select = -description)
 ```
 
 During package development, it was noted that *most* fields returned by the API are documented in these internal datasets. **However, there are several instances where fields are either no longer available or new (undocumented) fields have been added.**
