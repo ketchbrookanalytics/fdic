@@ -1,0 +1,94 @@
+---
+title: "fdic"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{fdic}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(fdic)
+```
+
+Each function in {fdic} accepts the following arguments:
+
+- `api_key`: Your FDIC API key
+- `filters`: One or more filters to apply when requesting data using [Elasticsearch Query String Syntax](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-query-string-query#query-string-syntax)
+- `fields`: One or more fields to include in the response
+- `sort_by`: A field name to sort the response by
+- `descending`: A flag to specify the direction to `sort_by` (if `sort_by` is specified)
+- `limit`: The number of records to include in the response (up to a maximum of 10,000)
+
+While most of the arguments are relatively straightforward, there are some idiosyncrasies with both the `fields` and `filters` arguments that are worth discussing.
+
+### Available API Fields
+
+{fdic} contains eight internal datasets documenting the [current API endpoint definition files](https://api.fdic.gov/banks/docs/) provided by the FDIC. Each dataset corresponds to one of the functions contained in {fdic} and is named by prefixing the endpoint with `fdic_` (e.g., `fdic_institutions` for `get_institutions()`). Each dataset can be accessed directly by name, as demonstrated below.
+
+```{r example-1}
+# Dropping `description` for example due to length of field
+head(fdic_locations) |>
+  subset(select = -description)
+```
+
+During package development, it was noted that *most* fields returned by the API are documented in these internal datasets. **However, there are several instances where fields are either no longer available or new (undocumented) fields have been added.**
+
+{fdic} functions evaluate the values supplied to the `fields` argument and will raise a warning if a field is not returned in the response. However, it can be helpful to call an {fdic} function with no `fields` argument and `limit = 1` to return the current endpoint definition, as demonstrated below:
+
+```{r example-2}
+# Review current endpoint definition
+get_locations(limit = 1) |>
+  names()
+```
+
+Alternatively, the BankFind Suite offers a [Glossary and Variable Definition](https://banks.data.fdic.gov/bankfind-suite/help?helpTopic=glossary-and-variable-definitions) table which may provide more up-to-date information on API fields.
+
+By familiarizing yourself with the available `fields`, you can begin to refine your {fdic} queries by passing `filters` to target the data you are most concerned with. The next section provides a brief primer on the `filters` syntax.
+
+### Filtering Using Elasticsearch Query String Syntax
+
+The [FDIC Bank Suite API](https://api.fdic.gov/banks/docs/) uses [Elasticsearch Query String Syntax](https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-query-string-query#query-string-syntax) to filter results.
+
+Elasticsearch Query String Syntax is a mini-language that allows for a customized search of the data, using familiar terms and operators to facilitate the filtering.
+
+By passing a valid Elasticsearch Query String to the `filters` argument of an {fdic} function, you can conveniently manipulate the data provided in response.
+
+The following examples demonstrate several ways to use Elasticsearch Query Strings in {fdic} functions to collect the data of interest.
+
+```{r example-3}
+# Search for five active institutions in New York
+# Return all available fields
+get_institutions(
+  filters = "STALP:NY AND ACTIVE:1",
+  limit = 5
+)
+```
+
+```{r example-4}
+# Collect location data for five branches of a specific institution
+# Return all available fields
+get_locations(
+  filters = "CERT:33124",
+  limit = 5
+)
+```
+
+```{r example-5}
+# Explore the 2025 Summary of Deposit data for non-community banks in New York
+# Collect the coordinates for the top five branch locations by total deposits
+get_sod(
+  filters = "STALP:NY AND !(CB:1) AND YEAR:2025",
+  fields = c("DEPSUM", "NAMEBR", "SIMS_LATITUDE", "SIMS_LONGITUDE", "YEAR"),
+  sort_by = "DEPSUM",
+  descending = TRUE,
+  limit = 5
+)
+```
