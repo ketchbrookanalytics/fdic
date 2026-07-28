@@ -38,6 +38,7 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
+<li class="nav-item"><a class="nav-link" href="articles/fdic.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="reference/index.html">Reference</a></li>
 <li class="nav-item"><a class="nav-link" href="news/index.html">Changelog</a></li>
       </ul>
@@ -102,7 +103,7 @@
 </div>
 </div>
 <div class="section level2">
-<h2 id="examples">Examples<a class="anchor" aria-label="anchor" href="#examples"></a>
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ketchbrookanalytics/fdic" class="external-link">fdic</a></span><span class="op">)</span></span>
@@ -121,129 +122,23 @@
 <span><span class="co">#&gt; # A tibble: 5 × 4</span></span>
 <span><span class="co">#&gt;       ASSET    ID NAME                                              REPDTE    </span></span>
 <span><span class="co">#&gt;       &lt;int&gt; &lt;int&gt; &lt;chr&gt;                                             &lt;chr&gt;     </span></span>
-<span><span class="co">#&gt; 1 644997000 33124 Goldman Sachs Bank USA                            12/31/2025</span></span>
-<span><span class="co">#&gt; 2 380997000   639 The Bank of New York Mellon                       12/31/2025</span></span>
-<span><span class="co">#&gt; 3 254706000 34221 Morgan Stanley Private Bank, National Association 12/31/2025</span></span>
-<span><span class="co">#&gt; 4 212887157   588 Manufacturers and Traders Trust Company           12/31/2025</span></span>
-<span><span class="co">#&gt; 5  87511954 32541 Flagstar Bank, National Association               12/31/2025</span></span></code></pre></div>
-<p>Each function in {fdic} accepts the following arguments:</p>
+<span><span class="co">#&gt; 1 751776000 33124 Goldman Sachs Bank USA                            03/31/2026</span></span>
+<span><span class="co">#&gt; 2 467349000   639 The Bank of New York Mellon                       03/31/2026</span></span>
+<span><span class="co">#&gt; 3 241388000 34221 Morgan Stanley Private Bank, National Association 03/31/2026</span></span>
+<span><span class="co">#&gt; 4 214201000   588 Manufacturers and Traders Trust Company           03/31/2026</span></span>
+<span><span class="co">#&gt; 5  87128815 32541 Flagstar Bank, National Association               03/31/2026</span></span></code></pre></div>
+<p>For a more detailed walkthrough, see <code><a href="articles/fdic.html">vignette("fdic")</a></code>.</p>
+</div>
+<div class="section level2">
+<h2 id="related-projects">Related Projects<a class="anchor" aria-label="anchor" href="#related-projects"></a>
+</h2>
+<p>Inspiration for {fdic} came from several existing packages (both R and Python) that wrap the FDIC BankFind Suite API, including:</p>
 <ul>
-<li>
-<code>api_key</code>: Your FDIC API key (see <a href="#authentication">Authentication</a> above)</li>
-<li>
-<code>filters</code>: One or more filters to apply when requesting data using <a href="https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-query-string-query#query-string-syntax" class="external-link">Elasticsearch Query String Syntax</a>
-</li>
-<li>
-<code>fields</code>: One or more fields to include in the response</li>
-<li>
-<code>sort_by</code>: A field name to sort the response by</li>
-<li>
-<code>descending</code>: A flag to specify the direction to <code>sort_by</code> (if <code>sort_by</code> is specified)</li>
-<li>
-<code>limit</code>: The number of records to include in the response (up to a maximum of 10,000)</li>
+<li><a href="https://github.com/Visbanking/fdicdata" class="external-link">{fdicdata}</a></li>
+<li><a href="https://github.com/bertcarnell/fdic.api" class="external-link">{fdic.api}</a></li>
+<li><a href="https://github.com/dpguthrie/bankfind" class="external-link">{bankfind}</a></li>
 </ul>
-<p>While most of the arguments are relatively straightforward, there are some idiosyncrasies with both the <code>filters</code> and <code>fields</code> arguments that are worth discussing.</p>
-<div class="section level3">
-<h3 id="filtering-using-elasticsearch-query-string-syntax">Filtering Using Elasticsearch Query String Syntax<a class="anchor" aria-label="anchor" href="#filtering-using-elasticsearch-query-string-syntax"></a>
-</h3>
-<p>The <a href="https://www.elastic.co/docs/reference/query-languages/query-dsl/query-dsl-query-string-query#query-string-syntax" class="external-link">Elasticsearch Query String Syntax</a> is a mini-language that allows for a customized search of the data, using terms and operators to facilitate the filtering. Pass a valid Elasticsearch Query String to the <code>filters</code> argument of an {fdic} function to filter the data provided by the FDIC BankFind Suite API.</p>
-<p>While it is strongly encouraged to review the Query String Syntax documentation provided by the FDIC and Elastic, a few examples are provided below for reference:</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Search for five active institutions in New York</span></span>
-<span><span class="co"># Return all available fields</span></span>
-<span><span class="fu"><a href="reference/get_institutions.html">get_institutions</a></span><span class="op">(</span></span>
-<span>  filters <span class="op">=</span> <span class="st">"STALP:NY AND ACTIVE:1"</span>,</span>
-<span>  limit <span class="op">=</span> <span class="fl">5</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 5 × 135</span></span>
-<span><span class="co">#&gt;   ACTIVE ADDRESS         ADDRESS2   ASSET BKCLASS CALLFORM    CB CBSA   CBSA_DIV</span></span>
-<span><span class="co">#&gt;    &lt;int&gt; &lt;chr&gt;           &lt;chr&gt;      &lt;int&gt; &lt;chr&gt;      &lt;int&gt; &lt;int&gt; &lt;chr&gt;  &lt;lgl&gt;   </span></span>
-<span><span class="co">#&gt; 1      1 201 Mohawk Ave  ""        698520 N             41     1 Alban… NA      </span></span>
-<span><span class="co">#&gt; 2      1 212 Dolson Ave  ""       2650965 SM            41     1 Pough… NA      </span></span>
-<span><span class="co">#&gt; 3      1 857 E Main St   ""        180561 NM            41     1 Alban… NA      </span></span>
-<span><span class="co">#&gt; 4      1 116 Main St     "# 20"    375234 NM            51     1 Olean… NA      </span></span>
-<span><span class="co">#&gt; 5      1 1537 Milton Ave ""       1183807 SM            51     1 Syrac… NA      </span></span>
-<span><span class="co">#&gt; # ℹ 126 more variables: CBSA_DIV_FLG &lt;int&gt;, CBSA_DIV_NO &lt;lgl&gt;,</span></span>
-<span><span class="co">#&gt; #   CBSA_METRO &lt;int&gt;, CBSA_METRO_FLG &lt;int&gt;, CBSA_METRO_NAME &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   CBSA_MICRO_FLG &lt;int&gt;, CBSA_NO &lt;int&gt;, CERT &lt;int&gt;, CFPBEFFDTE &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   CFPBENDDTE &lt;chr&gt;, CFPBFLAG &lt;int&gt;, CHARTER &lt;int&gt;, CHRTAGNT &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   CITY &lt;chr&gt;, CITYHCR &lt;chr&gt;, CLCODE &lt;int&gt;, CONSERVE &lt;chr&gt;, COUNTY &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   CSA &lt;chr&gt;, CSA_FLG &lt;int&gt;, CSA_NO &lt;int&gt;, DATEUPDT &lt;chr&gt;, DENOVO &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   DEP &lt;int&gt;, DEPDOM &lt;int&gt;, DOCKET &lt;int&gt;, EFFDATE &lt;chr&gt;, ENDEFYMD &lt;chr&gt;, …</span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Collect location data for five branches of a specific institution</span></span>
-<span><span class="co"># Return all available fields</span></span>
-<span><span class="fu"><a href="reference/get_locations.html">get_locations</a></span><span class="op">(</span></span>
-<span>  filters <span class="op">=</span> <span class="st">"CERT:33124"</span>,</span>
-<span>  limit <span class="op">=</span> <span class="fl">5</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 5 × 38</span></span>
-<span><span class="co">#&gt;   ACQDATE      ADDRESS  ADDRESS2 BKCLASS CBSA  CBSA_DIV CBSA_DIV_FLG CBSA_DIV_NO</span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;        &lt;chr&gt;    &lt;lgl&gt;    &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;           &lt;int&gt;       &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 "11/28/2008" 111 S M… NA       SM      Salt… ""                  0          NA</span></span>
-<span><span class="co">#&gt; 2 ""           200 Wes… NA       SM      New … "New Yo…            1       35614</span></span>
-<span><span class="co">#&gt; 3 ""           125 Hig… NA       SM      Bost… "Boston…            1       14454</span></span>
-<span><span class="co">#&gt; 4 ""           30 Huds… NA       SM      New … "New Yo…            1       35614</span></span>
-<span><span class="co">#&gt; 5 ""           11850 S… NA       SM      Salt… ""                  0          NA</span></span>
-<span><span class="co">#&gt; # ℹ 30 more variables: CBSA_METRO &lt;int&gt;, CBSA_METRO_FLG &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   CBSA_METRO_NAME &lt;chr&gt;, CBSA_MICRO_FLG &lt;int&gt;, CBSA_NO &lt;int&gt;, CERT &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   CITY &lt;chr&gt;, COUNTY &lt;chr&gt;, CSA &lt;chr&gt;, CSA_FLG &lt;int&gt;, CSA_NO &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   ESTYMD &lt;chr&gt;, FI_UNINUM &lt;int&gt;, ID &lt;int&gt;, LATITUDE &lt;dbl&gt;, LONGITUDE &lt;dbl&gt;,</span></span>
-<span><span class="co">#&gt; #   MAINOFF &lt;int&gt;, MDI_STATUS_CODE &lt;lgl&gt;, MDI_STATUS_DESC &lt;chr&gt;, NAME &lt;chr&gt;,</span></span>
-<span><span class="co">#&gt; #   OFFNAME &lt;chr&gt;, OFFNUM &lt;int&gt;, RUNDATE &lt;chr&gt;, SERVTYPE &lt;int&gt;,</span></span>
-<span><span class="co">#&gt; #   SERVTYPE_DESC &lt;chr&gt;, STALP &lt;chr&gt;, STCNTY &lt;int&gt;, STNAME &lt;chr&gt;, …</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Explore the 2025 Summary of Deposit data for non-community banks in New York</span></span>
-<span><span class="co"># Collect the coordinates for the top five branch locations by total deposits</span></span>
-<span><span class="fu"><a href="reference/get_sod.html">get_sod</a></span><span class="op">(</span></span>
-<span>  filters <span class="op">=</span> <span class="st">"STALP:NY AND !(CB:1) AND YEAR:2025"</span>,</span>
-<span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"DEPSUM"</span>, <span class="st">"NAMEBR"</span>, <span class="st">"SIMS_LATITUDE"</span>, <span class="st">"SIMS_LONGITUDE"</span>, <span class="st">"YEAR"</span><span class="op">)</span>,</span>
-<span>  sort_by <span class="op">=</span> <span class="st">"DEPSUM"</span>,</span>
-<span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>  limit <span class="op">=</span> <span class="fl">5</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 5 × 6</span></span>
-<span><span class="co">#&gt;      DEPSUM ID           NAMEBR               SIMS_LATITUDE SIMS_LONGITUDE  YEAR</span></span>
-<span><span class="co">#&gt;       &lt;int&gt; &lt;chr&gt;        &lt;chr&gt;                        &lt;dbl&gt;          &lt;dbl&gt; &lt;int&gt;</span></span>
-<span><span class="co">#&gt; 1 390220000 2025_33124_0 Goldman Sachs Bank …          40.7          -74.0  2025</span></span>
-<span><span class="co">#&gt; 2 227667000 2025_639_0   The Bank Of New Yor…          40.7          -74.0  2025</span></span>
-<span><span class="co">#&gt; 3 212449000 2025_34221_0 Morgan Stanley Priv…          41.0          -73.7  2025</span></span>
-<span><span class="co">#&gt; 4 168383903 2025_588_0   Manufacturers And T…          42.9          -78.9  2025</span></span>
-<span><span class="co">#&gt; 5  70246292 2025_32541_0 Flagstar Bank, Nati…          40.8          -73.5  2025</span></span></code></pre></div>
-</div>
-<div class="section level3">
-<h3 id="available-api-fields">Available API Fields<a class="anchor" aria-label="anchor" href="#available-api-fields"></a>
-</h3>
-<p>{fdic} contains eight internal datasets documenting the <a href="https://api.fdic.gov/banks/docs/" class="external-link">current API endpoint definition files</a> provided by the FDIC. Each dataset corresponds to one of the functions contained in {fdic} and is named by prefixing the endpoint with <code>fdic_</code> (e.g., <code>fdic_institutions</code> for <code><a href="reference/get_institutions.html">get_institutions()</a></code>). Each dataset can be accessed directly by name, as demonstrated below.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fdic_institutions</span><span class="op">)</span></span>
-<span><span class="co">#&gt; # A tibble: 6 × 4</span></span>
-<span><span class="co">#&gt;   field   title                            description                     type </span></span>
-<span><span class="co">#&gt;   &lt;chr&gt;   &lt;chr&gt;                            &lt;chr&gt;                           &lt;chr&gt;</span></span>
-<span><span class="co">#&gt; 1 ACTIVE  Institution Status               A number indicating the status… numb…</span></span>
-<span><span class="co">#&gt; 2 ADDRESS Street Address                   The street address in which an… stri…</span></span>
-<span><span class="co">#&gt; 3 ASSET   Total assets                     The sum of all assets owned by… numb…</span></span>
-<span><span class="co">#&gt; 4 BKCLASS Institution Class                A classification code assigned… stri…</span></span>
-<span><span class="co">#&gt; 5 CB      Community Bank                   A flag used to indicate whethe… stri…</span></span>
-<span><span class="co">#&gt; 6 CBSA    Core Based Statistical Area Name Name of the Core Based Statist… stri…</span></span></code></pre></div>
-<p>During package development, it was noted that <em>most</em> fields returned by the API are documented in these internal datasets. <strong>However, there are several instances where fields are either no longer available or new, undocumented fields have been added.</strong></p>
-<p>{fdic} functions evaluate the values supplied to the <code>fields</code> argument and will raise a warning if a field is not returned in the response. However, it can be helpful to call an {fdic} function with no <code>fields</code> argument and <code>limit = 1</code> to return the current endpoint definition, as demonstrated below:</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># Review current endpoint definition</span></span>
-<span><span class="fu"><a href="reference/get_locations.html">get_locations</a></span><span class="op">(</span>limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;  [1] "ACQDATE"         "ADDRESS"         "ADDRESS2"        "BKCLASS"        </span></span>
-<span><span class="co">#&gt;  [5] "CBSA"            "CBSA_DIV"        "CBSA_DIV_FLG"    "CBSA_DIV_NO"    </span></span>
-<span><span class="co">#&gt;  [9] "CBSA_METRO"      "CBSA_METRO_FLG"  "CBSA_METRO_NAME" "CBSA_MICRO_FLG" </span></span>
-<span><span class="co">#&gt; [13] "CBSA_NO"         "CERT"            "CITY"            "COUNTY"         </span></span>
-<span><span class="co">#&gt; [17] "CSA"             "CSA_FLG"         "CSA_NO"          "ESTYMD"         </span></span>
-<span><span class="co">#&gt; [21] "FI_UNINUM"       "ID"              "LATITUDE"        "LONGITUDE"      </span></span>
-<span><span class="co">#&gt; [25] "MAINOFF"         "MDI_STATUS_CODE" "MDI_STATUS_DESC" "NAME"           </span></span>
-<span><span class="co">#&gt; [29] "OFFNAME"         "OFFNUM"          "RUNDATE"         "SERVTYPE"       </span></span>
-<span><span class="co">#&gt; [33] "SERVTYPE_DESC"   "STALP"           "STCNTY"          "STNAME"         </span></span>
-<span><span class="co">#&gt; [37] "UNINUM"          "ZIP"</span></span></code></pre></div>
-<p>Alternatively, the BankFind Suite offers a <a href="https://banks.data.fdic.gov/bankfind-suite/help?helpTopic=glossary-and-variable-definitions" class="external-link">Glossary and Variable Definition</a> table which may provide more up-to-date information on API fields.</p>
-</div>
+<p>{fdic} expands on the principles of these packages to provide a consistent, flexible, and well-documented interface that uses a <a href="https://httr2.r-lib.org/" class="external-link">modern HTTP client</a> and returns data in an <a href="https://tibble.tidyverse.org/" class="external-link">easily usable format</a>.</p>
 </div>
 <div class="section level2">
 <h2 id="need-help">Need Help?<a class="anchor" aria-label="anchor" href="#need-help"></a>
@@ -300,7 +195,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.1.</p>
 </div>
 
     </footer>
