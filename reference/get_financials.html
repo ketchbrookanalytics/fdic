@@ -104,13 +104,20 @@ allowed <code>limit</code> to 500 records; exceeding this will raise an error.</
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># !no_creds_available()</span></span></span>
-<span class="r-in"><span><span class="co"># Return key financial fields for institutions in New York</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return key financial fields for institutions in New York</span></span></span>
 <span class="r-in"><span><span class="fu">get_financials</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"STALP:NY"</span>,</span></span>
 <span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASSET"</span>, <span class="st">"CERT"</span>, <span class="st">"NETINC"</span>, <span class="st">"REPDTE"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ASSET  CERT ID             NETINC   REPDTE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">62</span>523 <span style="text-decoration: underline;">11</span>051 11051_19840331    185 19<span style="text-decoration: underline;">840</span>331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">66</span>602 <span style="text-decoration: underline;">11</span>051 11051_19840630    393 19<span style="text-decoration: underline;">840</span>630</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">65</span>740 <span style="text-decoration: underline;">11</span>051 11051_19840930    649 19<span style="text-decoration: underline;">840</span>930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">40</span>016 <span style="text-decoration: underline;">11</span>496 11496_19840331    -<span style="color: #BB0000;">21</span> 19<span style="text-decoration: underline;">840</span>331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">50</span>504 <span style="text-decoration: underline;">11</span>501 11501_19840331     67 19<span style="text-decoration: underline;">840</span>331</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Sort by total assets descending</span></span></span>
 <span class="r-in"><span><span class="fu">get_financials</span><span class="op">(</span></span></span>
@@ -119,7 +126,14 @@ allowed <code>limit</code> to 500 records; exceeding this will raise an error.</
 <span class="r-in"><span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 3</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        ASSET  CERT ID          </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">4</span>016<span style="text-decoration: underline;">571</span>000   628 628_20260331</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">3</span>813<span style="text-decoration: underline;">431</span>000   628 628_20250930</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">3</span>788<span style="text-decoration: underline;">551</span>000   628 628_20250630</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">3</span>752<span style="text-decoration: underline;">662</span>000   628 628_20251231</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">3</span>643<span style="text-decoration: underline;">099</span>000   628 628_20250331</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

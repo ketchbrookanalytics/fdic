@@ -99,12 +99,26 @@ for FDIC-insured institutions, with one row per institution location.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># !no_creds_available()</span></span></span>
-<span class="r-in"><span><span class="co"># Return Summary of Deposit data for institutions in North York</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return Summary of Deposit data for institutions in North York</span></span></span>
 <span class="r-in"><span><span class="fu">get_sod</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"STALP:NY"</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 81</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ADDRESBR        ADDRESS  ASSET BKCLASS  BKMO BRCENM BRNUM BRSERTYP CALL  CB   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 201 Mohawk Ave… 201 Mo… <span style="text-decoration: underline;">143</span>810 N           1 <span style="color: #949494;">"</span>M<span style="color: #949494;">"</span>        0       11 CALL  <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1705 Central A… 201 Mo… <span style="text-decoration: underline;">143</span>810 N           0 <span style="color: #949494;">""</span>         1       11 CALL  <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1476 Balltown … 201 Mo… <span style="text-decoration: underline;">143</span>810 N           0 <span style="color: #949494;">""</span>         2       11 CALL  <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 8 Karner Road   201 Mo… <span style="text-decoration: underline;">143</span>810 N           0 <span style="color: #949494;">""</span>         3       11 CALL  <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 240 Saratoga R… 201 Mo… <span style="text-decoration: underline;">143</span>810 N           0 <span style="color: #949494;">""</span>         4       11 CALL  <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 71 more variables: CBSA_DIV_NAMB &lt;lgl&gt;, CERT &lt;int&gt;, CHARTER &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CHRTAGNN &lt;chr&gt;, CHRTAGNT &lt;chr&gt;, CITY &lt;chr&gt;, CITY2BR &lt;chr&gt;, CITYBR &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CITYHCR &lt;lgl&gt;, CLCODE &lt;int&gt;, CNTRYNA &lt;chr&gt;, CNTRYNAB &lt;chr&gt;, CNTYNAMB &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CNTYNUMB &lt;int&gt;, CONSOLD &lt;lgl&gt;, CSABR &lt;int&gt;, CSANAMBR &lt;chr&gt;, DENOVO &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   DEPDOM &lt;int&gt;, DEPSUM &lt;int&gt;, DEPSUMBR &lt;int&gt;, DIVISIONB &lt;int&gt;, DOCKET &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ESCROW &lt;lgl&gt;, FDICDBS &lt;int&gt;, FDICNAME &lt;chr&gt;, FED &lt;int&gt;, FEDNAME &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   HCTMULT &lt;chr&gt;, ID &lt;chr&gt;, INSAGNT1 &lt;chr&gt;, INSBRDD &lt;int&gt;, INSBRTS &lt;int&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return specific fields, sorted by total assets descending</span></span></span>
 <span class="r-in"><span><span class="fu">get_sod</span><span class="op">(</span></span></span>
@@ -114,7 +128,14 @@ for FDIC-insured institutions, with one row per institution location.</p>
 <span class="r-in"><span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       ASSET  CERT CITY          ID             YEAR</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 777<span style="text-decoration: underline;">345</span>000  <span style="text-decoration: underline;">7</span>213 New York City 2006_7213_0    <span style="text-decoration: underline;">2</span>006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 777<span style="text-decoration: underline;">345</span>000  <span style="text-decoration: underline;">7</span>213 New York City 2006_7213_10   <span style="text-decoration: underline;">2</span>006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 777<span style="text-decoration: underline;">345</span>000  <span style="text-decoration: underline;">7</span>213 New York City 2006_7213_100  <span style="text-decoration: underline;">2</span>006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> 777<span style="text-decoration: underline;">345</span>000  <span style="text-decoration: underline;">7</span>213 New York City 2006_7213_101  <span style="text-decoration: underline;">2</span>006</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> 777<span style="text-decoration: underline;">345</span>000  <span style="text-decoration: underline;">7</span>213 New York City 2006_7213_102  <span style="text-decoration: underline;">2</span>006</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

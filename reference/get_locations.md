@@ -62,12 +62,26 @@ one row per institution location.
 ## Examples
 
 ``` r
-if (FALSE) { # !no_creds_available()
 # Return branch locations in New York
 get_locations(
   filters = "STALP:NY",
   limit = 5
 )
+#> # A tibble: 5 × 38
+#>   ACQDATE    ADDRESS    ADDRESS2 BKCLASS CBSA  CBSA_DIV CBSA_DIV_FLG CBSA_DIV_NO
+#>   <chr>      <chr>      <lgl>    <chr>   <chr> <chr>           <int>       <int>
+#> 1 07/01/1992 6 State S… NA       SM      Roch… ""                  0          NA
+#> 2 10/08/2016 11 Divisi… NA       N       Amst… ""                  0          NA
+#> 3 11/30/2007 68 Exchan… NA       SM      Bing… ""                  0          NA
+#> 4 01/01/1987 12 Westch… NA       SI      New … "New Yo…            1       35614
+#> 5 05/31/1991 1 Fountai… NA       SM      Buff… ""                  0          NA
+#> # ℹ 30 more variables: CBSA_METRO <int>, CBSA_METRO_FLG <int>,
+#> #   CBSA_METRO_NAME <chr>, CBSA_MICRO_FLG <int>, CBSA_NO <int>, CERT <int>,
+#> #   CITY <chr>, COUNTY <chr>, CSA <chr>, CSA_FLG <int>, CSA_NO <int>,
+#> #   ESTYMD <chr>, FI_UNINUM <int>, ID <int>, LATITUDE <dbl>, LONGITUDE <dbl>,
+#> #   MAINOFF <int>, MDI_STATUS_CODE <lgl>, MDI_STATUS_DESC <chr>, NAME <chr>,
+#> #   OFFNAME <chr>, OFFNUM <int>, RUNDATE <chr>, SERVTYPE <int>,
+#> #   SERVTYPE_DESC <chr>, STALP <chr>, STCNTY <int>, STNAME <chr>, …
 
 # Return specific fields only
 get_locations(
@@ -75,5 +89,12 @@ get_locations(
   fields = c("ADDRESS", "CERT", "CITY", "STALP"),
   limit = 5
 )
-}
+#> # A tibble: 5 × 5
+#>   ADDRESS          CERT CITY          ID STALP
+#>   <chr>           <int> <chr>      <int> <chr>
+#> 1 205 Main Ave    15472 Aneta      10023 ND   
+#> 2 210 Sheyenne St  9423 West Fargo 10124 ND   
+#> 3 Main Street      8387 Buffalo    10147 ND   
+#> 4 509 Parke Ave   15539 Portland   10302 ND   
+#> 5 210 8th Ave      9423 Langdon    10373 ND   
 ```

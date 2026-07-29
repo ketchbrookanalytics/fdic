@@ -99,12 +99,26 @@ with one row per institution.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># !no_creds_available()</span></span></span>
-<span class="r-in"><span><span class="co"># Return active institutions in New York</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return active institutions in New York</span></span></span>
 <span class="r-in"><span><span class="fu">get_institutions</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"STALP:NY AND ACTIVE:1"</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 136</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ACTIVE ADDRESS         ADDRESS2   ASSET BKCLASS CALLFORM    CB CBSA   CBSA_DIV</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>      1 201 Mohawk Ave  <span style="color: #949494;">""</span>        <span style="text-decoration: underline;">706</span>452 N             41     1 Alban… <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>      1 212 Dolson Ave  <span style="color: #949494;">""</span>       2<span style="text-decoration: underline;">697</span>498 SM            41     1 Pough… <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>      1 857 E Main St   <span style="color: #949494;">""</span>        <span style="text-decoration: underline;">192</span>861 NM            41     1 Alban… <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>      1 116 Main St     <span style="color: #949494;">"</span># 20<span style="color: #949494;">"</span>    <span style="text-decoration: underline;">378</span>964 NM            51     1 Olean… <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>      1 1537 Milton Ave <span style="color: #949494;">""</span>       1<span style="text-decoration: underline;">190</span>928 SM            51     1 Syrac… <span style="color: #BB0000;">NA</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 127 more variables: CBSA_DIV_FLG &lt;int&gt;, CBSA_DIV_NO &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CBSA_METRO &lt;int&gt;, CBSA_METRO_FLG &lt;int&gt;, CBSA_METRO_NAME &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CBSA_MICRO_FLG &lt;int&gt;, CBSA_NO &lt;int&gt;, CERT &lt;int&gt;, CFPBEFFDTE &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CFPBENDDTE &lt;chr&gt;, CFPBFLAG &lt;int&gt;, CHARTER &lt;int&gt;, CHRTAGNT &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CITY &lt;chr&gt;, CITYHCR &lt;chr&gt;, CLCODE &lt;int&gt;, CONSERVE &lt;chr&gt;, COUNTY &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   CSA &lt;chr&gt;, CSA_FLG &lt;int&gt;, CSA_NO &lt;int&gt;, DATEUPDT &lt;chr&gt;, DENOVO &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   DEP &lt;int&gt;, DEPDOM &lt;int&gt;, DOCKET &lt;int&gt;, EFFDATE &lt;chr&gt;, ENDEFYMD &lt;chr&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return the 5 largest institutions by total assets</span></span></span>
 <span class="r-in"><span><span class="fu">get_institutions</span><span class="op">(</span></span></span>
@@ -113,7 +127,14 @@ with one row per institution.</p>
 <span class="r-in"><span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        ASSET  CERT    ID NAME                                      STALP</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">4</span>016<span style="text-decoration: underline;">571</span>000   628   628 JPMorgan Chase Bank, National Association OH   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">2</span>672<span style="text-decoration: underline;">192</span>000  <span style="text-decoration: underline;">3</span>510  <span style="text-decoration: underline;">3</span>510 Bank of America, National Association     NC   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">1</span>933<span style="text-decoration: underline;">622</span>000  <span style="text-decoration: underline;">7</span>213  <span style="text-decoration: underline;">7</span>213 Citibank, National Association            SD   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">1</span>852<span style="text-decoration: underline;">239</span>000  <span style="text-decoration: underline;">3</span>511  <span style="text-decoration: underline;">3</span>511 Wells Fargo Bank, National Association    SD   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span>  751<span style="text-decoration: underline;">776</span>000 <span style="text-decoration: underline;">33</span>124 <span style="text-decoration: underline;">33</span>124 Goldman Sachs Bank USA                    NY   </span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

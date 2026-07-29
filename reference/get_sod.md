@@ -62,12 +62,26 @@ institutions, with one row per institution location.
 ## Examples
 
 ``` r
-if (FALSE) { # !no_creds_available()
 # Return Summary of Deposit data for institutions in North York
 get_sod(
   filters = "STALP:NY",
   limit = 5
 )
+#> # A tibble: 5 × 81
+#>   ADDRESBR        ADDRESS  ASSET BKCLASS  BKMO BRCENM BRNUM BRSERTYP CALL  CB   
+#>   <chr>           <chr>    <int> <chr>   <int> <chr>  <int>    <int> <chr> <lgl>
+#> 1 201 Mohawk Ave… 201 Mo… 143810 N           1 "M"        0       11 CALL  NA   
+#> 2 1705 Central A… 201 Mo… 143810 N           0 ""         1       11 CALL  NA   
+#> 3 1476 Balltown … 201 Mo… 143810 N           0 ""         2       11 CALL  NA   
+#> 4 8 Karner Road   201 Mo… 143810 N           0 ""         3       11 CALL  NA   
+#> 5 240 Saratoga R… 201 Mo… 143810 N           0 ""         4       11 CALL  NA   
+#> # ℹ 71 more variables: CBSA_DIV_NAMB <lgl>, CERT <int>, CHARTER <chr>,
+#> #   CHRTAGNN <chr>, CHRTAGNT <chr>, CITY <chr>, CITY2BR <chr>, CITYBR <chr>,
+#> #   CITYHCR <lgl>, CLCODE <int>, CNTRYNA <chr>, CNTRYNAB <chr>, CNTYNAMB <chr>,
+#> #   CNTYNUMB <int>, CONSOLD <lgl>, CSABR <int>, CSANAMBR <chr>, DENOVO <int>,
+#> #   DEPDOM <int>, DEPSUM <int>, DEPSUMBR <int>, DIVISIONB <int>, DOCKET <int>,
+#> #   ESCROW <lgl>, FDICDBS <int>, FDICNAME <chr>, FED <int>, FEDNAME <chr>,
+#> #   HCTMULT <chr>, ID <chr>, INSAGNT1 <chr>, INSBRDD <int>, INSBRTS <int>, …
 
 # Return specific fields, sorted by total assets descending
 get_sod(
@@ -77,5 +91,12 @@ get_sod(
   descending = TRUE,
   limit = 5
 )
-}
+#> # A tibble: 5 × 5
+#>       ASSET  CERT CITY          ID             YEAR
+#>       <int> <int> <chr>         <chr>         <int>
+#> 1 777345000  7213 New York City 2006_7213_0    2006
+#> 2 777345000  7213 New York City 2006_7213_10   2006
+#> 3 777345000  7213 New York City 2006_7213_100  2006
+#> 4 777345000  7213 New York City 2006_7213_101  2006
+#> 5 777345000  7213 New York City 2006_7213_102  2006
 ```

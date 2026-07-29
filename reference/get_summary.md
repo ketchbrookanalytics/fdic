@@ -63,12 +63,19 @@ regarding financial institutions, with one row per quarter and year.
 ## Examples
 
 ``` r
-if (FALSE) { # !no_creds_available()
 # Return summary data for each bank type, state, quarter, and year
 get_summary(
   fields = c("ASSET", "BANKS", "BRANCHES", "CALLYM", "NETINC"),
   limit = 5
 )
+#> # A tibble: 5 × 6
+#>    ASSET BANKS BRANCHES CALLYM ID         NETINC
+#>    <int> <int>    <int>  <int> <chr>       <int>
+#> 1      0     2        0 193412 CB_1934_AK      0
+#> 2 277000   210        0 193412 CB_1934_AL      0
+#> 3 148000   213        0 193412 CB_1934_AR      0
+#> 4      0     0        0 193412 CB_1934_AS      0
+#> 5  55000    15        0 193412 CB_1934_AZ      0
 
 # Return summary data sorted by reporting period descending
 get_summary(
@@ -77,5 +84,12 @@ get_summary(
   descending = TRUE,
   limit = 5
 )
-}
+#> # A tibble: 5 × 5
+#>       ASSET BANKS CALLYM ID          YEAR
+#>       <int> <int>  <int> <chr>      <int>
+#> 1   9765541     4 202512 CB_2025_AK  2025
+#> 2 225230810    92 202512 CB_2025_AL  2025
+#> 3 178292908    77 202512 CB_2025_AR  2025
+#> 4         0    NA 202512 CB_2025_AS  2025
+#> 5  95336832    11 202512 CB_2025_AZ  2025
 ```

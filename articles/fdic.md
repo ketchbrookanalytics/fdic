@@ -62,11 +62,6 @@ demonstrated below:
 # Review current endpoint definition
 get_locations(limit = 1) |>
   names()
-#> Warning: No `api_key` provided.
-#> ℹ Use `api_key = "DEMO_KEY"` for exploration (30 req/hr, 50 req/day).
-#> ℹ Register for a free personal key (1,000 req/hr) at
-#>   <https://api.data.gov/signup/>.
-#> This message is shown once per session.
 #>  [1] "ACQDATE"         "ADDRESS"         "ADDRESS2"        "BKCLASS"        
 #>  [5] "CBSA"            "CBSA_DIV"        "CBSA_DIV_FLG"    "CBSA_DIV_NO"    
 #>  [9] "CBSA_METRO"      "CBSA_METRO_FLG"  "CBSA_METRO_NAME" "CBSA_MICRO_FLG" 

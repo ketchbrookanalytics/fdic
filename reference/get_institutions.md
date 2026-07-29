@@ -62,12 +62,26 @@ per institution.
 ## Examples
 
 ``` r
-if (FALSE) { # !no_creds_available()
 # Return active institutions in New York
 get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
 )
+#> # A tibble: 5 × 136
+#>   ACTIVE ADDRESS         ADDRESS2   ASSET BKCLASS CALLFORM    CB CBSA   CBSA_DIV
+#>    <int> <chr>           <chr>      <int> <chr>      <int> <int> <chr>  <lgl>   
+#> 1      1 201 Mohawk Ave  ""        706452 N             41     1 Alban… NA      
+#> 2      1 212 Dolson Ave  ""       2697498 SM            41     1 Pough… NA      
+#> 3      1 857 E Main St   ""        192861 NM            41     1 Alban… NA      
+#> 4      1 116 Main St     "# 20"    378964 NM            51     1 Olean… NA      
+#> 5      1 1537 Milton Ave ""       1190928 SM            51     1 Syrac… NA      
+#> # ℹ 127 more variables: CBSA_DIV_FLG <int>, CBSA_DIV_NO <lgl>,
+#> #   CBSA_METRO <int>, CBSA_METRO_FLG <int>, CBSA_METRO_NAME <chr>,
+#> #   CBSA_MICRO_FLG <int>, CBSA_NO <int>, CERT <int>, CFPBEFFDTE <chr>,
+#> #   CFPBENDDTE <chr>, CFPBFLAG <int>, CHARTER <int>, CHRTAGNT <chr>,
+#> #   CITY <chr>, CITYHCR <chr>, CLCODE <int>, CONSERVE <chr>, COUNTY <chr>,
+#> #   CSA <chr>, CSA_FLG <int>, CSA_NO <int>, DATEUPDT <chr>, DENOVO <int>,
+#> #   DEP <int>, DEPDOM <int>, DOCKET <int>, EFFDATE <chr>, ENDEFYMD <chr>, …
 
 # Return the 5 largest institutions by total assets
 get_institutions(
@@ -76,5 +90,12 @@ get_institutions(
   descending = TRUE,
   limit = 5
 )
-}
+#> # A tibble: 5 × 5
+#>        ASSET  CERT    ID NAME                                      STALP
+#>        <dbl> <int> <int> <chr>                                     <chr>
+#> 1 4016571000   628   628 JPMorgan Chase Bank, National Association OH   
+#> 2 2672192000  3510  3510 Bank of America, National Association     NC   
+#> 3 1933622000  7213  7213 Citibank, National Association            SD   
+#> 4 1852239000  3511  3511 Wells Fargo Bank, National Association    SD   
+#> 5  751776000 33124 33124 Goldman Sachs Bank USA                    NY   
 ```

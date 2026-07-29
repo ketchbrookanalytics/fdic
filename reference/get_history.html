@@ -102,20 +102,41 @@ for FDIC-insured institutions, with one row per structural change event.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># !no_creds_available()</span></span></span>
-<span class="r-in"><span><span class="co"># Return the 5 most recent structural change events</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return the 5 most recent structural change events</span></span></span>
 <span class="r-in"><span><span class="fu">get_history</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  sort_by <span class="op">=</span> <span class="st">"PROCDATE"</span>,</span></span>
 <span class="r-in"><span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 229</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ACQDATE         ACQYEAR ACQ_BRANCHES ACQ_BRANCHES_HREF ACQ_CERT ACQ_CHARTAGENT</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>             <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">"</span>2004-11-13T00…    <span style="text-decoration: underline;">2</span>004           <span style="color: #BB0000;">NA</span> <span style="color: #949494;">""</span>                      <span style="color: #BB0000;">NA</span> <span style="color: #949494;">""</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">"</span>9999-12-31T00…    <span style="text-decoration: underline;">9</span>999           <span style="color: #BB0000;">NA</span> <span style="color: #949494;">""</span>                      <span style="color: #BB0000;">NA</span> <span style="color: #949494;">""</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">"</span>9999-12-31T00…    <span style="text-decoration: underline;">9</span>999           <span style="color: #BB0000;">NA</span> <span style="color: #949494;">""</span>                      <span style="color: #BB0000;">NA</span> <span style="color: #949494;">""</span>            </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">""</span>                   <span style="color: #BB0000;">NA</span>            1 <span style="color: #949494;">"</span>/history?filter…     <span style="text-decoration: underline;">3</span>337 <span style="color: #949494;">"</span>OCC<span style="color: #949494;">"</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="color: #949494;">""</span>                   <span style="color: #BB0000;">NA</span>            1 <span style="color: #949494;">"</span>/history?filter…     <span style="text-decoration: underline;">3</span>337 <span style="color: #949494;">"</span>OCC<span style="color: #949494;">"</span>         </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 223 more variables: ACQ_CHARTER &lt;int&gt;, ACQ_CLASS &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACQ_CLASS_TYPE &lt;chr&gt;, ACQ_CLASS_TYPE_DESC &lt;chr&gt;, ACQ_CLCODE &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACQ_CNTYNAME &lt;chr&gt;, ACQ_CNTYNUM &lt;int&gt;, ACQ_FDICREGION &lt;int&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACQ_FDICREGION_DESC &lt;chr&gt;, ACQ_INSAGENT1 &lt;chr&gt;, ACQ_INSAGENT2 &lt;lgl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACQ_INSTNAME &lt;chr&gt;, ACQ_LATITUDE &lt;dbl&gt;, ACQ_LONGITUDE &lt;dbl&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACQ_ORGTYPE_NUM &lt;int&gt;, ACQ_ORG_EFF_DTE &lt;chr&gt;, ACQ_PADDR &lt;chr&gt;,</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   ACQ_PADDR2 &lt;lgl&gt;, ACQ_PCITY &lt;chr&gt;, ACQ_PSTALP &lt;chr&gt;, ACQ_PSTNUM &lt;int&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return specific fields only</span></span></span>
 <span class="r-in"><span><span class="fu">get_history</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CERT"</span>, <span class="st">"CHANGECODE"</span>, <span class="st">"CHANGECODE_DESC"</span>, <span class="st">"PROCDATE"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    CERT CHANGECODE CHANGECODE_DESC                                ID    PROCDATE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                          <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> <span style="text-decoration: underline;">18</span>409        721 Branch Closing                                 0000… 2013-08…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">31</span>746        713 Branch Acquired in Merger/Consolidation/Failu… 0000… 1996-01…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">24</span>015        722 Branch Sold                                    0000… 1994-06…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">14</span>533        713 Branch Acquired in Merger/Consolidation/Failu… 0000… 1997-02…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">17</span>097        713 Branch Acquired in Merger/Consolidation/Failu… 0000… 1997-08…</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

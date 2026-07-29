@@ -62,15 +62,42 @@ one row per institution.
 ## Examples
 
 ``` r
-if (FALSE) { # !no_creds_available()
 # Return demographic data for a specific institution
 get_demographics(filters = "CERT:10002")
+#> # A tibble: 137 × 55
+#>    ACTEVT BRANCH CALLYM  CALLYMD CBSANAME  CERT CLCODE CNTRYALP CNTRYNUM CNTYNUM
+#>     <int>  <int>  <int>    <int> <chr>    <int>  <int> <chr>       <int>   <int>
+#>  1     NA      1 198403 19840331 WHEELIN… 10002      3 US           1007      69
+#>  2    810      1 198406 19840630 WHEELIN… 10002      3 US           1007      69
+#>  3    810      1 198409 19840930 WHEELIN… 10002      3 US           1007      69
+#>  4    810      1 198412 19841231 WHEELIN… 10002      3 US           1007      69
+#>  5    810      1 198503 19850331 WHEELIN… 10002      3 US           1007      69
+#>  6    810      1 198506 19850630 WHEELIN… 10002      3 US           1007      69
+#>  7    810      1 198509 19850930 WHEELIN… 10002      3 US           1007      69
+#>  8    810      1 198512 19851231 WHEELIN… 10002      3 US           1007      69
+#>  9    810      1 198603 19860331 WHEELIN… 10002      3 US           1007      69
+#> 10    810      1 198606 19860630 WHEELIN… 10002      3 US           1007      69
+#> # ℹ 127 more rows
+#> # ℹ 45 more variables: CSA <lgl>, DIVISION <int>, DOCKET <int>, FDICAREA <int>,
+#> #   FDICTERR <chr>, FLDOFDCA <chr>, HCTNONE <lgl>, ID <chr>, INSAGNT2 <lgl>,
+#> #   METRO <int>, MICRO <int>, MNRTYCDE <lgl>, MNRTYDTE <int>, OAKAR <int>,
+#> #   OFFDMULT <int>, OFFNDOM <int>, OFFOTH <int>, OFFSOD <int>, OFFSTATE <int>,
+#> #   OFFTOT <int>, OFFUSOA <int>, QTRNO <int>, REPDTE <int>, REPDTE_INT <lgl>,
+#> #   RISKTERR <chr>, SASSER <int>, SIMS_LAT <dbl>, SIMS_LONG <dbl>, …
 
 # Return specific fields only
 get_demographics(
   fields = c("CERT", "OFFSTATE", "OFFTOT", "REPDTE"),
   limit = 5
 )
+#> # A tibble: 5 × 5
+#>    CERT ID             OFFSTATE OFFTOT   REPDTE
+#>   <int> <chr>             <int>  <int>    <int>
+#> 1 10002 10002_19840331        1      2 19840331
+#> 2 10002 10002_19840630        1      3 19840630
+#> 3 10002 10002_19840930        1      3 19840930
+#> 4 10002 10002_19841231        1      3 19841231
+#> 5 10002 10002_19850331        1      3 19850331
 
 # Sort by report date in descending order
 get_demographics(
@@ -79,5 +106,12 @@ get_demographics(
   descending = TRUE,
   limit = 5
 )
-}
+#> # A tibble: 5 × 4
+#>    CERT ID             OFFTOT   REPDTE
+#>   <int> <chr>           <int>    <int>
+#> 1 10004 10004_20250630      5 20250630
+#> 2 10011 10011_20250630      6 20250630
+#> 3 10012 10012_20250630      4 20250630
+#> 4 10015 10015_20250630      4 20250630
+#> 5 10044 10044_20250630     34 20250630
 ```
