@@ -143,6 +143,11 @@ get_fdic <- function(
     ) |>
     httr2::req_url_query(format = "CSV") |>
     httr2::req_error(body = fdic_error_message) |>
+    httr2::req_throttle(
+      capacity = c(1, 8),
+      fill_time_s = c(2, 60)
+    ) |>
+    httr2::req_retry(max_tries = 5) |>
     httr2::req_user_agent(
       "fdic R package (https://ketchbrookanalytics.github.io/fdic/)"
     )

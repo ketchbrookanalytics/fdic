@@ -137,7 +137,7 @@
 # get_fdic() errors when API returns an empty response
 
     Code
-      get_institutions(filters = "STALP:XX")
+      suppressMessages(get_institutions(filters = "STALP:XX"))
     Condition
       Error in `get_fdic()`:
       ! The response from the API is empty.
@@ -148,8 +148,8 @@
 # get_fdic() errors when all requested fields are invalid
 
     Code
-      get_institutions(filters = "STALP:ND", fields = c("NONEXISTENT_FIELD_1",
-        "NONEXISTENT_FIELD_2"), limit = 5)
+      suppressMessages(get_institutions(filters = "STALP:ND", fields = c(
+        "NONEXISTENT_FIELD_1", "NONEXISTENT_FIELD_2"), limit = 5))
     Condition
       Error in `get_fdic()`:
       ! None of the requested `fields` were returned by the API:
@@ -159,8 +159,8 @@
 # get_fdic() warns when some requested fields are invalid
 
     Code
-      get_institutions(api_key = "test_key", filters = "STALP:ND", fields = c("CERT",
-        "NONEXISTENT_FIELD"), limit = 5)
+      suppressMessages(get_institutions(api_key = "test_key", filters = "STALP:ND",
+        fields = c("CERT", "NONEXISTENT_FIELD"), limit = 5))
     Condition
       Warning:
       The following `fields` were not returned by the API:

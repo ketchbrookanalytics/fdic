@@ -193,11 +193,18 @@ test_that("validate_query_params() errors on invalid limit", {
 
 # get_fdic() integration tests:
 
+# req_throttle() (see get_fdic()) prints a "Waiting Ns for throttling delay"
+# message when a call has to wait for the token bucket to refill. That
+# message is a timing side-effect, not part of what these tests assert, and
+# whether it appears depends on how quickly preceding calls ran the bucket
+# down. suppressMessages() muffles it before expect_snapshot() ever captures
+# it, so the snapshots stay stable regardless of throttling.
+
 test_that("get_fdic() errors when API returns an empty response", {
   skip_if(no_creds_available())
   expect_snapshot(
     error = TRUE,
-    get_institutions(filters = "STALP:XX")
+    suppressMessages(get_institutions(filters = "STALP:XX"))
   )
 })
 
@@ -205,11 +212,11 @@ test_that("get_fdic() errors when all requested fields are invalid", {
   skip_if(no_creds_available())
   expect_snapshot(
     error = TRUE,
-    get_institutions(
+    suppressMessages(get_institutions(
       filters = "STALP:ND",
       fields = c("NONEXISTENT_FIELD_1", "NONEXISTENT_FIELD_2"),
       limit = 5
-    )
+    ))
   )
 })
 
@@ -228,12 +235,12 @@ test_that("get_fdic() warns when some requested fields are invalid", {
     )
   ))
   expect_snapshot(
-    get_institutions(
+    suppressMessages(get_institutions(
       api_key = "test_key",
       filters = "STALP:ND",
       fields = c("CERT", "NONEXISTENT_FIELD"),
       limit = 5
-    )
+    ))
   )
 })
 
