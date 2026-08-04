@@ -2,10 +2,6 @@
 #' @noRd
 base_url <- "https://api.fdic.gov/banks/"
 
-# Session-scoped state: tracks whether the no-key warning has been shown
-.fdic_env <- new.env(parent = emptyenv())
-.fdic_env$no_key_warned <- FALSE
-
 #' Create a small error handler to return error messages from API
 #' @noRd
 fdic_error_message <- function(resp) {
@@ -32,19 +28,17 @@ no_creds_available <- function(
   }
 }
 
-#' Handle missing API Key value
+#' Require a non-empty API key
 #' @noRd
-check_empty_creds <- function(api_key) {
-  if ((is.null(api_key) || trimws(api_key) == "") && !.fdic_env$no_key_warned) {
-    cli::cli_warn(
+check_api_key <- function(api_key) {
+  if (is.null(api_key) || trimws(api_key) == "") {
+    cli::cli_abort(
       c(
         "No {.arg api_key} provided.",
-        "i" = "Use {.code api_key = \"DEMO_KEY\"} for exploration (30 req/hr, 50 req/day).",
-        "i" = "Register for a free personal key (1,000 req/hr) at {.url https://api.data.gov/signup/}.",
-        "{.emph This message is shown once per session.}"
+        "i" = "The FDIC requires an API key for all requests.",
+        "i" = "Register for a free personal key (1,000 req/hr) at {.url https://api.data.gov/signup/}."
       )
     )
-    .fdic_env$no_key_warned <- TRUE
   }
 }
 
@@ -121,8 +115,8 @@ get_fdic <- function(
   descending,
   limit
 ) {
-  # Check for FDIC_API_KEY
-  check_empty_creds(api_key = api_key)
+  # Require an API key: the FDIC no longer accepts unauthenticated requests
+  check_api_key(api_key = api_key)
 
   # Evaluate and prepare query params for request
   params <- validate_query_params(
@@ -143,14 +137,15 @@ get_fdic <- function(
     ) |>
     httr2::req_url_query(format = "CSV") |>
     httr2::req_error(body = fdic_error_message) |>
+    httr2::req_throttle(
+      capacity = c(1, 8),
+      fill_time_s = c(2, 60)
+    ) |>
+    httr2::req_retry(max_tries = 5) |>
     httr2::req_user_agent(
       "fdic R package (https://ketchbrookanalytics.github.io/fdic/)"
-    )
-
-  if (!is.null(api_key) && trimws(api_key) != "") {
-    req <- req |>
-      httr2::req_url_query(api_key = api_key)
-  }
+    ) |>
+    httr2::req_url_query(api_key = api_key)
 
   # Perform request
   resp <- httr2::req_perform(req)

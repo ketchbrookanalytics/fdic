@@ -10,14 +10,14 @@ test_that("no_creds_available() returns FALSE when api_key is non-empty", {
   expect_false(no_creds_available("my_api_key"))
 })
 
-test_that("check_empty_creds() warns once per session when api_key is NULL or empty", {
-  .fdic_env$no_key_warned <- FALSE
-  on.exit(.fdic_env$no_key_warned <- FALSE)
+test_that("check_api_key() errors when api_key is NULL or empty", {
+  expect_snapshot(error = TRUE, check_api_key(NULL))
+  expect_snapshot(error = TRUE, check_api_key(""))
+  expect_snapshot(error = TRUE, check_api_key("   "))
+})
 
-  expect_snapshot(check_empty_creds(NULL))
-  # Second call should be silent
-  expect_no_warning(check_empty_creds(""))
-  expect_no_warning(check_empty_creds("   "))
+test_that("check_api_key() is silent when api_key is non-empty", {
+  expect_no_error(check_api_key("my_api_key"))
 })
 
 test_that("validate_query_params() errors when filters is not a single string", {
@@ -193,11 +193,18 @@ test_that("validate_query_params() errors on invalid limit", {
 
 # get_fdic() integration tests:
 
+# req_throttle() (see get_fdic()) prints a "Waiting Ns for throttling delay"
+# message when a call has to wait for the token bucket to refill. That
+# message is a timing side-effect, not part of what these tests assert, and
+# whether it appears depends on how quickly preceding calls ran the bucket
+# down. suppressMessages() muffles it before expect_snapshot() ever captures
+# it, so the snapshots stay stable regardless of throttling.
+
 test_that("get_fdic() errors when API returns an empty response", {
   skip_if(no_creds_available())
   expect_snapshot(
     error = TRUE,
-    get_institutions(filters = "STALP:XX")
+    suppressMessages(get_institutions(filters = "STALP:XX"))
   )
 })
 
@@ -205,11 +212,11 @@ test_that("get_fdic() errors when all requested fields are invalid", {
   skip_if(no_creds_available())
   expect_snapshot(
     error = TRUE,
-    get_institutions(
+    suppressMessages(get_institutions(
       filters = "STALP:ND",
       fields = c("NONEXISTENT_FIELD_1", "NONEXISTENT_FIELD_2"),
       limit = 5
-    )
+    ))
   )
 })
 
@@ -228,12 +235,12 @@ test_that("get_fdic() warns when some requested fields are invalid", {
     )
   ))
   expect_snapshot(
-    get_institutions(
+    suppressMessages(get_institutions(
       api_key = "test_key",
       filters = "STALP:ND",
       fields = c("CERT", "NONEXISTENT_FIELD"),
       limit = 5
-    )
+    ))
   )
 })
 

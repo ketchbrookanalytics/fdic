@@ -14,10 +14,10 @@ get_sod(
 )
 }
 \arguments{
-\item{api_key}{(String) Your FDIC API key. Defaults to the value of the
-\code{FDIC_API_KEY} environment variable. A key is strongly recommended: use
-\code{"DEMO_KEY"} for exploration (30 req/hr, 50 req/day), or register for a
-free personal key (1,000 req/hr) at \url{https://api.data.gov/signup/}.}
+\item{api_key}{(String) Your FDIC API key. Required: the FDIC does not
+accept unauthenticated requests. Defaults to the value of the
+\code{FDIC_API_KEY} environment variable. Register for a free personal key
+(1,000 req/hr) at \url{https://api.data.gov/signup/}.}
 
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase.}
@@ -47,19 +47,19 @@ returning summary of deposit data for FDIC-insured financial institutions.
 }
 \examples{
 \dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
-# Return Summary of Deposit data for institutions in North York
-get_sod(
+# Return Summary of Deposit data for institutions in New York
+suppressMessages(get_sod(
   filters = "STALP:NY",
   limit = 5
-)
+))
 
 # Return specific fields, sorted by total assets descending
-get_sod(
+suppressMessages(get_sod(
   filters = "STALP:NY",
   fields = c("ASSET", "CERT", "CITY", "YEAR"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
-)
+))
 \dontshow{\}) # examplesIf}
 }

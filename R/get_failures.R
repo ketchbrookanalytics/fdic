@@ -13,23 +13,23 @@
 #'
 #' @examplesIf !no_creds_available()
 #' # Return the 5 most recent bank failures
-#' get_failures(
+#' suppressMessages(get_failures(
 #'   sort_by = "FAILDATE",
 #'   descending = TRUE,
 #'   limit = 5
-#' )
+#' ))
 #'
 #' # Filter to failures in a single state
-#' get_failures(
+#' suppressMessages(get_failures(
 #'   filters = "PSTALP:NY",
 #'   limit = 5
-#' )
+#' ))
 #'
 #' # Return specific fields only
-#' get_failures(
+#' suppressMessages(get_failures(
 #'   fields = c("CERT", "FAILDATE", "NAME", "PSTALP"),
 #'   limit = 5
-#' )
+#' ))
 get_failures <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,

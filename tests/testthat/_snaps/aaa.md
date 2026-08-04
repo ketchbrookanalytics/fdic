@@ -1,13 +1,32 @@
-# check_empty_creds() warns once per session when api_key is NULL or empty
+# check_api_key() errors when api_key is NULL or empty
 
     Code
-      check_empty_creds(NULL)
+      check_api_key(NULL)
     Condition
-      Warning:
-      No `api_key` provided.
-      i Use `api_key = "DEMO_KEY"` for exploration (30 req/hr, 50 req/day).
+      Error in `check_api_key()`:
+      ! No `api_key` provided.
+      i The FDIC requires an API key for all requests.
       i Register for a free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
-      This message is shown once per session.
+
+---
+
+    Code
+      check_api_key("")
+    Condition
+      Error in `check_api_key()`:
+      ! No `api_key` provided.
+      i The FDIC requires an API key for all requests.
+      i Register for a free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
+
+---
+
+    Code
+      check_api_key("   ")
+    Condition
+      Error in `check_api_key()`:
+      ! No `api_key` provided.
+      i The FDIC requires an API key for all requests.
+      i Register for a free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
 
 # validate_query_params() errors when filters is not a single string
 
@@ -137,7 +156,7 @@
 # get_fdic() errors when API returns an empty response
 
     Code
-      get_institutions(filters = "STALP:XX")
+      suppressMessages(get_institutions(filters = "STALP:XX"))
     Condition
       Error in `get_fdic()`:
       ! The response from the API is empty.
@@ -148,8 +167,8 @@
 # get_fdic() errors when all requested fields are invalid
 
     Code
-      get_institutions(filters = "STALP:ND", fields = c("NONEXISTENT_FIELD_1",
-        "NONEXISTENT_FIELD_2"), limit = 5)
+      suppressMessages(get_institutions(filters = "STALP:ND", fields = c(
+        "NONEXISTENT_FIELD_1", "NONEXISTENT_FIELD_2"), limit = 5))
     Condition
       Error in `get_fdic()`:
       ! None of the requested `fields` were returned by the API:
@@ -159,8 +178,8 @@
 # get_fdic() warns when some requested fields are invalid
 
     Code
-      get_institutions(api_key = "test_key", filters = "STALP:ND", fields = c("CERT",
-        "NONEXISTENT_FIELD"), limit = 5)
+      suppressMessages(get_institutions(api_key = "test_key", filters = "STALP:ND",
+        fields = c("CERT", "NONEXISTENT_FIELD"), limit = 5))
     Condition
       Warning:
       The following `fields` were not returned by the API:

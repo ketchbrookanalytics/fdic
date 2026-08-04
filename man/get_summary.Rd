@@ -14,10 +14,10 @@ get_summary(
 )
 }
 \arguments{
-\item{api_key}{(String) Your FDIC API key. Defaults to the value of the
-\code{FDIC_API_KEY} environment variable. A key is strongly recommended: use
-\code{"DEMO_KEY"} for exploration (30 req/hr, 50 req/day), or register for a
-free personal key (1,000 req/hr) at \url{https://api.data.gov/signup/}.}
+\item{api_key}{(String) Your FDIC API key. Required: the FDIC does not
+accept unauthenticated requests. Defaults to the value of the
+\code{FDIC_API_KEY} environment variable. Register for a free personal key
+(1,000 req/hr) at \url{https://api.data.gov/signup/}.}
 
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase.}
@@ -50,17 +50,17 @@ for FDIC-insured financial institutions.
 \examples{
 \dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return summary data for each bank type, state, quarter, and year
-get_summary(
+suppressMessages(get_summary(
   fields = c("ASSET", "BANKS", "BRANCHES", "CALLYM", "NETINC"),
   limit = 5
-)
+))
 
 # Return summary data sorted by reporting period descending
-get_summary(
+suppressMessages(get_summary(
   fields = c("ASSET", "BANKS", "CALLYM", "YEAR"),
   sort_by = "CALLYM",
   descending = TRUE,
   limit = 5
-)
+))
 \dontshow{\}) # examplesIf}
 }
