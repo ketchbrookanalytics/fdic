@@ -20,11 +20,10 @@ get_financials(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -68,11 +67,11 @@ allowed `limit` to 500 records; exceeding this will raise an error.
 
 ``` r
 # Return key financial fields for institutions in New York
-get_financials(
+suppressMessages(get_financials(
   filters = "STALP:NY",
   fields = c("ASSET", "CERT", "NETINC", "REPDTE"),
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
 #>   ASSET  CERT ID             NETINC   REPDTE
 #>   <int> <int> <chr>           <int>    <int>
@@ -83,12 +82,12 @@ get_financials(
 #> 5 50504 11501 11501_19840331     67 19840331
 
 # Sort by total assets descending
-get_financials(
+suppressMessages(get_financials(
   fields = c("ASSET", "CERT"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
-)
+))
 #> # A tibble: 5 × 3
 #>        ASSET  CERT ID          
 #>        <dbl> <int> <chr>       

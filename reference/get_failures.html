@@ -57,10 +57,10 @@ returning data for failed financial institutions from 1934 to present.</p>
 
 
 <dl><dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
-<dd><p>(String) Your FDIC API key. Defaults to the value of the
-<code>FDIC_API_KEY</code> environment variable. A key is strongly recommended: use
-<code>"DEMO_KEY"</code> for exploration (30 req/hr, 50 req/day), or register for a
-free personal key (1,000 req/hr) at <a href="https://api.data.gov/signup/" class="external-link">https://api.data.gov/signup/</a>.</p></dd>
+<dd><p>(String) Your FDIC API key. Required: the FDIC does not
+accept unauthenticated requests. Defaults to the value of the
+<code>FDIC_API_KEY</code> environment variable. Register for a free personal key
+(1,000 req/hr) at <a href="https://api.data.gov/signup/" class="external-link">https://api.data.gov/signup/</a>.</p></dd>
 
 
 <dt id="arg-filters">filters<a class="anchor" aria-label="anchor" href="#arg-filters"></a></dt>
@@ -100,11 +100,11 @@ institutions, with one row per failure event.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return the 5 most recent bank failures</span></span></span>
-<span class="r-in"><span><span class="fu">get_failures</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu">get_failures</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  sort_by <span class="op">=</span> <span class="st">"FAILDATE"</span>,</span></span>
 <span class="r-in"><span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   BANKNO BIDCITY    BIDNAME BIDSTATE BRDATE BSTATUS  CERT CHCLASS CHCLASS1 CITY </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -120,10 +120,10 @@ institutions, with one row per failure event.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   RESTYPE1 &lt;chr&gt;, SAVR &lt;chr&gt;, TERMI &lt;lgl&gt;, UNINSDEP &lt;lgl&gt;, URL &lt;lgl&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Filter to failures in a single state</span></span></span>
-<span class="r-in"><span><span class="fu">get_failures</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu">get_failures</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"PSTALP:NY"</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 33</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   BANKNO BIDCITY    BIDNAME BIDSTATE BRDATE BSTATUS  CERT CHCLASS CHCLASS1 CITY </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
@@ -139,10 +139,10 @@ institutions, with one row per failure event.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   RESTYPE1 &lt;chr&gt;, SAVR &lt;chr&gt;, TERMI &lt;lgl&gt;, UNINSDEP &lt;lgl&gt;, URL &lt;chr&gt;</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return specific fields only</span></span></span>
-<span class="r-in"><span><span class="fu">get_failures</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu">get_failures</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"CERT"</span>, <span class="st">"FAILDATE"</span>, <span class="st">"NAME"</span>, <span class="st">"PSTALP"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    CERT FAILDATE      ID NAME                                       PSTALP</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                                      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> </span>

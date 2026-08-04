@@ -20,11 +20,10 @@ get_sod(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -62,11 +61,11 @@ institutions, with one row per institution location.
 ## Examples
 
 ``` r
-# Return Summary of Deposit data for institutions in North York
-get_sod(
+# Return Summary of Deposit data for institutions in New York
+suppressMessages(get_sod(
   filters = "STALP:NY",
   limit = 5
-)
+))
 #> # A tibble: 5 × 81
 #>   ADDRESBR        ADDRESS  ASSET BKCLASS  BKMO BRCENM BRNUM BRSERTYP CALL  CB   
 #>   <chr>           <chr>    <int> <chr>   <int> <chr>  <int>    <int> <chr> <lgl>
@@ -84,13 +83,13 @@ get_sod(
 #> #   HCTMULT <chr>, ID <chr>, INSAGNT1 <chr>, INSBRDD <int>, INSBRTS <int>, …
 
 # Return specific fields, sorted by total assets descending
-get_sod(
+suppressMessages(get_sod(
   filters = "STALP:NY",
   fields = c("ASSET", "CERT", "CITY", "YEAR"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
 #>       ASSET  CERT CITY          ID             YEAR
 #>       <int> <int> <chr>         <chr>         <int>

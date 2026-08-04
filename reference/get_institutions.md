@@ -20,11 +20,10 @@ get_institutions(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -63,10 +62,10 @@ per institution.
 
 ``` r
 # Return active institutions in New York
-get_institutions(
+suppressMessages(get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
-)
+))
 #> # A tibble: 5 × 136
 #>   ACTIVE ADDRESS         ADDRESS2   ASSET BKCLASS CALLFORM    CB CBSA   CBSA_DIV
 #>    <int> <chr>           <chr>      <int> <chr>      <int> <int> <chr>  <lgl>   
@@ -84,12 +83,12 @@ get_institutions(
 #> #   DEP <int>, DEPDOM <int>, DOCKET <int>, EFFDATE <chr>, ENDEFYMD <chr>, …
 
 # Return the 5 largest institutions by total assets
-get_institutions(
+suppressMessages(get_institutions(
   fields = c("ASSET", "CERT", "NAME", "STALP"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
 #>        ASSET  CERT    ID NAME                                      STALP
 #>        <dbl> <int> <int> <chr>                                     <chr>

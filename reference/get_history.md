@@ -21,11 +21,10 @@ get_history(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -64,32 +63,32 @@ institutions, with one row per structural change event.
 
 ``` r
 # Return the 5 most recent structural change events
-get_history(
+suppressMessages(get_history(
   sort_by = "PROCDATE",
   descending = TRUE,
   limit = 5
-)
-#> # A tibble: 5 × 229
-#>   ACQDATE         ACQYEAR ACQ_BRANCHES ACQ_BRANCHES_HREF ACQ_CERT ACQ_CHARTAGENT
-#>   <chr>             <int>        <int> <chr>                <int> <chr>         
-#> 1 "2004-11-13T00…    2004           NA ""                      NA ""            
-#> 2 "9999-12-31T00…    9999           NA ""                      NA ""            
-#> 3 "9999-12-31T00…    9999           NA ""                      NA ""            
-#> 4 ""                   NA            1 "/history?filter…     3337 "OCC"         
-#> 5 ""                   NA            1 "/history?filter…     3337 "OCC"         
-#> # ℹ 223 more variables: ACQ_CHARTER <int>, ACQ_CLASS <chr>,
-#> #   ACQ_CLASS_TYPE <chr>, ACQ_CLASS_TYPE_DESC <chr>, ACQ_CLCODE <int>,
-#> #   ACQ_CNTYNAME <chr>, ACQ_CNTYNUM <int>, ACQ_FDICREGION <int>,
-#> #   ACQ_FDICREGION_DESC <chr>, ACQ_INSAGENT1 <chr>, ACQ_INSAGENT2 <lgl>,
-#> #   ACQ_INSTNAME <chr>, ACQ_LATITUDE <dbl>, ACQ_LONGITUDE <dbl>,
-#> #   ACQ_ORGTYPE_NUM <int>, ACQ_ORG_EFF_DTE <chr>, ACQ_PADDR <chr>,
-#> #   ACQ_PADDR2 <lgl>, ACQ_PCITY <chr>, ACQ_PSTALP <chr>, ACQ_PSTNUM <int>, …
+))
+#> # A tibble: 5 × 126
+#>   ACQDATE  ACQYEAR ACQ_UNINUM ASSISTED_PAYOUT_FLAG BANK_INSURED  CERT CHANGECODE
+#>   <chr>      <int>      <int>                <int> <chr>        <int>      <int>
+#> 1 9999-12…    9999          0                    0 Y            11952        711
+#> 2 2025-04…    2025          0                    0 Y            30788        721
+#> 3 2005-06…    2005          0                    0 Y            12368        520
+#> 4 9999-12…    9999          0                    0 Y             8321        711
+#> 5 9999-12…    9999          0                    0 Y            28332        721
+#> # ℹ 119 more variables: CHANGECODE_DESC <chr>, CHARTAGENT <chr>,
+#> #   CHARTER_COM_TO_OTHER_FLAG <int>, CHARTER_COM_TO_OTS_FLAG <int>,
+#> #   CHARTER_OTHER_TO_COM_FLAG <int>, CHARTER_OTS_TO_COM_FLAG <int>,
+#> #   CLASS <chr>, CLASS_CHANGE_FLAG <int>, CLASS_TYPE <chr>,
+#> #   CLASS_TYPE_DESC <chr>, CLCODE <int>, CNTYNAME <chr>, CNTYNUM <int>,
+#> #   EFFDATE <chr>, EFFYEAR <int>, ENDDATE <chr>, ENDYEAR <int>, ESTDATE <chr>,
+#> #   ESTYEAR <int>, FAILED_COM_TO_COM_FLAG <int>, …
 
 # Return specific fields only
-get_history(
+suppressMessages(get_history(
   fields = c("CERT", "CHANGECODE", "CHANGECODE_DESC", "PROCDATE"),
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
 #>    CERT CHANGECODE CHANGECODE_DESC                                ID    PROCDATE
 #>   <int>      <int> <chr>                                          <chr> <chr>   

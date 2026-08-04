@@ -54,10 +54,12 @@ one `get_*()` file together:
 
 Functions read the API key from the `FDIC_API_KEY` environment variable
 by default (`Sys.getenv("FDIC_API_KEY")`), overridable via the `api_key`
-argument. With no key, the API allows only 50 requests/day; `"DEMO_KEY"`
-allows 30/hr. `check_empty_creds()` warns once per session (state
-tracked in the `.fdic_env` environment in
-[R/aaa.R](https://ketchbrookanalytics.github.io/fdic/R/aaa.R)).
+argument. An `api_key` is required: FDIC announced that as of September
+8, 2026 it no longer accepts unauthenticated requests, so
+`check_api_key()` in
+[R/aaa.R](https://ketchbrookanalytics.github.io/fdic/R/aaa.R) aborts if
+`api_key` is missing or empty rather than warning and falling back to a
+degraded no-key/`"DEMO_KEY"` mode.
 [`no_creds_available()`](https://ketchbrookanalytics.github.io/fdic/reference/no_creds_available.md)
 is exported purely so tests can `skip_if()` when no key is present.
 

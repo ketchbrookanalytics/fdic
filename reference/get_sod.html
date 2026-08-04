@@ -57,10 +57,10 @@ returning summary of deposit data for FDIC-insured financial institutions.</p>
 
 
 <dl><dt id="arg-api-key">api_key<a class="anchor" aria-label="anchor" href="#arg-api-key"></a></dt>
-<dd><p>(String) Your FDIC API key. Defaults to the value of the
-<code>FDIC_API_KEY</code> environment variable. A key is strongly recommended: use
-<code>"DEMO_KEY"</code> for exploration (30 req/hr, 50 req/day), or register for a
-free personal key (1,000 req/hr) at <a href="https://api.data.gov/signup/" class="external-link">https://api.data.gov/signup/</a>.</p></dd>
+<dd><p>(String) Your FDIC API key. Required: the FDIC does not
+accept unauthenticated requests. Defaults to the value of the
+<code>FDIC_API_KEY</code> environment variable. Register for a free personal key
+(1,000 req/hr) at <a href="https://api.data.gov/signup/" class="external-link">https://api.data.gov/signup/</a>.</p></dd>
 
 
 <dt id="arg-filters">filters<a class="anchor" aria-label="anchor" href="#arg-filters"></a></dt>
@@ -99,11 +99,11 @@ for FDIC-insured institutions, with one row per institution location.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return Summary of Deposit data for institutions in North York</span></span></span>
-<span class="r-in"><span><span class="fu">get_sod</span><span class="op">(</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Return Summary of Deposit data for institutions in New York</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu">get_sod</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"STALP:NY"</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 81</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ADDRESBR        ADDRESS  ASSET BKCLASS  BKMO BRCENM BRNUM BRSERTYP CALL  CB   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span></span>
@@ -121,13 +121,13 @@ for FDIC-insured institutions, with one row per institution location.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   HCTMULT &lt;chr&gt;, ID &lt;chr&gt;, INSAGNT1 &lt;chr&gt;, INSBRDD &lt;int&gt;, INSBRTS &lt;int&gt;, …</span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Return specific fields, sorted by total assets descending</span></span></span>
-<span class="r-in"><span><span class="fu">get_sod</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/message.html" class="external-link">suppressMessages</a></span><span class="op">(</span><span class="fu">get_sod</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  filters <span class="op">=</span> <span class="st">"STALP:NY"</span>,</span></span>
 <span class="r-in"><span>  fields <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"ASSET"</span>, <span class="st">"CERT"</span>, <span class="st">"CITY"</span>, <span class="st">"YEAR"</span><span class="op">)</span>,</span></span>
 <span class="r-in"><span>  sort_by <span class="op">=</span> <span class="st">"ASSET"</span>,</span></span>
 <span class="r-in"><span>  descending <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
 <span class="r-in"><span>  limit <span class="op">=</span> <span class="fl">5</span></span></span>
-<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       ASSET  CERT CITY          ID             YEAR</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>

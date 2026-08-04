@@ -21,11 +21,10 @@ get_summary(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -64,10 +63,10 @@ regarding financial institutions, with one row per quarter and year.
 
 ``` r
 # Return summary data for each bank type, state, quarter, and year
-get_summary(
+suppressMessages(get_summary(
   fields = c("ASSET", "BANKS", "BRANCHES", "CALLYM", "NETINC"),
   limit = 5
-)
+))
 #> # A tibble: 5 × 6
 #>    ASSET BANKS BRANCHES CALLYM ID         NETINC
 #>    <int> <int>    <int>  <int> <chr>       <int>
@@ -78,12 +77,12 @@ get_summary(
 #> 5  55000    15        0 193412 CB_1934_AZ      0
 
 # Return summary data sorted by reporting period descending
-get_summary(
+suppressMessages(get_summary(
   fields = c("ASSET", "BANKS", "CALLYM", "YEAR"),
   sort_by = "CALLYM",
   descending = TRUE,
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
 #>       ASSET BANKS CALLYM ID          YEAR
 #>       <int> <int>  <int> <chr>      <int>

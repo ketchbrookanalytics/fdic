@@ -20,11 +20,10 @@ get_locations(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -63,10 +62,10 @@ one row per institution location.
 
 ``` r
 # Return branch locations in New York
-get_locations(
+suppressMessages(get_locations(
   filters = "STALP:NY",
   limit = 5
-)
+))
 #> # A tibble: 5 × 38
 #>   ACQDATE    ADDRESS    ADDRESS2 BKCLASS CBSA  CBSA_DIV CBSA_DIV_FLG CBSA_DIV_NO
 #>   <chr>      <chr>      <lgl>    <chr>   <chr> <chr>           <int>       <int>
@@ -84,17 +83,17 @@ get_locations(
 #> #   SERVTYPE_DESC <chr>, STALP <chr>, STCNTY <int>, STNAME <chr>, …
 
 # Return specific fields only
-get_locations(
-  filters = "STALP:ND",
+suppressMessages(get_locations(
+  filters = "STALP:NY",
   fields = c("ADDRESS", "CERT", "CITY", "STALP"),
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
-#>   ADDRESS          CERT CITY          ID STALP
-#>   <chr>           <int> <chr>      <int> <chr>
-#> 1 205 Main Ave    15472 Aneta      10023 ND   
-#> 2 210 Sheyenne St  9423 West Fargo 10124 ND   
-#> 3 Main Street      8387 Buffalo    10147 ND   
-#> 4 509 Parke Ave   15539 Portland   10302 ND   
-#> 5 210 8th Ave      9423 Langdon    10373 ND   
+#>   ADDRESS            CERT CITY          ID STALP
+#>   <chr>             <int> <chr>      <int> <chr>
+#> 1 6 State Street      588 Nunda      10078 NY   
+#> 2 11 Division St    17534 Amsterdam  10185 NY   
+#> 3 68 Exchange St      588 Binghamton 10188 NY   
+#> 4 12 Westchester Sq 16068 Bronx      10189 NY   
+#> 5 1 Fountain Plz      588 Buffalo    10194 NY   
 ```

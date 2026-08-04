@@ -20,11 +20,10 @@ get_failures(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -63,11 +62,11 @@ with one row per failure event.
 
 ``` r
 # Return the 5 most recent bank failures
-get_failures(
+suppressMessages(get_failures(
   sort_by = "FAILDATE",
   descending = TRUE,
   limit = 5
-)
+))
 #> # A tibble: 5 × 33
 #>   BANKNO BIDCITY    BIDNAME BIDSTATE BRDATE BSTATUS  CERT CHCLASS CHCLASS1 CITY 
 #>   <lgl>  <chr>      <chr>   <chr>    <lgl>  <chr>   <int> <chr>   <chr>    <chr>
@@ -83,10 +82,10 @@ get_failures(
 #> #   RESTYPE1 <chr>, SAVR <chr>, TERMI <lgl>, UNINSDEP <lgl>, URL <lgl>
 
 # Filter to failures in a single state
-get_failures(
+suppressMessages(get_failures(
   filters = "PSTALP:NY",
   limit = 5
-)
+))
 #> # A tibble: 5 × 33
 #>   BANKNO BIDCITY    BIDNAME BIDSTATE BRDATE BSTATUS  CERT CHCLASS CHCLASS1 CITY 
 #>   <lgl>  <chr>      <chr>   <chr>    <chr>  <chr>   <int> <chr>   <chr>    <chr>
@@ -102,10 +101,10 @@ get_failures(
 #> #   RESTYPE1 <chr>, SAVR <chr>, TERMI <lgl>, UNINSDEP <lgl>, URL <chr>
 
 # Return specific fields only
-get_failures(
+suppressMessages(get_failures(
   fields = c("CERT", "FAILDATE", "NAME", "PSTALP"),
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
 #>    CERT FAILDATE      ID NAME                                       PSTALP
 #>   <int> <chr>      <int> <chr>                                      <chr> 

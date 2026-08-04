@@ -20,11 +20,10 @@ get_demographics(
 
 - api_key:
 
-  (String) Your FDIC API key. Defaults to the value of the
-  `FDIC_API_KEY` environment variable. A key is strongly recommended:
-  use `"DEMO_KEY"` for exploration (30 req/hr, 50 req/day), or register
-  for a free personal key (1,000 req/hr) at
-  <https://api.data.gov/signup/>.
+  (String) Your FDIC API key. Required: the FDIC does not accept
+  unauthenticated requests. Defaults to the value of the `FDIC_API_KEY`
+  environment variable. Register for a free personal key (1,000 req/hr)
+  at <https://api.data.gov/signup/>.
 
 - filters:
 
@@ -63,7 +62,7 @@ one row per institution.
 
 ``` r
 # Return demographic data for a specific institution
-get_demographics(filters = "CERT:10002")
+suppressMessages(get_demographics(filters = "CERT:10002"))
 #> # A tibble: 137 × 55
 #>    ACTEVT BRANCH CALLYM  CALLYMD CBSANAME  CERT CLCODE CNTRYALP CNTRYNUM CNTYNUM
 #>     <int>  <int>  <int>    <int> <chr>    <int>  <int> <chr>       <int>   <int>
@@ -86,10 +85,10 @@ get_demographics(filters = "CERT:10002")
 #> #   RISKTERR <chr>, SASSER <int>, SIMS_LAT <dbl>, SIMS_LONG <dbl>, …
 
 # Return specific fields only
-get_demographics(
+suppressMessages(get_demographics(
   fields = c("CERT", "OFFSTATE", "OFFTOT", "REPDTE"),
   limit = 5
-)
+))
 #> # A tibble: 5 × 5
 #>    CERT ID             OFFSTATE OFFTOT   REPDTE
 #>   <int> <chr>             <int>  <int>    <int>
@@ -100,12 +99,12 @@ get_demographics(
 #> 5 10002 10002_19850331        1      3 19850331
 
 # Sort by report date in descending order
-get_demographics(
+suppressMessages(get_demographics(
   fields = c("CERT", "OFFTOT", "REPDTE"),
   sort_by = "REPDTE",
   descending = TRUE,
   limit = 5
-)
+))
 #> # A tibble: 5 × 4
 #>    CERT ID             OFFTOT   REPDTE
 #>   <int> <chr>           <int>    <int>
