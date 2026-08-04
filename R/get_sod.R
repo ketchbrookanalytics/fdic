@@ -12,20 +12,20 @@
 #' @export
 #'
 #' @examplesIf !no_creds_available()
-#' # Return Summary of Deposit data for institutions in North York
-#' get_sod(
+#' # Return Summary of Deposit data for institutions in New York
+#' suppressMessages(get_sod(
 #'   filters = "STALP:NY",
 #'   limit = 5
-#' )
+#' ))
 #'
 #' # Return specific fields, sorted by total assets descending
-#' get_sod(
+#' suppressMessages(get_sod(
 #'   filters = "STALP:NY",
 #'   fields = c("ASSET", "CERT", "CITY", "YEAR"),
 #'   sort_by = "ASSET",
 #'   descending = TRUE,
 #'   limit = 5
-#' )
+#' ))
 get_sod <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,

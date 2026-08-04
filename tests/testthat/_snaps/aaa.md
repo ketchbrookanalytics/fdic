@@ -1,13 +1,32 @@
-# check_empty_creds() warns once per session when api_key is NULL or empty
+# check_api_key() errors when api_key is NULL or empty
 
     Code
-      check_empty_creds(NULL)
+      check_api_key(NULL)
     Condition
-      Warning:
-      No `api_key` provided.
-      i Use `api_key = "DEMO_KEY"` for exploration (30 req/hr, 50 req/day).
+      Error in `check_api_key()`:
+      ! No `api_key` provided.
+      i The FDIC requires an API key for all requests.
       i Register for a free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
-      This message is shown once per session.
+
+---
+
+    Code
+      check_api_key("")
+    Condition
+      Error in `check_api_key()`:
+      ! No `api_key` provided.
+      i The FDIC requires an API key for all requests.
+      i Register for a free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
+
+---
+
+    Code
+      check_api_key("   ")
+    Condition
+      Error in `check_api_key()`:
+      ! No `api_key` provided.
+      i The FDIC requires an API key for all requests.
+      i Register for a free personal key (1,000 req/hr) at <https://api.data.gov/signup/>.
 
 # validate_query_params() errors when filters is not a single string
 

@@ -13,17 +13,17 @@
 #'
 #' @examplesIf !no_creds_available()
 #' # Return branch locations in New York
-#' get_locations(
+#' suppressMessages(get_locations(
 #'   filters = "STALP:NY",
 #'   limit = 5
-#' )
+#' ))
 #'
 #' # Return specific fields only
-#' get_locations(
-#'   filters = "STALP:ND",
+#' suppressMessages(get_locations(
+#'   filters = "STALP:NY",
 #'   fields = c("ADDRESS", "CERT", "CITY", "STALP"),
 #'   limit = 5
-#' )
+#' ))
 get_locations <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,

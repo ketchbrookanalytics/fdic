@@ -15,18 +15,18 @@
 #'
 #' @examplesIf !no_creds_available()
 #' # Return summary data for each bank type, state, quarter, and year
-#' get_summary(
+#' suppressMessages(get_summary(
 #'   fields = c("ASSET", "BANKS", "BRANCHES", "CALLYM", "NETINC"),
 #'   limit = 5
-#' )
+#' ))
 #'
 #' # Return summary data sorted by reporting period descending
-#' get_summary(
+#' suppressMessages(get_summary(
 #'   fields = c("ASSET", "BANKS", "CALLYM", "YEAR"),
 #'   sort_by = "CALLYM",
 #'   descending = TRUE,
 #'   limit = 5
-#' )
+#' ))
 get_summary <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,

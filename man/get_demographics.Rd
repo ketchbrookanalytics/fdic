@@ -14,10 +14,10 @@ get_demographics(
 )
 }
 \arguments{
-\item{api_key}{(String) Your FDIC API key. Defaults to the value of the
-\code{FDIC_API_KEY} environment variable. A key is strongly recommended: use
-\code{"DEMO_KEY"} for exploration (30 req/hr, 50 req/day), or register for a
-free personal key (1,000 req/hr) at \url{https://api.data.gov/signup/}.}
+\item{api_key}{(String) Your FDIC API key. Required: the FDIC does not
+accept unauthenticated requests. Defaults to the value of the
+\code{FDIC_API_KEY} environment variable. Register for a free personal key
+(1,000 req/hr) at \url{https://api.data.gov/signup/}.}
 
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase.}
@@ -48,20 +48,20 @@ returning demographic data for FDIC-insured financial institutions.
 \examples{
 \dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return demographic data for a specific institution
-get_demographics(filters = "CERT:10002")
+suppressMessages(get_demographics(filters = "CERT:10002"))
 
 # Return specific fields only
-get_demographics(
+suppressMessages(get_demographics(
   fields = c("CERT", "OFFSTATE", "OFFTOT", "REPDTE"),
   limit = 5
-)
+))
 
 # Sort by report date in descending order
-get_demographics(
+suppressMessages(get_demographics(
   fields = c("CERT", "OFFTOT", "REPDTE"),
   sort_by = "REPDTE",
   descending = TRUE,
   limit = 5
-)
+))
 \dontshow{\}) # examplesIf}
 }

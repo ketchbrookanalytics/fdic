@@ -14,10 +14,10 @@ get_institutions(
 )
 }
 \arguments{
-\item{api_key}{(String) Your FDIC API key. Defaults to the value of the
-\code{FDIC_API_KEY} environment variable. A key is strongly recommended: use
-\code{"DEMO_KEY"} for exploration (30 req/hr, 50 req/day), or register for a
-free personal key (1,000 req/hr) at \url{https://api.data.gov/signup/}.}
+\item{api_key}{(String) Your FDIC API key. Required: the FDIC does not
+accept unauthenticated requests. Defaults to the value of the
+\code{FDIC_API_KEY} environment variable. Register for a free personal key
+(1,000 req/hr) at \url{https://api.data.gov/signup/}.}
 
 \item{filters}{(String) An optional Elasticsearch query string to filter
 results. All field names and values must be uppercase.}
@@ -48,17 +48,17 @@ returning FDIC-insured financial institution data.
 \examples{
 \dontshow{if (!no_creds_available()) withAutoprint(\{ # examplesIf}
 # Return active institutions in New York
-get_institutions(
+suppressMessages(get_institutions(
   filters = "STALP:NY AND ACTIVE:1",
   limit = 5
-)
+))
 
 # Return the 5 largest institutions by total assets
-get_institutions(
+suppressMessages(get_institutions(
   fields = c("ASSET", "CERT", "NAME", "STALP"),
   sort_by = "ASSET",
   descending = TRUE,
   limit = 5
-)
+))
 \dontshow{\}) # examplesIf}
 }

@@ -13,18 +13,18 @@
 #'
 #' @examplesIf !no_creds_available()
 #' # Return active institutions in New York
-#' get_institutions(
+#' suppressMessages(get_institutions(
 #'   filters = "STALP:NY AND ACTIVE:1",
 #'   limit = 5
-#' )
+#' ))
 #'
 #' # Return the 5 largest institutions by total assets
-#' get_institutions(
+#' suppressMessages(get_institutions(
 #'   fields = c("ASSET", "CERT", "NAME", "STALP"),
 #'   sort_by = "ASSET",
 #'   descending = TRUE,
 #'   limit = 5
-#' )
+#' ))
 get_institutions <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,

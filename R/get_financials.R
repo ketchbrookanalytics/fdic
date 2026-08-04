@@ -24,19 +24,19 @@
 #'
 #' @examplesIf !no_creds_available()
 #' # Return key financial fields for institutions in New York
-#' get_financials(
+#' suppressMessages(get_financials(
 #'   filters = "STALP:NY",
 #'   fields = c("ASSET", "CERT", "NETINC", "REPDTE"),
 #'   limit = 5
-#' )
+#' ))
 #'
 #' # Sort by total assets descending
-#' get_financials(
+#' suppressMessages(get_financials(
 #'   fields = c("ASSET", "CERT"),
 #'   sort_by = "ASSET",
 #'   descending = TRUE,
 #'   limit = 5
-#' )
+#' ))
 get_financials <- function(
   api_key = Sys.getenv("FDIC_API_KEY"),
   filters = NULL,
