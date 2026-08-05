@@ -1,6 +1,6 @@
 Package: fdic
 Title: R Interface to 'FDIC BankFind Suite API'
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
     person("Dylan", "Hughes", email = "dhughes@ketchbrookanalytics.com",
            role = c("aut", "cre")),

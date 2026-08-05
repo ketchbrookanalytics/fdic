@@ -8,15 +8,20 @@ vignette: >
 ---
 
 ```{r, include = FALSE}
+library(fdic)
+no_creds <- no_creds_available()
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  message = FALSE
+  message = FALSE,
+  eval = !no_creds
 )
 ```
 
-```{r setup}
-library(fdic)
+```{r eval = no_creds, echo = FALSE, comment = NA}
+message(
+  "No FDIC API credentials available. Code chunks will not be evaluated."
+)
 ```
 
 Each function in {fdic} accepts the following arguments:
