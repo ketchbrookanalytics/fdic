@@ -1,10 +1,5 @@
 # fdic
 
-``` r
-
-library(fdic)
-```
-
 Each function in {fdic} accepts the following arguments:
 
 - `api_key`: Your FDIC API key

@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">fdic</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.1.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -65,8 +65,6 @@
 
     
     
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/ketchbrookanalytics/fdic" class="external-link">fdic</a></span><span class="op">)</span></span></code></pre></div>
 <p>Each function in {fdic} accepts the following arguments:</p>
 <ul>
 <li>
@@ -100,7 +98,7 @@ functions contained in {fdic} and is named by prefixing the endpoint
 with <code>fdic_</code> (e.g., <code>fdic_institutions</code> for
 <code><a href="../reference/get_institutions.html">get_institutions()</a></code>). Each dataset can be accessed directly
 by name, as demonstrated below.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Dropping `description` for example due to length of field</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">fdic_locations</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span>select <span class="op">=</span> <span class="op">-</span><span class="va">description</span><span class="op">)</span></span>
@@ -121,7 +119,7 @@ added.</strong></p>
 returned in the response. However, it can be helpful to call an {fdic}
 function with no <code>fields</code> argument and <code>limit = 1</code>
 to return the current endpoint definition, as demonstrated below:</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Review current endpoint definition</span></span>
 <span><span class="fu"><a href="../reference/get_locations.html">get_locations</a></span><span class="op">(</span>limit <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -157,7 +155,7 @@ facilitate the filtering.</p>
 conveniently manipulate the data provided in response.</p>
 <p>The following examples demonstrate several ways to use Elasticsearch
 Query Strings in {fdic} functions to collect the data of interest.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Search for five active institutions in New York</span></span>
 <span><span class="co"># Return all available fields</span></span>
 <span><span class="fu"><a href="../reference/get_institutions.html">get_institutions</a></span><span class="op">(</span></span>
@@ -179,7 +177,7 @@ Query Strings in {fdic} functions to collect the data of interest.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   CITY &lt;chr&gt;, CITYHCR &lt;chr&gt;, CLCODE &lt;int&gt;, CONSERVE &lt;chr&gt;, COUNTY &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   CSA &lt;chr&gt;, CSA_FLG &lt;int&gt;, CSA_NO &lt;int&gt;, DATEUPDT &lt;chr&gt;, DENOVO &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   DEP &lt;int&gt;, DEPDOM &lt;int&gt;, DOCKET &lt;int&gt;, EFFDATE &lt;chr&gt;, ENDEFYMD &lt;chr&gt;, …</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Collect location data for five branches of a specific institution</span></span>
 <span><span class="co"># Return all available fields</span></span>
 <span><span class="fu"><a href="../reference/get_locations.html">get_locations</a></span><span class="op">(</span></span>
@@ -201,7 +199,7 @@ Query Strings in {fdic} functions to collect the data of interest.</p>
 <span><span class="co">#&gt; <span style="color: #949494;">#   MAINOFF &lt;int&gt;, MDI_STATUS_CODE &lt;lgl&gt;, MDI_STATUS_DESC &lt;chr&gt;, NAME &lt;chr&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   OFFNAME &lt;chr&gt;, OFFNUM &lt;int&gt;, RUNDATE &lt;chr&gt;, SERVTYPE &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   SERVTYPE_DESC &lt;chr&gt;, STALP &lt;chr&gt;, STCNTY &lt;int&gt;, STNAME &lt;chr&gt;, …</span></span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Explore the 2025 Summary of Deposit data for non-community banks in New York</span></span>
 <span><span class="co"># Collect the coordinates for the top five branch locations by total deposits</span></span>
 <span><span class="fu"><a href="../reference/get_sod.html">get_sod</a></span><span class="op">(</span></span>
