@@ -107,11 +107,11 @@ get_institutions(
 #> # A tibble: 5 × 136
 #>   ACTIVE ADDRESS         ADDRESS2   ASSET BKCLASS CALLFORM    CB CBSA   CBSA_DIV
 #>    <int> <chr>           <chr>      <int> <chr>      <int> <int> <chr>  <lgl>   
-#> 1      1 201 Mohawk Ave  ""        706452 N             41     1 Alban… NA      
-#> 2      1 212 Dolson Ave  ""       2697498 SM            41     1 Pough… NA      
-#> 3      1 857 E Main St   ""        192861 NM            41     1 Alban… NA      
-#> 4      1 116 Main St     "# 20"    378964 NM            51     1 Olean… NA      
-#> 5      1 1537 Milton Ave ""       1190928 SM            51     1 Syrac… NA      
+#> 1      1 201 Mohawk Ave  ""        719046 N             41     1 Alban… NA      
+#> 2      1 212 Dolson Ave  ""       2792253 SM            41     1 Pough… NA      
+#> 3      1 857 E Main St   ""        185900 NM            41     1 Alban… NA      
+#> 4      1 116 Main St     "# 20"    384681 NM            51     1 Olean… NA      
+#> 5      1 1537 Milton Ave ""       1197828 SM            51     1 Syrac… NA      
 #> # ℹ 127 more variables: CBSA_DIV_FLG <int>, CBSA_DIV_NO <lgl>,
 #> #   CBSA_METRO <int>, CBSA_METRO_FLG <int>, CBSA_METRO_NAME <chr>,
 #> #   CBSA_MICRO_FLG <int>, CBSA_NO <int>, CERT <int>, CFPBEFFDTE <chr>,

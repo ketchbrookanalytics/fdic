@@ -71,11 +71,11 @@ suppressMessages(get_history(
 #> # A tibble: 5 × 126
 #>   ACQDATE  ACQYEAR ACQ_UNINUM ASSISTED_PAYOUT_FLAG BANK_INSURED  CERT CHANGECODE
 #>   <chr>      <int>      <int>                <int> <chr>        <int>      <int>
-#> 1 9999-12…    9999          0                    0 Y            11952        711
-#> 2 2025-04…    2025          0                    0 Y            30788        721
-#> 3 2005-06…    2005          0                    0 Y            12368        520
-#> 4 9999-12…    9999          0                    0 Y             8321        711
-#> 5 9999-12…    9999          0                    0 Y            28332        721
+#> 1 2021-11…    2021          0                    0 Y             6540        721
+#> 2 9999-12…    9999          0                    0 Y              628        711
+#> 3 9999-12…    9999          0                    0 Y            11063        711
+#> 4 2010-11…    2010          0                    0 Y            11241        721
+#> 5 9999-12…    9999          0                    0 Y             3285        711
 #> # ℹ 119 more variables: CHANGECODE_DESC <chr>, CHARTAGENT <chr>,
 #> #   CHARTER_COM_TO_OTHER_FLAG <int>, CHARTER_COM_TO_OTS_FLAG <int>,
 #> #   CHARTER_OTHER_TO_COM_FLAG <int>, CHARTER_OTS_TO_COM_FLAG <int>,
