@@ -4,6 +4,9 @@
 
 ## Resubmission
 
-This is a resubmission; the initial version was rejected. In this version I have:
+This is a resubmission. In this version I have:
 
-* Updated the vignette code evaluation to check if an API key is available.
+* Removed the redundant 'R' in the package title.
+* Removed the FDIC acronym from the package title.
+* Written API names in single quotes and removed quotes around acronyms.
+* Added a reference to the API documentation in the package description.
