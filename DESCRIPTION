@@ -8,12 +8,14 @@ Authors@R: c(
            role = c("aut")),
     person("Ketchbrook Analytics", role = c("cph", "fnd"))
   )
-Description: Provides a convenient interface to the BankFind Suite API made
-    available by the Federal Deposit Insurance Corporation ('FDIC'). Contains
+Description: Provides a convenient interface to the 'BankFind Suite API' made
+    available by the Federal Deposit Insurance Corporation (FDIC). Contains
     functions to retrieve data related to qualitative institution information,
     branch and office locations, Summary of Deposit reporting, financial
     information, failed financial institutions, structural change events,
-    historic aggregate industry data, and demographics information.
+    historic aggregate industry data, and demographics information. See
+    <https://api.fdic.gov/banks/docs/> for the official 'BankFind Suite API'
+    documentation published by the FDIC.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
